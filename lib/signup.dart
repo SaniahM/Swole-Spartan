@@ -1,6 +1,3 @@
-
-// This is the Sign up screen, it either redirects the users back to the login screen or displays the terms and conditions if prompted
-
 import 'package:flutter/material.dart';
 
 class SignupPage extends StatefulWidget {
@@ -13,10 +10,15 @@ class _SignupPageState extends State<SignupPage>  {
   
    @override
     Widget build(BuildContext context) {
+
+      String ssFont = 'NeusaNextStf-CompactRegular.otf';
+
       return new Scaffold(
-        resizeToAvoidBottomPadding: false,
+        // resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.grey[200],
-        body: Column(
+        body: Container(
+          child: SingleChildScrollView(
+          child: Column(
           children: <Widget>[
 
             //The header of the application featuring the Sign Up and Log In options.
@@ -24,11 +26,12 @@ class _SignupPageState extends State<SignupPage>  {
             Container(              
               child: Row(         
                 children: <Widget>[
-                  Container( 
+                  Container(                  
                       padding: EdgeInsets.fromLTRB(25.0, 100.0, 0.0, 0.0), 
                       child: InkWell(
                         child: Text ('Sign Up',
                         style: TextStyle(
+                          fontFamily: ssFont,
                           color: Colors.blueGrey[600],
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold)
@@ -44,6 +47,7 @@ class _SignupPageState extends State<SignupPage>  {
                       child: Text(
                         'Log In',
                         style: TextStyle(
+                          fontFamily: ssFont,
                           color: Colors.grey,
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold)
@@ -58,6 +62,7 @@ class _SignupPageState extends State<SignupPage>  {
 
             Container(      
               padding: EdgeInsets.fromLTRB(20.0, 35.0, 20.0, 0.0),
+              child: SingleChildScrollView(
               child: Column(
                 children: <Widget> [
                   Container(
@@ -78,6 +83,7 @@ class _SignupPageState extends State<SignupPage>  {
                             decoration: InputDecoration(
                               labelText: "FIRST NAME",
                               labelStyle: TextStyle(
+                                fontFamily: ssFont,
                                 color: Colors.grey,
                                 height: 2.0
                               ),
@@ -96,6 +102,7 @@ class _SignupPageState extends State<SignupPage>  {
                             decoration: InputDecoration(
                               labelText: "LAST NAME",
                               labelStyle: TextStyle(
+                                fontFamily: ssFont,
                                 color: Colors.grey,
                                 height: 2.0
                               ),
@@ -114,6 +121,7 @@ class _SignupPageState extends State<SignupPage>  {
                             decoration: InputDecoration(
                               labelText: "PHONE",
                               labelStyle: TextStyle(
+                                fontFamily: ssFont,
                                 color: Colors.grey
                               ),
                               focusedBorder: UnderlineInputBorder(
@@ -131,6 +139,7 @@ class _SignupPageState extends State<SignupPage>  {
                             decoration: InputDecoration(
                               labelText: "EMAIL",
                               labelStyle: TextStyle(
+                                fontFamily: ssFont,
                                 color: Colors.grey
                               ),
                               focusedBorder: UnderlineInputBorder(
@@ -147,6 +156,7 @@ class _SignupPageState extends State<SignupPage>  {
                             decoration: InputDecoration(
                               labelText: "PASSWORD",
                               labelStyle: TextStyle(
+                                fontFamily: ssFont,
                                 color: Colors.grey
                               ),
                               focusedBorder: UnderlineInputBorder(
@@ -163,6 +173,7 @@ class _SignupPageState extends State<SignupPage>  {
                             decoration: InputDecoration(
                               labelText: "ADDRESS",
                               labelStyle: TextStyle(
+                                fontFamily: ssFont,
                                 color: Colors.grey
                               ),
                               focusedBorder: UnderlineInputBorder(
@@ -198,6 +209,7 @@ class _SignupPageState extends State<SignupPage>  {
                               child: Text(
                                 "SIGN UP",
                                 style: TextStyle(
+                                  fontFamily: ssFont,
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                 )
@@ -215,19 +227,22 @@ class _SignupPageState extends State<SignupPage>  {
                   SizedBox(height: 15.0),
 
                 ]
-              )
+              ),
+              ),
             ),
 
             SizedBox(height: 20.0),
 
             // The text at the bottom
-
-            Column(
+            Container(
+            child: SingleChildScrollView(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
                 Text(
                   "By creating an account, you agree to our",
                   style: TextStyle(
+                    fontFamily: ssFont,
                     color: Colors.grey
                   )
                 ),
@@ -237,15 +252,20 @@ class _SignupPageState extends State<SignupPage>  {
                   },
                   child: Text ('Terms of Service and Privacy Policy',
                   style: TextStyle(
+                    fontFamily: ssFont,
                     color: Colors.orange,
                     fontWeight: FontWeight.bold,
                     decoration: TextDecoration.underline
                   )
                   )
-                )
+                ),
               ]
+            ),
+              ),
             )
           ],
+        ),
+          ),
         ),
       );
     }
