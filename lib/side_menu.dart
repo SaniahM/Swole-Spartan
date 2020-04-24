@@ -28,14 +28,16 @@ class _SideMenuPage extends State<SideMenuPage>{
 //////////////////////////////////////////////////////////////////////////////////////////
 /////CHANGE ONLY THIS PART TO FIT ANY SCREEN INTO THE COMMON ITEMS TEMPLATE/////////////
             
-              child: Column(
-                children:  
-                  [
-                    Padding(padding: EdgeInsets.all(196.5)),
-                    Padding(padding: EdgeInsets.all(100)),
-                  ]  
+              // child: Column(
+              //   children:  
+              //     [
+              //       Padding(padding: EdgeInsets.all(196.5)),
+              //       Padding(padding: EdgeInsets.all(100)),
+              //     ]  
                
-                )
+              //   )
+
+              
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////      

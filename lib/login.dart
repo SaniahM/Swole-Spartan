@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -8,7 +8,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<LoginPage>  {
-  
+
+    final AuthService _auth = AuthService();
+    final _formKey = GlobalKey<FormState>();
+    String email = '';
+    String password = '';
+
+    String error = '';
+
     @override
     Widget build(BuildContext context) {
       
@@ -17,9 +24,9 @@ class _MyHomePageState extends State<LoginPage>  {
       return new Scaffold(
         resizeToAvoidBottomPadding: false,
         backgroundColor: Colors.grey[200],
-        // body: Container(
-          // child: SingleChildScrollView(
-        body: ListView(
+        body: Container(
+          child: SingleChildScrollView(
+        child: Column(
           children: <Widget>[
             Container(              
               child: Row(         
@@ -28,7 +35,7 @@ class _MyHomePageState extends State<LoginPage>  {
                   //The header of the application featuring the Sign Up and Log In options.
 
                   Container( 
-                      padding: EdgeInsets.fromLTRB(25.0, 80.0, 0.0, 0.0), 
+                      padding: EdgeInsets.fromLTRB(25.0, 100.0, 0.0, 0.0), 
                       child: InkWell(
                         onTap: () {
                           Navigator.of(context).pushNamed('/signup');
@@ -69,7 +76,12 @@ class _MyHomePageState extends State<LoginPage>  {
                       borderRadius: BorderRadius.circular(20.0),
                       color: Colors.white,
                     ),
+                    child:
+                  Form(
+                    
+                    key: _formKey,
                     child: Column(
+
 
                       // The 'Username/email' and 'Password' fields
 
@@ -77,7 +89,12 @@ class _MyHomePageState extends State<LoginPage>  {
                         SizedBox(height: 10),
                         Container(
                           width: 325.0,
-                          child: TextField(
+                          child: TextFormField(
+                            validator: (val) => val.isEmpty ? 'You need to provide an email to log in': null,
+                            onChanged: (val){
+                              setState(() => email = val );
+                            },
+
                             cursorColor: Colors.amber,
                             cursorWidth: 2.0,
                             decoration: InputDecoration(
@@ -95,7 +112,12 @@ class _MyHomePageState extends State<LoginPage>  {
                         ),
                         Container(
                           width: 325.0,
-                          child: TextField(
+                          child: TextFormField(
+                            validator: (val) => val.isEmpty ? 'You need to provide a password to log in': null,
+                            onChanged: (val){
+                              setState(() => password = val );
+                            },
+                            obscureText: true,
                             cursorColor: Colors.amber,
                             cursorWidth: 2.0,
                             decoration: InputDecoration(
@@ -114,6 +136,7 @@ class _MyHomePageState extends State<LoginPage>  {
                       ],
                     )
                   ),
+                  ),
 
                   SizedBox(height: 40.0),
 
@@ -127,8 +150,20 @@ class _MyHomePageState extends State<LoginPage>  {
                       shadowColor: Colors.orangeAccent,
                       color: Colors.orange,
                       elevation: 7.0,
-                      child: GestureDetector(
-                        onTap: () {},
+                      child: InkWell( 
+                        hoverColor: Colors.red,
+                        splashColor: Colors.blueAccent,
+                        onTap: () async{ 
+                          if(_formKey.currentState.validate()){
+                            
+                            dynamic result = await _auth.logIn(email, password);
+                            if(result == null){
+                              setState(() =>  error = 'kindly provide a valid email and password');
+                            }
+
+                          }
+
+                        },
                             child: Center(
                               child: Text(
                                 "LOG IN",
@@ -149,8 +184,18 @@ class _MyHomePageState extends State<LoginPage>  {
 
                   Container(
                     child: InkWell(
-                      onTap: () {
+                      onTap: () async {
+
+                        dynamic result = await _auth.guestSignin();
+
+                        if(result == null){
+                          // HERE GOES THE INVALID LOGIN ERROR
+                        }
+                        else{
                           Navigator.of(context).pushNamed('/store');
+                        }
+                        
+                        
                         },
                       child: Text('Skip',
                       style: TextStyle(
@@ -198,8 +243,8 @@ class _MyHomePageState extends State<LoginPage>  {
           // )
           ],
         ),
-        //   ),
-        // ),
+          ),
+        ),
       );
     }
 }
