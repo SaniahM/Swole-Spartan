@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "894309734052",
+    "firebase_url": "https://swolespartan16.firebaseio.com",
+    "project_id": "swolespartan16",
+    "storage_bucket": "swolespartan16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894309734052:android:0d61603d13ceb8a9393831",
+        "android_client_info": {
+          "package_name": "flutter.swolespartan.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "894309734052-fir6aj3s1hjrm1lju8gcj3g2qohmgell.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-tQdHeH5mXJrwWbGGj89WcxoFqnHVHBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "894309734052-fir6aj3s1hjrm1lju8gcj3g2qohmgell.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
