@@ -255,7 +255,7 @@ class _SignupPageState extends State<SignupPage>  {
                         onTap: () async{ 
                           if(_formKey.currentState.validate()){
                             
-                            dynamic result = await _auth.signUp(email, password);
+                            dynamic result = await _auth.signUp(email, password, firstName, lastName, address, phone);
                             if(result == null){
                               setState(() =>  error = 'kindly provide a valid email and password');
                             }

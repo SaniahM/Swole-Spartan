@@ -2,8 +2,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'shopping_list.dart';
-
-
+import 'user.dart';
+// import 'auth.dart';
+import 'package:provider/provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 class CheckoutPageSub extends StatefulWidget {
@@ -13,11 +15,22 @@ class CheckoutPageSub extends StatefulWidget {
 
 
 class _CheckoutPageStateSub extends State<CheckoutPageSub> {
-  
+
+
+
 @override
 Widget build(BuildContext context) {
-  
-return SingleChildScrollView(
+
+final user = Provider.of<User>(context);
+
+return StreamBuilder<UserData>(
+    stream: DatabaseService(uid: user.uid).userData,
+    
+     builder:(context,snapshot){ 
+       
+       UserData userdata = snapshot.data;
+
+        return SingleChildScrollView(
           child: Container(
             height: MediaQuery
                 .of(context)
@@ -55,6 +68,8 @@ return SingleChildScrollView(
                 ),
 
                 //DELIVERY DETAILS
+
+                
                 Container(
                   height: 300,
                   //color:Colors.pink,
@@ -69,14 +84,31 @@ return SingleChildScrollView(
                             color: Colors.white,
                             margin: EdgeInsets.fromLTRB(20, 3, 0, 3),
                             padding: EdgeInsets.only(top: 3),
-                            child: Text('Name',
+                            child: Row( 
+                              children:[
+
+                              Text('Name',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
+                             
+                            Padding(padding: EdgeInsets.only(left: 20),),
+
+                            //SWITCH
+                           Text(userdata.firstName+ " " +userdata.lastName,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: ssFont,
+                                color: Colors.grey,
+                              ),
+                            )
+
+                            ],
                           ),
+                          )
                         ],
                       ),
 
@@ -94,14 +126,29 @@ return SingleChildScrollView(
                             color: Colors.white,
                             margin: EdgeInsets.fromLTRB(20, 3, 0, 3),
                             padding: EdgeInsets.only(top: 3),
-                            child: Text(
-                              'Phone Number',
+                            child: Row( 
+                              children:[
+
+                              Text('Phone Number',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
+                             
+                            Padding(padding: EdgeInsets.only(left: 20),),
+
+                           Text(userdata.phone, //SWITCH
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: ssFont,
+                                color: Colors.grey,
+                              ),
+                            )
+
+                            ],
+                          ),
                           ),
                         ],
                       ),
@@ -119,14 +166,29 @@ return SingleChildScrollView(
                             color: Colors.white,
                             margin: EdgeInsets.fromLTRB(20, 3, 0, 3),
                             padding: EdgeInsets.only(top: 3),
-                            child: Text(
-                              'Email',
+                            child: Row( 
+                              children:[
+
+                              Text('Email',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
+                             
+                            Padding(padding: EdgeInsets.only(left: 20),),
+
+                           Text(userdata.email, //SWITCH
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: ssFont,
+                                color: Colors.grey,
+                              ),
+                            )
+
+                            ],
+                          ),
                           ),
                         ],
                       ),
@@ -145,15 +207,29 @@ return SingleChildScrollView(
                             color: Colors.white,
                             margin: EdgeInsets.fromLTRB(20, 3, 0, 3),
                             padding: EdgeInsets.only(top: 3),
-                            child: Text(
-                              'Address',
+                            child: Row( 
+                              children:[
+
+                              Text('Address',
                               style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
-                          ),
+                             
+                            Padding(padding: EdgeInsets.only(left: 20),),
+
+                           Text(userdata.address, //SWITCH
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: ssFont,
+                                color: Colors.grey,
+                              ),
+                            )
+
+                            ],
+                          ),                          ),
                         ],
                       ),
 
@@ -338,5 +414,8 @@ return SingleChildScrollView(
           ),
         );
 
-}
+      
+    }
+  );
+  }
 }

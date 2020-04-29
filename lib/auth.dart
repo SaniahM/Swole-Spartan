@@ -34,10 +34,13 @@ class AuthService{
 
 
   //official signup
-  Future signUp(String email, String password) async{
+  Future signUp(String email, String password, String fName, String lName, String address, String phone) async{
     try{
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+
+      await DatabaseService(uid: user.uid).updateUserData(fName, lName, address, phone, email);
+
       return _user(user);
 
     }catch(e){

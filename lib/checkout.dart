@@ -6,6 +6,11 @@ import 'footnavbar.dart';
 import 'properties.dart';
 import 'screens.dart';
 
+// import 'user.dart';
+// // import 'auth.dart';
+// import 'package:provider/provider.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class CheckoutPage extends StatefulWidget {
   @override
@@ -18,7 +23,10 @@ class _CheckoutPageState extends State<CheckoutPage> {
   int _sectionIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    // return StreamProvider<QuerySnapshot>.value(
+    //        value: DatabaseService().userInfo,
+    
+     return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
       appBar: topbar(context, getColor()[0], getColor()[1]),
       body: Card(
