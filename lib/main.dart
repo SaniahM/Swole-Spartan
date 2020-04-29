@@ -14,6 +14,8 @@ import 'auth.dart';
 import 'user.dart';
 import 'gateway.dart';
 
+import 'post.dart';
+
 void main() => runApp( MyApp() );
 
 class MyApp extends StatelessWidget{
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget{
           '/cart': (BuildContext context) => new CartPage(),
           '/checkout': (BuildContext context) => new CheckoutPage(),
           '/categoryscreen': (BuildContext context) => new StoreCatPage(),
+          '/post': (BuildContext context) => new DFPostPage(),
+
         },
       
         home: new Gateway(),

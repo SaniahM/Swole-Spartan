@@ -1,13 +1,10 @@
 class ThreadClass {
   
   String threadTitle;
-  String postTitle;
-  String postDescription;
+  List postTitle;
+  List postDescription;
 
-  ThreadClass (String tT, String pT, String pD) {
-    this.threadTitle = tT;
-    this.postTitle = pT;
-    this.postDescription = pD;
-  } 
+  ThreadClass (this.threadTitle, this.postTitle, this.postDescription);
+
 }
 

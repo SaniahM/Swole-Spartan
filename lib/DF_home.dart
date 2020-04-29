@@ -7,21 +7,21 @@ class DFHomePage extends StatefulWidget{
   _DFHomePage createState() => _DFHomePage();
 }
 
+List<ThreadClass> threads = [
+      ThreadClass('General Discussion', ['Forum Rules', 'Ramzan Tournament'],
+      ['PakGamers is going to kickstart its first Gaming Night! Don’t know what that is? Its simply like an online party, from your home, with your PG friends, A little bit of “ShoorSharaba” with things flying around (monitor, mouse, abuses, calls, etc). Ok?We’re going to record all of the session to put up on your PakGamers Youtube Channel Lets see if this overflows, it most probably will but wel will make this scrollable hopefully.', 'Announcement for ramzan Tournament...']),
+      ThreadClass('Workout Discussion', ['Traps Exercises?'], ['Hello']),
+      ThreadClass('Supplements Discussion', ['Whey Protein Brands'], ['Hello']),
+      ThreadClass('Miscellaneous', ['Getting fat'],
+      ['Ramzan is making me fatter']),
+    ];
+
 class _DFHomePage extends State<DFHomePage>{
 
   @override
   Widget build(BuildContext context){
 
     String ssFont = 'NeusaNextStf-CompactRegular.otf';
-
-    List<ThreadClass> threads = [
-      ThreadClass('General Discussion', 'Forum Rules',
-      'PakGamers is going to kickstart its first Gaming Night! Don’t know what that is? Its simply like an online party, from your home, with your PG friends, A little bit of “ShoorSharaba” with things flying around (monitor, mouse, abuses, calls, etc). Ok?We’re going to record all of the session to put up on your PakGamers Youtube Channel Lets see if this overflows, it most probably will but wel will make this scrollable hopefully.'),
-      ThreadClass('Workout Discussion', 'Traps Exercises?', 'Hello'),
-      ThreadClass('Supplements Discussion', 'Whey Protein Brands', 'Hello'),
-      ThreadClass('Miscellaneous', 'Getting fat',
-      'Ramzan is making me fatter'),
-    ];
 
     return Column(
                 children:
@@ -55,7 +55,7 @@ class _DFHomePage extends State<DFHomePage>{
                             height: 150,
                             child: InkWell(
                             onTap: () {
-                              
+                              Navigator.of(context).pushNamed('/post');
                             },
                             child: Column(
                               children: [
@@ -72,7 +72,7 @@ class _DFHomePage extends State<DFHomePage>{
                                 SizedBox(height: 20.0),
 
                                     Text(
-                                      threads[index].postTitle,
+                                      threads[index].postTitle[0],
                                       style: TextStyle(
                                         fontSize: 15.0,
                                         fontFamily: ssFont,
@@ -92,7 +92,7 @@ class _DFHomePage extends State<DFHomePage>{
                                 Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  threads[index].postDescription,
+                                  threads[index].postDescription[0],
                                   style: TextStyle(
                                     fontSize: 15.0,
                                     fontFamily: ssFont,
