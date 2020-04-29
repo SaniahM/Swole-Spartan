@@ -18,17 +18,6 @@ AppBar topbar(context, greyShade, deepOrangeShade){
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
 
-              // Center(
-              //   child: IconButton(
-              //     iconSize: 19,
-              //     icon: Icon(Icons.menu),
-              //     onPressed: () { 
-              //       Navigator.of(context).pushNamed(
-              //         '/sidemenu');
-              //     },
-              //   )
-              // ),
-
               SizedBox(width: 150.0),
 
               Center(
@@ -37,7 +26,6 @@ AppBar topbar(context, greyShade, deepOrangeShade){
                   icon: Icon(SpartanIcons.profile) ,
                   onPressed: () async {
                     await _auth.signOut();
-                    //Navigator.of(context).pushNamed('/profile');
                   },
                 )
               ),

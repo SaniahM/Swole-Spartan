@@ -14,7 +14,7 @@ Future<DraggableScrollableSheet> getdata() async{
 
           builder: (BuildContext context, ScrollController scrollController) {
            
-              return  ListView.builder(
+              return ListView.builder(
                   controller: scrollController,
                   itemCount: 4,
 
@@ -25,18 +25,18 @@ Future<DraggableScrollableSheet> getdata() async{
                     return Row(
 
                       mainAxisAlignment: MainAxisAlignment.center, 
-                      children:[ 
-                        singleItem(
+                      children:[
+                        Container(
+                        // color: Colors.grey[300], 
+                        child: singleItem(
                           context, 
                           products[x]['prod_name'], 
                           products[x]['image_link'], 
                           products[x]['price'], 
                           products[x]['category'], 
-                          query[x].documentID,products[x]), 
-                          // Padding(
-                          //   padding: EdgeInsets.only(left: 70),
-                          //   ) ,
-                            singleItem(context,products[y]['prod_name'], 
+                          query[x].documentID,products[x]),
+                        ), 
+                        singleItem(context,products[y]['prod_name'], 
                             products[y]['image_link'], 
                             products[y]['price'], 
                             products[y]['category'], 
@@ -46,9 +46,8 @@ Future<DraggableScrollableSheet> getdata() async{
 
                   );
                   },
-                
-                
-                );
+              
+              );
           },
       
 
@@ -79,7 +78,6 @@ InkWell singleItem(context, name, images, price, categories, id, product){
                     children: [
 
                       Container(
-                      // color: Colors.red,
                       height: 100,
                       width: 100,
                       

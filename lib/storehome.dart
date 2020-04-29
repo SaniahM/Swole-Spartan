@@ -12,10 +12,24 @@ class _StoreHome extends State<StoreHomePage>{
   @override
   Widget build(BuildContext context){
 
+    String ssFont = 'NeusaNextStf-CompactRegular.otf';
+
     return Column(
                 children:  
                   [
-                    Padding(padding: EdgeInsets.all(22)),
+                    SizedBox(height: 20),
+                    Container(
+                    child:Text(
+                      'FEATURED PRODUCTS',
+                      style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: ssFont,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    ),
+                    SizedBox(height: 20),
                     carousel(),
                     Padding(padding: EdgeInsets.all(10)),
                     Expanded(child:featuredlist())
