@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'spartan_icons_icons.dart';
-import 'threads.dart';
-import 'DF_home.dart';
 import 'appbar.dart';
+import 'drawer.dart';
+import 'drawer.dart';
 import 'properties.dart';
-import 'screens.dart';
 import 'drawer.dart';
 import 'footnavbar.dart';
-
+import 'DF_home.dart';
 
 class DFPostPage extends StatefulWidget{
   @override
@@ -15,23 +13,14 @@ class DFPostPage extends StatefulWidget{
 }
 
 class _DFPostPage extends State<DFPostPage>{
-
   int _currentIndex = 0;
   int _sectionIndex = 0;
-
   @override
   Widget build(BuildContext context){
-
-    String ssFont = 'NeusaNextStf-CompactRegular.otf';
 
     return Scaffold(
       
       backgroundColor: Colors.grey[getColor()[0]],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
-        backgroundColor: Colors.orange[600], 
-      ),
 
       appBar: topbar(context, getColor()[0], getColor()[1]),
       drawer: drawerFunc(),
@@ -39,17 +28,18 @@ class _DFPostPage extends State<DFPostPage>{
               color: Colors.white,
               elevation: 10,
               margin: EdgeInsets.only(top:8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))), 
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
+
             
               child: Column(
-                children: <Widget> 
-                [
+                children: <Widget> [
+
                   SizedBox(height: 20),
-                  
+
                   Center( 
                     child: Container(
                     child:Text(
-                      'General Discussion',
+                      'Looking for gyms in DHA',
                       style: TextStyle(
                       fontSize: 20.0,
                       fontFamily: ssFont,
@@ -60,30 +50,143 @@ class _DFPostPage extends State<DFPostPage>{
                     ),
                   ),
 
+                  SizedBox(height: 30.0),
+
                   Expanded(
                     child: ListView.builder(
                       itemCount:threads.length,
                       itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
-                        child: Card(
+                      
+                      if (index == threads.length - 1) {
+                        return Card(
+                          elevation: 3.0,
+                          margin: EdgeInsets.all(10.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30))),
                           child: Container(
-                            height: 150,
+                            height: 200,
+                            child: Column(
+                              children: <Widget>[
+
+                                SizedBox(height: 20),
+
+                                Row(
+                                  children: <Widget>[
+                                    SizedBox( width: 20.0),
+                                    Text(
+                                      "New Post",
+                                          style: TextStyle(
+                                            fontSize: 20.0,
+                                            fontFamily: ssFont,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.bold
+                                          )
+
+                                    ),
+                                  ],
+                                ),
+
+                                Container(
+                                  width: 330.0,
+                                  child: TextFormField(
+                                    cursorColor: Colors.amber,
+                                    cursorWidth: 2.0,
+                                    decoration: InputDecoration(
+                                      labelText: "Please enter your text here...",
+                                      labelStyle: TextStyle(
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(color: Colors.orange)
+                                    ),
+                                  )
+                                  )
+
+                                ),
+
+                                SizedBox(height: 35.0),
+
+                                Container(
+                                  height: 40.0,
+                                  width: 275.0,
+                                  child: Material(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    shadowColor: Colors.orangeAccent,
+                                    color: Colors.orange,
+                                    elevation: 7.0,
+                                    child: InkWell( 
+                                      hoverColor: Colors.red,
+                                      splashColor: Colors.blueAccent,
+                                      onTap: () {},
+                                          child: Center(
+                                            child: Text(
+                                              "ENTER POST",
+                                              style: TextStyle(
+                                                fontFamily: ssFont,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              )
+                                            ),
+                                          )
+                                    ),
+                                  ),
+                                )
+
+                              ],
+
+
+                            )
+
+                          )
+                        );
+                      }
+
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 4.0),
+                        child: Card(
+                          elevation: 3.0,
+                          margin: EdgeInsets.all(10.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(30))),
+                          child: Container(
+                            height: 300,
                             child: InkWell(
                             onTap: () {
-                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamed('/post');
                             },
                             child: Column(
                               children: [
-                                Text(
-                                  threads[index].postTitle[0],
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontFamily: ssFont,
-                                    color: Colors.orange[500],
-                                    fontWeight: FontWeight.bold
-                                  )
-                                  ),
+
+                                SizedBox(height: 10),
+                                
+                                Row(
+                                  children: <Widget>[
+                                    
+                                    SizedBox(width: 10.0),
+
+                                    Text(
+                                      "User_name",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold
+                                      )
+                                      ),
+
+                                    SizedBox(width: 200.0),
+                                    
+                                    Text(
+                                      "date",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                      )
+                                    )
+                                  ],
+                                ),
 
                                 SizedBox(height: 20.0),
 
@@ -108,6 +211,29 @@ class _DFPostPage extends State<DFPostPage>{
                                 ),
                                 ),
 
+                                SizedBox(height: 20.0),
+
+                                Row(
+                                  children: <Widget>[
+
+                                    SizedBox(width: 280.0),
+                                    
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Text (
+                                        'Report Post',
+                                        style: TextStyle(
+                                          fontFamily: ssFont,
+                                          color: Colors.grey,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      )
+                                    )
+                                  ],
+                                ),
+
+                                SizedBox(height: 10),
+
                               ]
                             ),
                             ),
@@ -117,14 +243,14 @@ class _DFPostPage extends State<DFPostPage>{
                       );
                       
                       }
-                      ) 
+                      )
+
+                     
                   
-                  
-                  )
-
-
-
+                  ),
+                                    
                 ]
+
               )
 
       ),
@@ -137,7 +263,9 @@ class _DFPostPage extends State<DFPostPage>{
           }), 
 
       );
-  
   }
-
 }
+
+//Myapp
+
+
