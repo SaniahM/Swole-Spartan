@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'storescreenarg.dart';
+import 'properties.dart';
 
 Future<DraggableScrollableSheet> getdata() async{
   
@@ -12,9 +13,11 @@ Future<DraggableScrollableSheet> getdata() async{
   }
   return new Future( ()=> DraggableScrollableSheet(
 
+          initialChildSize: 1,
           builder: (BuildContext context, ScrollController scrollController) {
            
-              return ListView.builder(
+              return  ListView.builder(
+
                   controller: scrollController,
                   itemCount: 4,
 
@@ -25,18 +28,19 @@ Future<DraggableScrollableSheet> getdata() async{
                     return Row(
 
                       mainAxisAlignment: MainAxisAlignment.center, 
-                      children:[
-                        Container(
-                        // color: Colors.grey[300], 
-                        child: singleItem(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:[ 
+                        singleItem(
                           context, 
                           products[x]['prod_name'], 
                           products[x]['image_link'], 
                           products[x]['price'], 
                           products[x]['category'], 
-                          query[x].documentID,products[x]),
-                        ), 
-                        singleItem(context,products[y]['prod_name'], 
+                          query[x].documentID,products[x]), 
+                          Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            ) ,
+                            singleItem(context,products[y]['prod_name'], 
                             products[y]['image_link'], 
                             products[y]['price'], 
                             products[y]['category'], 
@@ -46,14 +50,16 @@ Future<DraggableScrollableSheet> getdata() async{
 
                   );
                   },
-              
-              );
+                
+                
+                );
           },
       
 
       )
   );
 }
+
 featuredlist(){
   return FutureBuilder<DraggableScrollableSheet> (
     future:getdata(),
@@ -73,23 +79,24 @@ InkWell singleItem(context, name, images, price, categories, id, product){
           Navigator.of(context).pushNamed('/viewproduct', arguments: ScreenArg(name,product['prod_desc'],categories,images,price,id) );
       },
 
-  child:Column(
+  child:Column( 
 
                     children: [
 
                       Container(
-                      height: 100,
-                      width: 100,
+                      
+                      height: 110,
+                      width: 135,
                       
                       child: Container(
                         
                         decoration: BoxDecoration(
                           color: Colors.white,
                         
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
                           image: DecorationImage(
                             image: NetworkImage(images),
-                            fit: BoxFit.fill
+                            fit: BoxFit.fitWidth
 
 
                       )
@@ -101,32 +108,35 @@ InkWell singleItem(context, name, images, price, categories, id, product){
                       ),
 
                       Container(
-                      width: 175,
+                      width: 125,
                       child: Center(
-                        child: Text(name, style: TextStyle(fontSize: 15, color: Colors.blue[900]),)
+                        child: Text(categories, style: TextStyle(fontSize: 12,color: Colors.blueGrey),textAlign: TextAlign.center,),
                       ),
                       ),
 
+                      Padding(padding: EdgeInsets.all(2.5),),
+
                       Container(
-                      width: 175,
+                      width: 125,
                       child: Center(
-                        child: Text(categories, style: TextStyle(fontSize: 12,color: Colors.blue[900]),),
+                        child: Text(name, style: TextStyle(fontSize: 12, color: Colors.blue[900]),textAlign: TextAlign.center,)
                       ),
                       ),
 
+
                       Container(
-                      width: 175,
+                      width: 125,
                       child: Center(
-                        child: Text(('Rs. ' + price.toString()), style: TextStyle(fontSize: 15,color: Colors.deepOrange[900]),),
+                        child: Text(('Rs. ' + price.toString()), style: TextStyle(fontSize: 15,color: Colors.deepOrange[getColor()[0]+400]),textAlign: TextAlign.center,),
                       ),
                       ),
 
                       Row(
                         children: <Widget>[
-                          SizedBox(width: 100, height: 40),
+                          SizedBox(width: 100, height: 15),
                         ]
                       )
-                      // Padding(padding: EdgeInsets.only(bottom:10))
+
                       ],
                     
                     )

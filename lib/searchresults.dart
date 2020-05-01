@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'storescreenarg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'properties.dart';
 
 Future<DraggableScrollableSheet> getQueryResults(String queryPhrase) async{
   
@@ -27,6 +28,7 @@ Future<DraggableScrollableSheet> getQueryResults(String queryPhrase) async{
   //else itcount=(products.length/2+1) as int;
   return new Future( ()=> DraggableScrollableSheet(
 
+          initialChildSize: 1,
           builder: (BuildContext context, ScrollController scrollController) {
            
               return  ListView.builder(
@@ -39,7 +41,8 @@ Future<DraggableScrollableSheet> getQueryResults(String queryPhrase) async{
                     if (y<products.length){
                     return Row(
                       
-                      mainAxisAlignment: MainAxisAlignment.center, 
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start, 
                       children:[ 
                         singleItem(
                           context, 
@@ -63,7 +66,7 @@ Future<DraggableScrollableSheet> getQueryResults(String queryPhrase) async{
                   else{
                     return Row(
                       
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       textDirection: TextDirection.ltr, 
                       children:[ 
                         singleItem(
@@ -110,24 +113,24 @@ InkWell singleItem(context, name, images, price, categories, id, product){
           Navigator.of(context).pushNamed('/viewproduct', arguments: ScreenArg(name,product['prod_desc'],categories,images,price,id) );
       },
 
-  child:Column(
+  child:Column( 
 
                     children: [
 
                       Container(
-                      // color: Colors.red,
-                      height: 100,
-                      width: 100,
+                      
+                      height: 120,
+                      width: 150,
                       
                       child: Container(
                         
                         decoration: BoxDecoration(
                           color: Colors.white,
                         
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
                           image: DecorationImage(
                             image: NetworkImage(images),
-                            fit: BoxFit.fill
+                            fit: BoxFit.fitWidth
 
 
                       )
@@ -139,23 +142,26 @@ InkWell singleItem(context, name, images, price, categories, id, product){
                       ),
 
                       Container(
-                      width: 175,
+                      width: 125,
                       child: Center(
-                        child: Text(name, style: TextStyle(fontSize: 15, color: Colors.blue[900]),)
+                        child: Text(categories, style: TextStyle(fontSize: 12,color: Colors.blueGrey),textAlign: TextAlign.center,),
                       ),
                       ),
 
+                      Padding(padding: EdgeInsets.all(2.5),),
+
                       Container(
-                      width: 175,
+                      width: 125,
                       child: Center(
-                        child: Text(categories, style: TextStyle(fontSize: 12,color: Colors.blue[900]),),
+                        child: Text(name, style: TextStyle(fontSize: 12, color: Colors.blue[900]),textAlign: TextAlign.center,)
                       ),
                       ),
 
+
                       Container(
-                      width: 175,
+                      width: 125,
                       child: Center(
-                        child: Text(('Rs. ' + price.toString()), style: TextStyle(fontSize: 15,color: Colors.deepOrange[900]),),
+                        child: Text(('Rs. ' + price.toString()), style: TextStyle(fontSize: 15,color: Colors.deepOrange[getColor()[0]+400]),textAlign: TextAlign.center,),
                       ),
                       ),
 
@@ -164,7 +170,7 @@ InkWell singleItem(context, name, images, price, categories, id, product){
                           SizedBox(width: 100, height: 40),
                         ]
                       )
-                      // Padding(padding: EdgeInsets.only(bottom:10))
+
                       ],
                     
                     )
