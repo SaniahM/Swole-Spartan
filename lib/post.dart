@@ -1,63 +1,25 @@
 import 'package:flutter/material.dart';
 import 'appbar.dart';
 import 'drawer.dart';
-import 'drawer.dart';
 import 'properties.dart';
-import 'drawer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'footnavbar.dart';
-import 'DF_home.dart';
-
-class DFPostPage extends StatefulWidget{
-  @override
-  _DFPostPage createState() => _DFPostPage();
-}
-
-class _DFPostPage extends State<DFPostPage>{
-  int _currentIndex = 0;
-  int _sectionIndex = 0;
-  @override
-  Widget build(BuildContext context){
-
-    return Scaffold(
-      
-      backgroundColor: Colors.grey[getColor()[0]],
-
-      appBar: topbar(context, getColor()[0], getColor()[1]),
-      drawer: drawerFunc(),
-      body: Card(
-              color: Colors.white,
-              elevation: 10,
-              margin: EdgeInsets.only(top:8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
-
-            
-              child: Column(
-                children: <Widget> [
-
-                  SizedBox(height: 20),
-
-                  Center( 
-                    child: Container(
-                    child:Text(
-                      'Looking for gyms in DHA',
-                      style: TextStyle(
-                      fontSize: 20.0,
-                      fontFamily: ssFont,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    ),
-                  ),
-
-                  SizedBox(height: 30.0),
-
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount:threads.length,
+import 'thread_arg.dart';
+import 'postsclass.dart';
+Future<ListView> getPosts(threadID) async{
+  var threadRef = Firestore.instance.collection('threads').document(threadID);
+  var threadData = (await Firestore.instance.collection('thread_posts').where('thread',isEqualTo: threadRef).orderBy('time').getDocuments()).documents;
+  String ssFont = 'NeusaNextStf-CompactRegular.otf';
+  List<Posts> posts=List<Posts>();
+  for (int x=0;x<threadData.length;x++){
+    Timestamp temp=threadData[x].data['time'];
+    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp.toDate().toString()));
+  }
+  return new Future( ()=> ListView.builder(
+                      itemCount:posts.length+1,
                       itemBuilder: (context, index) {
                       
-                      if (index == threads.length - 1) {
+                      if (index == posts.length) {
                         return Card(
                           elevation: 3.0,
                           margin: EdgeInsets.all(10.0),
@@ -166,7 +128,7 @@ class _DFPostPage extends State<DFPostPage>{
                                     SizedBox(width: 10.0),
 
                                     Text(
-                                      "User_name",
+                                      posts[index].name,
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         fontFamily: ssFont,
@@ -178,7 +140,7 @@ class _DFPostPage extends State<DFPostPage>{
                                     SizedBox(width: 200.0),
                                     
                                     Text(
-                                      "date",
+                                      posts[index].time,
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         fontFamily: ssFont,
@@ -199,7 +161,7 @@ class _DFPostPage extends State<DFPostPage>{
                                 Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  threads[index].postDescription[0],
+                                  posts[index].content,
                                   style: TextStyle(
                                     fontSize: 15.0,
                                     fontFamily: ssFont,
@@ -244,6 +206,72 @@ class _DFPostPage extends State<DFPostPage>{
                       
                       }
                       )
+                );
+         
+
+      
+  
+}
+
+postsList(threadID){
+  return FutureBuilder<ListView> (
+    future:getPosts(threadID),
+    builder: (context,snapshot){
+      if (snapshot.hasData){
+        return snapshot.data;
+      }
+      else return CircularProgressIndicator();
+    }
+  );
+}
+
+class DFPostPage extends StatefulWidget{
+  @override
+  _DFPostPage createState() => _DFPostPage();
+}
+
+class _DFPostPage extends State<DFPostPage>{
+  int _currentIndex = 0;
+  int _sectionIndex = 0;
+  @override
+  Widget build(BuildContext context){
+    ThreadArg arg=ModalRoute.of(context).settings.arguments;
+    return Scaffold(
+      
+      backgroundColor: Colors.grey[getColor()[0]],
+
+      appBar: topbar(context, getColor()[0], getColor()[1]),
+      drawer: drawerFunc(),
+      body: Card(
+              color: Colors.white,
+              elevation: 10,
+              margin: EdgeInsets.only(top:8),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
+
+            
+              child: Column(
+                children: <Widget> [
+
+                  SizedBox(height: 20),
+
+                  Center( 
+                    child: Container(
+                    child:Text(
+                      arg.threadTitle,
+                      style: TextStyle(
+                      fontSize: 20.0,
+                      fontFamily: ssFont,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    ),
+                  ),
+
+                  SizedBox(height: 30.0),
+
+                  Expanded(
+                    child: postsList(arg.docID)
 
                      
                   

@@ -1,10 +1,10 @@
-class ThreadClass {
+class HomeThreadClass {
   
+  String threadCat;
   String threadTitle;
-  List postTitle;
-  List postDescription;
+  String threadPost;
 
-  ThreadClass (this.threadTitle, this.postTitle, this.postDescription);
+  HomeThreadClass (this.threadCat, this.threadTitle, this.threadPost);
 
 }
 
