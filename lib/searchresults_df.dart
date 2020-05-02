@@ -1,21 +1,27 @@
-import 'package:flutter/material.dart';
-import 'spartan_icons_icons.dart';
-import 'threads.dart';
-import 'appbar.dart';
-import 'properties.dart';
+import 'df_searcharg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'screens.dart';
-import 'drawer_df.dart';
-import 'footnavbar.dart';
 import 'thread_arg.dart';
+import 'package:flutter/material.dart';
 
-Future<ListView> getThreads(category) async{
-  
-  var gen = (await Firestore.instance.collection('threads').where('category',isEqualTo: category).orderBy('time',descending: true ).getDocuments()).documents;
+Future<ListView> getThreadResults(queryPhrase) async{
+  var posts = (await Firestore.instance.collection('thread_posts').orderBy('time',descending: true ).getDocuments()).documents;
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
-  List<HomeThreadClass> threads=List<HomeThreadClass>();
-  for (int x=0;x<gen.length;x++){
-    threads.add(HomeThreadClass(gen[x].data['category'],gen[x].data['title'],gen[x].data['init_post']));
+  List<SearchArg> threads=List<SearchArg>();
+  List<String> postDocs=List<String>();
+  for (int x=0;x<posts.length;x++){
+    if ((posts[x].data['content'].toLowerCase().contains(queryPhrase.toLowerCase()) || (posts[x].data['title'].toLowerCase().contains(queryPhrase.toLowerCase()))) && !(postDocs.contains(posts[x].documentID))){
+      postDocs.add(posts[x].documentID);
+      threads.add(SearchArg(posts[x].data['thread'],posts[x].data['title'],posts[x].data['content']));
+    }
+  }
+  List<String> queryWords=queryPhrase.split(' ');
+  for(int y=0;y<queryWords.length;y++){
+    for (int x=0;x<posts.length;x++){
+      if ((posts[x].data['content'].toLowerCase().contains(queryWords[y].toLowerCase()) || (posts[x].data['title'].toLowerCase().contains(queryWords[y].toLowerCase()))) && !(postDocs.contains(posts[x].documentID))){
+        postDocs.add(posts[x].documentID);
+        threads.add(SearchArg(posts[x].data['thread'],posts[x].data['title'],posts[x].data['content']));
+      }
+    }
   }
   return new Future( ()=> ListView.builder(
                       itemCount:threads.length,
@@ -31,7 +37,7 @@ Future<ListView> getThreads(category) async{
                             height: 150,
                             child: InkWell(
                             onTap: () {
-                              Navigator.of(context).pushNamed('/post', arguments: ThreadArg(gen[index].documentID,threads[index].threadTitle));
+                              Navigator.of(context).pushNamed('/post', arguments: ThreadArg(threads[index].docID,threads[index].threadTitle));
                             },
                             child: Column(
                               children: [
@@ -71,7 +77,7 @@ Future<ListView> getThreads(category) async{
                                 Align(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
-                                  threads[index].threadPost,
+                                  threads[index].postContent,
                                   style: TextStyle(
                                     fontSize: 15.0,
                                     fontFamily: ssFont,
@@ -104,9 +110,9 @@ Future<ListView> getThreads(category) async{
   
 }
 
-threadsList(category){
+querylistdf(query){
   return FutureBuilder<ListView> (
-    future:getThreads(category),
+    future:getThreadResults(query),
     builder: (context,snapshot){
       if (snapshot.hasData){
         return snapshot.data;
@@ -115,7 +121,7 @@ threadsList(category){
     }
   );
 }
-
+/*
 class DFThreadPage extends StatefulWidget{
   @override
   _DFThreadPage createState() => _DFThreadPage();
@@ -194,3 +200,4 @@ class _DFThreadPage extends State<DFThreadPage>{
   }
 
 }
+*/

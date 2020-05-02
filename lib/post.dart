@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'appbar.dart';
-import 'drawer.dart';
+import 'drawer_df.dart';
 import 'properties.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'footnavbar.dart';
@@ -12,8 +12,8 @@ Future<ListView> getPosts(threadID) async{
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
   List<Posts> posts=List<Posts>();
   for (int x=0;x<threadData.length;x++){
-    Timestamp temp=threadData[x].data['time'];
-    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp.toDate().toString()));
+    String temp=(threadData[x].data['time']).toDate.toString();
+    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp.substring(0,10), temp.substring(11,16)));
   }
   return new Future( ()=> ListView.builder(
                       itemCount:posts.length+1,
