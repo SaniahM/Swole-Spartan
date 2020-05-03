@@ -376,7 +376,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                               splashColor: Colors.blueAccent,
                                               onTap: () async{
                                                     if (_formKey.currentState.validate()) {
-                                                      await PostReview(hashCode.toString()).newReview(arg.id, customerName, review);
+                                                      await PostReview().newReview(arg.id, customerName, review);
                                                       Navigator.pop(context);
                                                     }
                                                   },
