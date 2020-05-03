@@ -135,7 +135,9 @@ class _DFThreadPage extends State<DFThreadPage>{
       
       backgroundColor: Colors.grey[getColor()[0]],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed('/new_thread');
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.orange[600], 
       ),

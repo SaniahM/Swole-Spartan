@@ -113,10 +113,6 @@ Future<ListView> getPosts(threadID) async{
                             borderRadius: BorderRadius.all(Radius.circular(30))),
                           child: Container(
                             height: 300,
-                            child: InkWell(
-                            onTap: () {
-                              Navigator.of(context).pushNamed('/post');
-                            },
                             child: Column(
                               children: [
 
@@ -197,7 +193,6 @@ Future<ListView> getPosts(threadID) async{
                                 SizedBox(height: 10),
 
                               ]
-                            ),
                             ),
 
                           ),

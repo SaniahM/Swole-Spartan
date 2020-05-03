@@ -16,6 +16,7 @@ import 'gateway.dart';
 
 import 'thread.dart';
 import 'post.dart';
+import 'new_thread.dart';
 
 void main() => runApp( MyApp() );
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget{
           '/categoryscreen': (BuildContext context) => new StoreCatPage(),
           '/thread': (BuildContext context) => new DFThreadPage(),
           '/post': (BuildContext context) => new DFPostPage(),
+          '/new_thread': (BuildContext context) => new DFNewThreadPage(),
         },
       
         home: new Gateway(),
