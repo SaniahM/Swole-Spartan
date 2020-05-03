@@ -5,353 +5,160 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //our own imports
-import 'package:flutter_counter/flutter_counter.dart';
-import 'spartan_icons_icons.dart';
-import 'dropdown_menu.dart';
+// import 'package:flutter_counter/flutter_counter.dart';
+import 'properties.dart';
+import 'screens.dart';
+import 'appbar.dart';
+import 'footnavbar.dart';
 
-void main() => runApp( MyApp() );
-
-class MyApp extends StatelessWidget{
+class ViewProductPage extends StatefulWidget{
   @override
-  Widget build(BuildContext context){
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Home()
+  _ViewProduct createState() => _ViewProduct();
+}
+
+
+Future<Widget> getrow(id) async{
+
+  var variations = (await Firestore.instance.collection('products_variations').where('product', isEqualTo: '/products/'+id).getDocuments()).documents;
+  var options =(await Firestore.instance.collection('variation_options').where('product', isEqualTo: '/products/'+id).getDocuments()).documents;
+  List<List<String>> uniqueOptions=List<List<String>>();
+  List<Row> rows=List<Row>();
+  String ssFont = 'NeusaNextStf-CompactRegular.otf';
+  for(int x=0;x<variations.length;x++){
+    uniqueOptions.add(List<String>());
+    for(int y=0;y<options.length;y++){
+      if (!uniqueOptions[x].contains(options[y][variations[x]['variation_desc']])){
+        uniqueOptions[x].add(options[y][variations[x]['variation_desc']]);
+      }
+    }
+    rows.add(Row(
+        children: <Widget>[
+          Container(
+            width: 120,
+            height: 30,
+            margin: EdgeInsets.only(top:20,left:20,bottom:5),
+            child:Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
+              child: Text(
+                variations[x]['variation_desc'],
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: ssFont,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+          ),
+
+          //Dropdown Menu
+          Expanded(
+            child: Container(
+              height: 23,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              margin: EdgeInsets.only(left:30,top:19,right:20, bottom:5),
+              child: Center(child: DropdownButton<String>(
+                hint: Text('Choose an Option'),
+                icon: Icon(Icons.arrow_downward),
+                iconSize: 24,
+                elevation: 16,
+                style: TextStyle(
+                  fontFamily: ssFont,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey,
+                ),
+                underline: Container(
+                  height: 2,
+                  color: Colors.orangeAccent,
+                ),
+                items: uniqueOptions[x].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                })
+                    .toList(), onChanged: (String value) {},
+              )
+              ),
+            ),
+          ),
+        ]
+    ),
     );
-  }//build
+  }
+
+  return new Future( ()=> Container(
+      child:Column(children: rows)
+  )
+  );
+}
+getVariations(id){
+  return FutureBuilder<Widget> (
+      future: getrow(id),
+      builder: (context,snapshot){
+        if (snapshot.hasData){
+          return snapshot.data;
+        }
+        else return CircularProgressIndicator();
+      }
+  );
 }
 
-class Home extends StatefulWidget{
-  @override
-  _CommonItemsEmpty createState() => _CommonItemsEmpty();
-}
-//The AppBar, bottom navigation bar
-class _CommonItemsEmpty extends State<Home>{
-  //Foot Navigation Bar update
-  int _currentIndex = 0;
 
+
+
+class _ViewProduct extends State<ViewProductPage>{
+  int _currentIndex = 5;
+  int _sectionIndex = 0;
   //Counter variables
-  int counter = 0;
-  int defaultValue = 0;
+
   @override
   Widget build(BuildContext context){
     //Set Colors from here
-    int deepOrangeShade = 300;
-    int greyShade = 300;
-    String ss_Font = 'NeusaNextStf-CompactRegular.otf';
 
     return Scaffold(
-      backgroundColor: Colors.grey[greyShade],
-      appBar: AppBar(
-          backgroundColor: Colors.grey[greyShade],
-          elevation: 0,
-          iconTheme: IconThemeData(color:Colors.deepOrange[deepOrangeShade],size: 19),
-          actions: <Widget>[
-            Padding( //Search Button
-                padding: EdgeInsets.only(right: 235.0),
-                child: Icon(Icons.menu)
-              //IconButton(icon: Icon(Icons.menu)).
-              // Icons in appbar to be replaced by iconbuttons as soon
-              // as we have actions available
-            ),
 
-            Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: Icon(SpartanIcons.profile)
+      resizeToAvoidBottomInset: false,
 
-            ),
-            Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: Icon(SpartanIcons.sCart)
+      backgroundColor: Colors.grey[getColor()[0]],
 
-            ),
-            Padding(
-                padding: EdgeInsets.only(right: 25.0),
-                child: Icon(SpartanIcons.search)
+      appBar: topbar(context, getColor()[0], getColor()[1]),
 
-            ),
-
-
-          ]
-      ),
-
-    //The card that displays the product details, raised over the scaffold
       body: Card(
         color: Colors.white,
         elevation: 10,
         margin: EdgeInsets.only(top:8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
 
-        //Product details
-        child: Center(
-          child: Column(
-            children: <Widget>[
+//////////////////////////////////////////////////////////////////////////////////////////
+/////CHANGE ONLY THIS PART TO FIT ANY SCREEN INTO THE COMMON ITEMS TEMPLATE/////////////
+        // child: SingleChildScrollView(
+        child: screens()[_currentIndex],
 
-              //Product Name
-              Container(
-                width: 220,
-                margin: EdgeInsets.only(top:10, bottom: 10),
-                child:Card(
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                  child: Text(
-                    'Cellucor COR-Performance Isolate Protein Powder',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontFamily: ss_Font,
-                      fontSize: 17.5,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-              ),
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+        // ),
+      ),
 
-              //Product Picture
-              Container(
-                width: 200,
-                height: 170,
-                margin: EdgeInsets.only(bottom: 15),
-                child: Image.asset('images/Cellucor COR-Performance Isolate PP.jpeg',
-                  fit: BoxFit.contain,
-                ),
-              ),
-
-              //Product Price
-              Text('Rs 10,500',
-                style: TextStyle(
-                  fontFamily: ss_Font,
-                  fontSize: 20,
-                  color: Colors.orange,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-
-              //FLAVOUR Selection row
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 120,
-                    height: 30,
-                    margin: EdgeInsets.only(top:20,left:20,bottom:5),
-                    child:Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                      child: Text(
-                        'FLAVOUR',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: ss_Font,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  //Dropdown Menu for Flavour
-                  Expanded(
-                    child: Container(
-                      height: 23,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      margin: EdgeInsets.only(left:30,top:19,right:20, bottom:5),
-                      child: Center(child: DropDown()),
-                      ),
-                  ),
-                ]
-              ),
-
-              //WEIGHT Selection row
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 120,
-                    height: 30,
-                    margin: EdgeInsets.only(left:20,bottom:5),
-                    child:Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                      child: Text(
-                        'WEIGHT',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: ss_Font,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  //Dropdown menu for WEIGHT
-                  Expanded(
-                    child: Container(
-                      height: 23,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      margin: EdgeInsets.only(left:30,right:20,bottom:5),
-                      child: Center(child: DropDown()),
-                    ),
-                  ),
-
-                ],
-              ),
-
-                //QUANTITY Selection row
-                Row(
-                children: <Widget>[
-                  Container(
-                    width: 120,
-                    height: 30,
-                    margin: EdgeInsets.only(left:20),
-                    child:Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(26)),
-                      child: Text(
-                        'QUANTITY',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: ss_Font,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.only(left: 30),
-                    width: 110,
-                    height: 50,
-                    color: Colors.white,
-
-                    //Quantity Counter
-                    child: Counter(
-                      textStyle: TextStyle(
-                        fontSize: 16.5,
-                      ),
-                      buttonSize: 22,
-                      color: Colors.grey[300],
-                      initialValue: defaultValue,
-                      minValue: 0,
-                      maxValue: 50,
-                      step: 1,
-                      decimalPlaces: 0,
-                      onChanged: (value){
-                        setState(() {
-                          defaultValue = value;
-                          counter = value;
-                        });
-                      },
-                    ),
-                  ),
-
-                  //Add to Cart Button
-
-                  IconButton(
-                    onPressed: (){},
-                    icon: Icon(Icons.add_shopping_cart),
-                    color: Colors.orange[deepOrangeShade],
-                  ),
-                ],
-                ),
-
-              //DESCRIPTION
-              Container(
-                margin: EdgeInsets.only(left:20,top:30,bottom:10),
-                child: InkWell(
-                  onTap: () {},
-                  child: Row(
-                    children: <Widget>[
-                      Icon(Icons.keyboard_arrow_down, color: Colors.orange[deepOrangeShade]),
-                      Text('Description',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                        fontFamily: ss_Font,
-                        fontWeight: FontWeight.bold,
-                      ),),
-                    ],
-                  ),
-                ),
-              ),
-
-              //REVIEW
-              Container(
-                margin: EdgeInsets.only(left:20),
-                child: InkWell(
-                  onTap: () {},
-                  child: Row(
-                    children: <Widget>[
-                      Icon(Icons.keyboard_arrow_down, color: Colors.orange[deepOrangeShade]),
-                      Text('Reviews',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                          fontFamily: ss_Font,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                    ],
-                  ),
-                ),
-              ),
-
-
-            ],
-          ),
-
-          ),
-          ),
-
-
-
-
-          bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          onTap: (index){
+      bottomNavigationBar: footBar(_sectionIndex, (index){
             setState(() {
               _currentIndex = index;
-            });
-          },
-          elevation: 20,
-          type: BottomNavigationBarType.fixed,
-          items:
-          [
-            BottomNavigationBarItem( //Store
-                icon: Icon(SpartanIcons.store),
-                title: Text('')
-
-            ),
-
-            BottomNavigationBarItem( //Video Section
-                icon: Icon(SpartanIcons.vSection),
-                title: Text('')
-
-            ),
-
-            BottomNavigationBarItem( //Discussion Forum
-                icon: Icon(SpartanIcons.dForum),
-                title: Text('')
-
-            )
-          ],
-          iconSize: 20,
-          backgroundColor: Colors.grey[greyShade],
-          selectedFontSize: 0,
-          unselectedFontSize: 0,
-          selectedIconTheme:IconThemeData(color:Colors.deepOrange[deepOrangeShade]),
-          unselectedIconTheme:IconThemeData(color:Colors.blue[900])),
+              _sectionIndex = index;
+                          });
+          }),
 
     );
   }
+
+
+
 }
