@@ -1,13 +1,13 @@
-import 'package:SwoleSpartan/review_list.dart';
-import 'properties.dart';
-import 'dropdown_menu.dart';
-import 'auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'storescreenarg.dart';
-import 'review_list.dart';
-import 'post_review.dart';
+import 'package:SwoleSpartan/review_list.dart';
 
+import 'auth.dart';
+import 'dropdown_menu.dart';
+import 'post_review.dart';
+import 'properties.dart';
+import 'review_list.dart';
+import 'storescreenarg.dart';
 
 class ViewProductPageSub extends StatefulWidget {
   @override
@@ -15,7 +15,7 @@ class ViewProductPageSub extends StatefulWidget {
 }
 
 class _ViewProductSub extends State<ViewProductPageSub> {
-  int counter=0;
+  int counter = 0;
   int defaultValue = 0;
   String customerName;
   String review;
@@ -25,14 +25,13 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
   @override
   Widget build(BuildContext context) {
-
     int deepOrangeShade = getColor()[1];
     ScreenArg arg = ModalRoute.of(context).settings.arguments;
     String ssFont = 'NeusaNextStf-CompactRegular.otf';
 
     return SingleChildScrollView(
       child: Container(
-        height: 1500,
+        height: 1050,
         child: Column(
           children: <Widget>[
             //=====Product Name=====//
@@ -61,7 +60,6 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     fit: BoxFit.fill,
                   ),
                 )),
-
 
             //=====Product Price=====//
             Text(
@@ -214,6 +212,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     padding: const EdgeInsets.fromLTRB(15, 0, 10, 10),
                     child: Text(
                       arg.desc,
+                      maxLines: 10,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 15,
@@ -225,8 +224,6 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                 ],
               ),
             ),
-
-
 
             //=====REVIEW EXPANSION TILE=====//
             Padding(
@@ -255,8 +252,6 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                       ),
                     ],
                   ),
-
-
                   Container(
                     alignment: Alignment.topRight,
                     margin: EdgeInsets.only(right: 15, bottom: 15),
@@ -274,8 +269,8 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                             context: context,
                             builder: (context) {
                               return Container(
-                                padding: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
-
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 20),
 
                                 //=====REVIEW FORM=====//
                                 child: Form(
@@ -340,18 +335,17 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                           cursorColor: Colors.amber,
                                           cursorWidth: 2.0,
                                           decoration: InputDecoration(
-                                            labelText: "REVIEW",
-                                            labelStyle: TextStyle(
-                                                fontSize: 15,
-                                                fontFamily: ssFont,
-                                                color: Colors.grey,
-                                                height: 1.0),
-                                            focusedBorder:
-                                              UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                      color:
-                                                      Colors.orange))
-                                          ),
+                                              labelText: "REVIEW",
+                                              labelStyle: TextStyle(
+                                                  fontSize: 15,
+                                                  fontFamily: ssFont,
+                                                  color: Colors.grey,
+                                                  height: 1.0),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color:
+                                                              Colors.orange))),
                                         ),
                                       ),
 
@@ -372,29 +366,34 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                           color: Colors.orange,
                                           elevation: 7.0,
                                           child: InkWell(
-                                              hoverColor: Colors.red,
-                                              splashColor: Colors.blueAccent,
-                                              onTap: () async{
-                                                    if (_formKey.currentState.validate()) {
-                                                      await PostReview(hashCode.toString()).newReview(arg.id, customerName, review);
-                                                      Navigator.pop(context);
-                                                    }
-                                                  },
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Center(
-                                                    child: Text("POST",
-                                                        style: TextStyle(
-                                                          fontFamily: ssFont,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        )),
-                                                  ),
-                                                ],
-                                              )),
+                                            hoverColor: Colors.red,
+                                            splashColor: Colors.blueAccent,
+                                            onTap: () async {
+                                              if (_formKey.currentState
+                                                  .validate()) {
+                                                await PostReview().newReview(
+                                                    arg.id,
+                                                    customerName,
+                                                    review);
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Center(
+                                                  child: Text("POST",
+                                                      style: TextStyle(
+                                                        fontFamily: ssFont,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      )),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -403,7 +402,6 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                               );
                             });
                       },
-
                     ),
                   ),
                 ],
