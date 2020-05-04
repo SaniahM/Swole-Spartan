@@ -16,15 +16,19 @@ class _VSHomePage extends State<VSHomePage>{
       
       children:[
       SizedBox(height: 20),
-      Text(
-            'FEATURED PRODUCTS',
-            style: TextStyle(
-            fontSize: 20.0,
-            fontFamily: ssFont,
-            color: Colors.grey,
-            fontWeight: FontWeight.bold
+      Container(
+        alignment: Alignment.center,
+        width: 400.0,
+        child: Text(
+              'VIDEOS',
+              style: TextStyle(
+              fontSize: 20.0,
+              fontFamily: ssFont,
+              color: Colors.grey,
+              fontWeight: FontWeight.bold
+              ),
             ),
-          ),
+      ),
         Padding(padding: EdgeInsets.only(top: 30),),
         Expanded(child:videolist()),
       ]

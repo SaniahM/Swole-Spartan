@@ -12,7 +12,10 @@ Future<DraggableScrollableSheet> getdata() async{
     videos.add(query[x].data);
   }
 
+    String ssFont = 'NeusaNextStf-CompactRegular.otf';
+
   return new Future(()=> DraggableScrollableSheet(
+
 
           initialChildSize: 1,
           builder: (BuildContext context, ScrollController scrollController) {
@@ -29,7 +32,13 @@ Future<DraggableScrollableSheet> getdata() async{
                       mainAxisAlignment: MainAxisAlignment.center, 
             
                       children:[
-                        singleItem(
+
+                        Card(
+                        elevation: 3.0,
+                        child: Column (
+                          children: <Widget> [
+
+                          singleItem(
                           context, 
                           videos[x]['video_name'], 
                           videos[x]['video_link'],
@@ -39,7 +48,42 @@ Future<DraggableScrollableSheet> getdata() async{
                           index,
                           ),
 
-                          SizedBox(height: 40,) 
+                          SizedBox(height: 10),
+
+                          Container(
+                            alignment: Alignment.center,
+                            width: 320,
+                            height: 40,
+                            child: Row(
+                              children: <Widget>[
+                                
+                                SizedBox(width: 30.0),
+                                
+                                Expanded(
+                                child: 
+                                  Text(
+                                  videos[x]['video_name'],
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontFamily: ssFont,
+                                    // color: Colors.grey,
+                                    // fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                ),
+
+                                SizedBox(width: 30.0),
+
+                              ],
+                            ),
+                          ),
+
+                          SizedBox(height: 20),
+                          ]
+                        ),
+                        ),    
+
+                        SizedBox(height: 20),                  
                       ]
 
                   );
