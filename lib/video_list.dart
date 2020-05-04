@@ -20,7 +20,7 @@ Future<DraggableScrollableSheet> getdata() async{
               return  ListView.builder(
 
                   controller: scrollController,
-                  itemCount: 5,
+                  itemCount: 3,
 
                   itemBuilder: (BuildContext context, int index) {
                     int x=index;
@@ -28,14 +28,16 @@ Future<DraggableScrollableSheet> getdata() async{
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center, 
             
-                      children:[ 
+                      children:[
                         singleItem(
                           context, 
                           videos[x]['video_name'], 
                           videos[x]['video_link'],
                           videos[x]['video_category'], 
                           query[x].documentID,
-                          videos[x]),
+                          videos[x],
+                          index,
+                          ),
 
                           SizedBox(height: 40,) 
                       ]
@@ -64,14 +66,19 @@ videolist(){
   );
 }
 
-YoutubePlayer singleItem(context, name, link, categories, id, video){
+YoutubePlayer singleItem(context, name, link, categories, id, video, first){
+        bool _auto = false; 
+        
+        if(first==0){
+          _auto = true;
+        }
 
         return YoutubePlayer(
           width: 320,          
           controller: YoutubePlayerController(
           initialVideoId: YoutubePlayer.convertUrlToId(link),
           flags: YoutubePlayerFlags(
-            autoPlay: false,
+            autoPlay: _auto,
           )
           ),
         );
