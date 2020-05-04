@@ -32,7 +32,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
     return SingleChildScrollView(
       child: Container(
-        height: 1500,
+        height: 1050,
         child: Column(
           children: <Widget>[
             //=====Product Name=====//
@@ -214,6 +214,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     padding: const EdgeInsets.fromLTRB(15, 0, 10, 10),
                     child: Text(
                       arg.desc,
+                      maxLines: 10,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: 15,
