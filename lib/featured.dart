@@ -4,21 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'storescreenarg.dart';
 import 'properties.dart';
 
-Future<DraggableScrollableSheet> getdata() async{
+Future<ListView> getdata() async{
   
   var query = (await Firestore.instance.collection('products').limit(8).getDocuments()).documents;
   List<Map<String,dynamic>> products=List<Map<String,dynamic>>();
   for(int x=0;x<query.length;x++){
     products.add(query[x].data);
   }
-  return new Future( ()=> DraggableScrollableSheet(
+  return new Future( ()=> ListView.builder(
 
-          initialChildSize: 1,
-          builder: (BuildContext context, ScrollController scrollController) {
-           
-              return  ListView.builder(
-
-                  controller: scrollController,
                   itemCount: 4,
 
                   itemBuilder: (BuildContext context, int index) {
@@ -52,16 +46,12 @@ Future<DraggableScrollableSheet> getdata() async{
                   },
                 
                 
-                );
-          },
-      
-
-      )
-  );
+    )  );
+       
 }
 
 featuredlist(){
-  return FutureBuilder<DraggableScrollableSheet> (
+  return FutureBuilder<ListView> (
     future:getdata(),
     builder: (context,snapshot){
       if (snapshot.hasData){

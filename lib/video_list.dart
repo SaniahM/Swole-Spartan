@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'properties.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-Future<DraggableScrollableSheet> getdata() async{
+Future<ListView> getdata() async{
   
   var query = (await Firestore.instance.collection('videos').limit(8).getDocuments()).documents;
   
@@ -14,15 +14,8 @@ Future<DraggableScrollableSheet> getdata() async{
 
     String ssFont = 'NeusaNextStf-CompactRegular.otf';
 
-  return new Future(()=> DraggableScrollableSheet(
+  return new Future(()=> ListView.builder(
 
-
-          initialChildSize: 1,
-          builder: (BuildContext context, ScrollController scrollController) {
-           
-              return  ListView.builder(
-
-                  controller: scrollController,
                   itemCount: 3,
 
                   itemBuilder: (BuildContext context, int index) {
@@ -90,16 +83,12 @@ Future<DraggableScrollableSheet> getdata() async{
                   },
                 
                 
-                );
-          },
-      
+                  )                );
 
-      )
-  );
 }
 
 videolist(){
-  return FutureBuilder<DraggableScrollableSheet> (
+  return FutureBuilder<ListView> (
     future:getdata(),
     builder: (context,snapshot){
       if (snapshot.hasData){

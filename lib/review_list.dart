@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'review.dart';
-import 'storescreenarg.dart';
 
 Future<ListView> getReviews(id) async{
 
