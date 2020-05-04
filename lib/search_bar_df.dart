@@ -2,7 +2,7 @@ import 'package:SwoleSpartan/searchresults_df.dart';
 import 'package:flutter/material.dart';
 
 
-class SearchBarPage extends SearchDelegate<String> {
+class SearchBarPageDf extends SearchDelegate<String> {
 
   final cities = [
     "Hello",

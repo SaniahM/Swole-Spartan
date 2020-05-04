@@ -178,16 +178,11 @@ InkWell singleItem(context, name, images, price, categories, id, product){
 
 }
 
+
 Widget resultsscreen(BuildContext context, String query){
   return Scaffold(
     
     
-    // backgroundColor: Colors.grey[getColor()[0]],
-
-    // appBar: topbar(context, getColor()[0], getColor()[1]),
-    
-    // drawer: drawer_func(),
-
     body: Card(
             color: Colors.white,
             elevation: 10,

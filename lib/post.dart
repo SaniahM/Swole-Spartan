@@ -21,7 +21,7 @@ class _DFPostPage extends State<DFPostPage>{
       
       backgroundColor: Colors.grey[getColor()[0]],
 
-      appBar: topbar(context, getColor()[0], getColor()[1]),
+      appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),
       drawer: menus()[_sectionIndex],
       body: Card(
               color: Colors.white,

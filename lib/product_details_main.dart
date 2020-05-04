@@ -131,7 +131,7 @@ class _ViewProduct extends State<ViewProductPage>{
 
       backgroundColor: Colors.grey[getColor()[0]],
 
-      appBar: topbar(context, getColor()[0], getColor()[1]),
+      appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex),
 
       body: Card(
         color: Colors.white,

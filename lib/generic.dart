@@ -22,7 +22,7 @@ class _GenericTemplate extends State<GenericTemplate>{
       
       backgroundColor: Colors.grey[getColor()[0]],
 
-      appBar: topbar(context, getColor()[0], getColor()[1]),
+      appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex),
       
       drawer: menus()[_sectionIndex],
       

@@ -6,7 +6,6 @@ import 'side_menus.dart';
 import 'screens.dart';
 
 
-
 class DFThreadPage extends StatefulWidget{
   @override
   _DFThreadPage createState() => _DFThreadPage();
@@ -23,7 +22,7 @@ class _DFThreadPage extends State<DFThreadPage>{
       
       backgroundColor: Colors.grey[getColor()[0]],
 
-      appBar: topbar(context, getColor()[0], getColor()[1]),
+      appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex),
       
       drawer: menus()[_sectionIndex],
       

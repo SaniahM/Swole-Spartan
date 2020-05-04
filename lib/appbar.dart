@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'spartan_icons_icons.dart';
 import 'search_bar.dart';
+import 'search_bar_df.dart';
 import 'auth.dart';
 
-AppBar topbar(context, greyShade, deepOrangeShade){
+AppBar topbar(context, greyShade, deepOrangeShade, sectionIndex){
   final AuthService _auth = AuthService();
   return AppBar(
   
@@ -45,7 +46,16 @@ AppBar topbar(context, greyShade, deepOrangeShade){
                   iconSize: 19,
                   icon: Icon(SpartanIcons.search),
                   onPressed: () {
-                    showSearch(context: context, delegate: SearchBarPage());
+                    if(sectionIndex == 0){
+                      showSearch(context: context, delegate: SearchBarPage());
+                    }
+                    else if(sectionIndex == 1){
+
+                    }
+                    else if(sectionIndex==2){
+                      showSearch(context: context, delegate: SearchBarPageDf());
+                    }
+
                   },
                 )
               ),

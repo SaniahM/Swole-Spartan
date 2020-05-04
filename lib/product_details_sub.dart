@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'storescreenarg.dart';
 
 
-
 class ViewProductPageSub extends StatefulWidget{
   @override
   _ViewProductSub createState() => _ViewProductSub();
@@ -206,12 +205,6 @@ class _ViewProductSub extends State<ViewProductPageSub>{
                 ),
 
 
-
-
-
-
-
-
                 //DESCRIPTION
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25, 15, 10, 0),
@@ -274,7 +267,6 @@ class _ViewProductSub extends State<ViewProductPageSub>{
             ),
           ),
         );
-
 
 
   }

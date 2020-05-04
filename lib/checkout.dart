@@ -28,7 +28,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
     
      return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
-      appBar: topbar(context, getColor()[0], getColor()[1]),
+      appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),
       body: Card(
         color: Colors.white,
         elevation: 10,
