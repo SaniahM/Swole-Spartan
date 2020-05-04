@@ -9,10 +9,6 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage>  {
     
-    void printer(){
-     print(this.password);
-     print(this.email);
-    }
 
     final AuthService _auth = AuthService();
     final _formKey = GlobalKey<FormState>();
@@ -144,6 +140,19 @@ class _SignupPageState extends State<SignupPage>  {
                         Container(
                           width: 325.0,
                           child: TextFormField(
+                            validator: (val){
+                              
+                              if(val.length < 6){
+                                return "Invalid Phone Number";
+                              }
+                              for(int i=0; i<val.length; i++){
+                                if(aNumber(val[i]) == false){
+                                  return 'Invalid Phone Number';
+                                }
+                              }
+                              return null;
+
+                            },
                             onChanged: (val){
                               setState(() => phone = val );
                             },
@@ -166,9 +175,20 @@ class _SignupPageState extends State<SignupPage>  {
                         Container(
                           width: 325.0,
                           child: TextFormField(
-                            validator: (val) => val.isEmpty ? 'You need to provide an email address': null,
-                            onChanged: (val){
+                            validator: (val){
+                              if(val.isEmpty){
+                                return "Email Address cannot be empty";
+                              }
 
+                              if(validateNewEmail(val)){
+                                  return null;     
+                              }
+
+                              return 'Invalid Email Address';
+
+                            },
+                            onChanged: (val){
+                              setState(() =>  error = ' ');
                               setState(() => email = val );
                             },
                             cursorColor: Colors.amber,
@@ -188,7 +208,31 @@ class _SignupPageState extends State<SignupPage>  {
                         Container(
                           width: 325.0,
                           child: TextFormField(
-                            validator: (val) => val.length < 6 ? 'Password must have at least 6 characters': null,
+                            
+                            validator: (val){
+                            
+                            if(val.length < 8){
+                              return "The password must be at least 8 characters long";
+                            }
+                            
+                            List passwordQuality = validateNewPassword(val);
+
+                            if(passwordQuality[0] == false){
+                              return 'The password must contain at least one letter';                              
+                            }
+                            
+                            if(passwordQuality[1] == false){
+                              return 'The password must contain at least one number';
+                            }
+
+                            if(passwordQuality[2] == true){
+                              return 'Allowed characters: letters, numbers, \$, #, @, &, !';
+                            }
+
+                            return null;
+
+                            },
+
                             onChanged: (val){
                               setState(() => password = val );
                             },
@@ -210,7 +254,12 @@ class _SignupPageState extends State<SignupPage>  {
                         Container(
                           width: 325.0,
                           child: TextFormField(
-                            
+                            validator: (val){
+                              if(val.length < 5){
+                                return "The address must be at least 5 characters long";
+                              }
+                              return null;
+                            },
                             onChanged: (val){
                               setState(() => address = val );
                             },
@@ -237,10 +286,16 @@ class _SignupPageState extends State<SignupPage>  {
                   ),
 
                   
-                  SizedBox(height: 40.0),
+                  SizedBox(height: 20.0),
 
-                  // The Sign Up Botton 
+                  Container(
+                    height: 30.0,
+                    width: 275.0,
+                    child: Text(error, style: TextStyle(color: Colors.red[600],fontFamily: ssFont,),)                    
 
+                  // The SignUp Button 
+
+                  ),
                   Container(
                     height: 40.0,
                     width: 275.0,
@@ -257,17 +312,13 @@ class _SignupPageState extends State<SignupPage>  {
                             
                             dynamic result = await _auth.signUp(email, password, firstName, lastName, address, phone);
                             if(result == null){
-                              setState(() =>  error = 'kindly provide a valid email and password');
+                              setState(() =>  error = 'The provided email address is already in use');
                             }
                             else{
                                 Navigator.of(context).pop();
                             }
                             
-                            
-
                           }
-
-                          printer();
 
                         },
                         child: Row(
@@ -283,9 +334,7 @@ class _SignupPageState extends State<SignupPage>  {
                                 )
                               ),
                             ),
-                            Container(
-                              // child: ImageIcon(AssetImage('assets/arrow.png')),
-                            )
+                            
                           ],
                         )
                       ),
@@ -338,5 +387,4 @@ class _SignupPageState extends State<SignupPage>  {
       );
     }
 }
-
 

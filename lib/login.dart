@@ -92,6 +92,7 @@ class _MyHomePageState extends State<LoginPage>  {
                           child: TextFormField(
                             validator: (val) => val.isEmpty ? 'You need to provide an email to log in': null,
                             onChanged: (val){
+                              setState(() => error = ' ');
                               setState(() => email = val );
                             },
 
@@ -138,7 +139,13 @@ class _MyHomePageState extends State<LoginPage>  {
                   ),
                   ),
 
-                  SizedBox(height: 40.0),
+                  SizedBox(height: 20.0),
+
+                  Container(
+                    height: 30.0,
+                    width: 275.0,
+                    child: Text(error, style: TextStyle(color: Colors.red[600],fontFamily: ssFont,),)                    
+                  ),
 
                   // The Log in button:
 
@@ -158,7 +165,7 @@ class _MyHomePageState extends State<LoginPage>  {
                             
                             dynamic result = await _auth.logIn(email, password);
                             if(result == null){
-                              setState(() =>  error = 'kindly provide a valid email and password');
+                              setState(() =>  error = 'Kindly provide a valid email and password');
                             }
 
                           }

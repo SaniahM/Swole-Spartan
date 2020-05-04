@@ -6,19 +6,21 @@ import 'cart_sub.dart';
 import 'checkout_sub.dart';
 import 'product_details_sub.dart';
 import 'storecategoryscreen_sub.dart';
-
+import 'thread_sub.dart';
+import 'post_sub.dart';
+import 'new_thread_sub.dart';
 
 List<Widget> screens(){
 
   return [
 
-    StoreHomePage(), VSHomePage(), DFHomePage(),
+    StoreHomePage(), VSHomePage(), DFHomePage(), //0-2
 
-    CartPageSub(), CheckoutPageSub(), ViewProductPageSub(),
+    CartPageSub(), CheckoutPageSub(), ViewProductPageSub(), StoreCatPageSub(),//3-6
 
-    StoreCatPageSub(),
-
-
+    VSHomePage(),  //7
+    
+    DFThreadPageSub(), DFPostPageSub(), DFNewThreadPageSub()//8-10
 
   ];
 

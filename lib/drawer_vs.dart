@@ -80,7 +80,7 @@ ListView dfCategoryList(){
       }             
     );
 }
-ClipRRect dfDrawerFunc() {
+ClipRRect vsDrawerFunc() {
 
   return ClipRRect(
     borderRadius: BorderRadius.only(bottomRight: Radius.circular(700), topRight: Radius.circular(0), ),
