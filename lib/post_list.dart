@@ -11,7 +11,7 @@ Future<ListView> getPosts(threadID) async{
   List<Posts> posts=List<Posts>();
   for (int x=0;x<threadData.length;x++){
     String temp=(threadData[x].data['time']).toDate.toString();
-    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp.substring(0,10), temp.substring(11,16)));
+    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp));
   }
   return new Future( ()=> ListView.builder(
                       itemCount:posts.length+1,
