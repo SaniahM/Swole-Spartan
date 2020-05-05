@@ -154,6 +154,8 @@ class _ViewProductSub extends State<ViewProductPageSub> {
     int deepOrangeShade = getColor()[1];
     ScreenArg arg = ModalRoute.of(context).settings.arguments;
     String ssFont = 'NeusaNextStf-CompactRegular.otf';
+    dynamic pastReviews = reviewList(arg.id);
+
 
     return SingleChildScrollView(
       child: Container(
@@ -328,7 +330,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     children: <Widget>[
                       Container(
                         height: 170,
-                        child: reviewList(arg.id),
+                        child: pastReviews,
                       ),
                     ],
                   ),
@@ -449,6 +451,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                             hoverColor: Colors.red,
                                             splashColor: Colors.blueAccent,
                                             onTap: () async {
+
                                               if (_reviewFormKey.currentState
                                                   .validate()) {
                                                 await PostReview().newReview(
@@ -457,6 +460,9 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                                     review);
                                                 Navigator.pop(context);
                                               }
+                                                  setState(() {
+                                            pastReviews = reviewList(arg.id);
+                                            });
                                             },
                                             child: Row(
                                               mainAxisAlignment:
@@ -481,6 +487,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                 ),
                               );
                             });
+
                       },
                     ),
                   ),
