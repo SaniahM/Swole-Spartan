@@ -34,7 +34,8 @@ class _ViewProductSub extends State<ViewProductPageSub> {
         height: 1050,
         child: Column(
           children: <Widget>[
-            //=====Product Name=====//
+            
+            //Product Name
             Container(
               margin: EdgeInsets.fromLTRB(40, 30, 40, 0),
               child: Text(
@@ -49,7 +50,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ),
             ),
 
-            //=====Product Picture=====//
+            //Product Picture
             Container(
                 width: 200,
                 height: 170,
@@ -61,7 +62,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ),
                 )),
 
-            //=====Product Price=====//
+            //Product Price
             Text(
               'Rs. ' + arg.price.toString(),
               style: TextStyle(
@@ -74,7 +75,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
             //Container(child: getVariations(arg.id)),
 
-            //=====FLAVOUR Selection row=====//
+            //Flavour Selection row
             Padding(
               padding: const EdgeInsets.only(bottom: 5),
               child: Row(
@@ -94,7 +95,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                       ),
                     ),
 
-                    //=====Dropdown Menu for Flavour=====//
+                    //Dropdown Menu for Flavour
                     Expanded(
                       child: Container(
                         height: 23,
@@ -109,7 +110,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ]),
             ),
 
-            //=====WEIGHT Selection row=====//
+            //Weight Selection row
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Row(
@@ -128,7 +129,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     ),
                   ),
 
-                  //=====Dropdown menu for WEIGHT=====//
+                  //Dropdown menu for Weight
                   Expanded(
                     child: Container(
                       height: 23,
@@ -144,7 +145,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ),
             ),
 
-            //=====QUANTITY Selection row=====//
+            //Quantity Selection row
             Row(
               children: <Widget>[
                 Container(
@@ -165,7 +166,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   margin: EdgeInsets.only(left: 30),
                   width: 80,
                   height: 20,
-                  // color: Colors.orange,
+                
 
                   //Quantity Counter
                   child: Container(
@@ -182,7 +183,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ),
                 ),
 
-                //=====Add to Cart Button=====//
+                //Add to Cart Button
                 IconButton(
                   onPressed: () {},
                   padding: EdgeInsets.only(left: 30),
@@ -192,7 +193,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ],
             ),
 
-            //=====DESCRIPTION EXPANSION TILE=====//
+            //Description Expansion Tile
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 15, 10, 0),
               child: ExpansionTile(
@@ -225,7 +226,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ),
             ),
 
-            //=====REVIEW EXPANSION TILE=====//
+            //Review Expansion Tile
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 15, 10, 0),
               child: ExpansionTile(
@@ -241,7 +242,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ),
                 ),
 
-                //=====Review List=====//
+                //Review List
                 children: <Widget>[
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -256,10 +257,9 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     alignment: Alignment.topRight,
                     margin: EdgeInsets.only(right: 15, bottom: 15),
                     height: 40,
-                    //color: Colors.purple,
-                    //width: 50,
+                    
 
-                    //=====ADD REVIEW BUTTON=====//
+                    //Add Review Button
                     child: FloatingActionButton(
                       tooltip: 'Write a Review',
                       backgroundColor: Colors.orange,
@@ -272,7 +272,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 50, vertical: 20),
 
-                                //=====REVIEW FORM=====//
+                                //Review Form
                                 child: Form(
                                   key: _formKey,
                                   child: Column(
@@ -292,7 +292,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         ),
                                       ),
 
-                                      //=====Name field=====//
+                                      //Name field
                                       Container(
                                         //padding:EdgeInsets.fromLTRB(0, 10, 0, 0),
                                         width: 325.0,
@@ -321,7 +321,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         ),
                                       ),
 
-                                      //=====Content Box=====//
+                                      //Content field
                                       Container(
                                         width: 325.0,
                                         height: 70,
@@ -353,7 +353,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         height: 30,
                                       ),
 
-                                      //=====POST REVIEW BUTTON=====//
+                                      //Post Review Button
                                       Container(
                                         //padding:EdgeInsets.fromLTRB(0, 25, 0, 0),
                                         //height: 40.0,
