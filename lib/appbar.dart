@@ -3,10 +3,10 @@ import 'spartan_icons_icons.dart';
 import 'search_bar.dart';
 import 'search_bar_df.dart';
 import 'search_bar_vs.dart';
-import 'auth.dart';
+// import 'auth.dart';
 
 AppBar topbar(context, greyShade, deepOrangeShade, sectionIndex){
-  final AuthService _auth = AuthService();
+  // final AuthService _auth = AuthService();
   return AppBar(
   
         backgroundColor: Colors.grey[greyShade],
@@ -26,8 +26,11 @@ AppBar topbar(context, greyShade, deepOrangeShade, sectionIndex){
                 child: IconButton(
                   iconSize: 19,
                   icon: Icon(SpartanIcons.profile) ,
-                  onPressed: () async {
-                    await _auth.signOut();
+                  onPressed: ()  {       
+
+                       Navigator.of(context).pushNamed('/profile');
+                    
+
                   },
                 )
               ),

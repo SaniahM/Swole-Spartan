@@ -20,6 +20,8 @@ import 'post.dart';
 import 'new_thread.dart';
 import 'video_category.dart';
 
+import 'profile.dart';
+
 void main() => runApp( MyApp() );
 
 class MyApp extends StatelessWidget{
@@ -45,6 +47,9 @@ class MyApp extends StatelessWidget{
           '/post': (BuildContext context) => new DFPostPage(),
           '/new_thread': (BuildContext context) => new DFNewThreadPage(),
           '/vscategories': (BuildContext context) => new VSCatPage(),
+          '/profile': (BuildContext context) => new ProfilePage(),
+
+
         },
       
         home: new Gateway(),
