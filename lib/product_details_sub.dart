@@ -175,7 +175,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
             //=====Product Price=====//
             Text(
-              'Rs. ' + arg.price.toString(),
+              'Rs. ${arg.price}',
               style: TextStyle(
                 fontFamily: ssFont,
                 fontSize: 20,
