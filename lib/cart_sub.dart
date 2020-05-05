@@ -48,8 +48,8 @@ return SingleChildScrollView(
                       style: TextStyle(
                         fontFamily: ssFont,
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
-                        color: Colors.grey[600],
+                        fontSize: 20,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
@@ -58,7 +58,7 @@ return SingleChildScrollView(
                 //SCROLLABLE PRODUCT LIST
                 Container(
                   margin: EdgeInsets.fromLTRB(40, 35, 40, 0),
-                  height: 290,
+                  height: 400.0,
                   child: Column(
                     children: <Widget>[
                       Expanded(
@@ -89,7 +89,7 @@ return SingleChildScrollView(
                             'Subtotal: ',
                             style: TextStyle(
                               fontFamily: ssFont,
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Colors.grey[800],
                             ),
                           ),
@@ -100,7 +100,7 @@ return SingleChildScrollView(
                               'Rs. 46000',
                               style: TextStyle(
                                 fontFamily: ssFont,
-                                fontSize: 11,
+                                fontSize: 12,
                                 color: Colors.orange,
                               ),
                             ),
@@ -120,7 +120,7 @@ return SingleChildScrollView(
                             'Shipping: ',
                             style: TextStyle(
                               fontFamily: ssFont,
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Colors.grey[800],
                             ),
                           ),
@@ -130,7 +130,7 @@ return SingleChildScrollView(
                               'Rs. 500',
                               style: TextStyle(
                                 fontFamily: ssFont,
-                                fontSize: 11,
+                                fontSize: 12,
                                 color: Colors.orange,
                               ),
                             ),
@@ -149,7 +149,7 @@ return SingleChildScrollView(
                             'Total: ',
                             style: TextStyle(
                               fontFamily: ssFont,
-                              fontSize: 11,
+                              fontSize: 12,
                               color: Colors.grey[800],
                             ),
                           ),
@@ -159,7 +159,7 @@ return SingleChildScrollView(
                               'Rs. 46500',
                               style: TextStyle(
                                 fontFamily: ssFont,
-                                fontSize: 11,
+                                fontSize: 12,
                                 color: Colors.orange,
                               ),
                             ),
@@ -187,7 +187,7 @@ return SingleChildScrollView(
                         BoxShadow(
                           offset: Offset.zero,
                           color: Colors.grey[400],
-                          blurRadius: 11,
+                          blurRadius: 12,
                           spreadRadius: 2,
                         ),
                       ],
@@ -201,7 +201,7 @@ return SingleChildScrollView(
                           style: TextStyle(
                             fontFamily: ssFont,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: 14,
                             color: Colors.white,
                           ),
                         ),
@@ -242,7 +242,7 @@ return SingleChildScrollView(
                           style: TextStyle(
                             fontFamily: ssFont,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: 14,
                             color: Colors.orange,
                           ),
                         ),
