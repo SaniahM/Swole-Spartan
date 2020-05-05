@@ -43,7 +43,7 @@ Future<ListView> getThreadCats() async{
                                     Text(
                                       threads[index].threadCat,
                                       style: TextStyle(
-                                        fontSize: 20.0,
+                                        fontSize: 18.0,
                                         fontFamily: ssFont,
                                         color: Colors.orange[500],
                                         fontWeight: FontWeight.bold
@@ -59,12 +59,12 @@ Future<ListView> getThreadCats() async{
                                   ],
                                 ),
 
-                                SizedBox(height: 15.0),
+                                SizedBox(height: 16.0),
 
                                     Text(
                                       threads[index].threadTitle,
                                       style: TextStyle(
-                                        fontSize: 18.0,
+                                        fontSize: 14.0,
                                         fontFamily: ssFont,
                                         color: Colors.grey,
                                         decoration: TextDecoration.underline,
@@ -72,11 +72,10 @@ Future<ListView> getThreadCats() async{
                                       )
                                     ),
 
-                                SizedBox(height: 6.0),
+                                SizedBox(height: 10.0),
 
                                 Container(
                                   alignment: Alignment.center,
-                                  height: 60.0,
                                   width: 350.0,
                                   child: Row(
                                     children: <Widget>[
@@ -87,7 +86,7 @@ Future<ListView> getThreadCats() async{
                                           child: Text(
                                             threads[index].threadPost,
                                             style: TextStyle(
-                                              fontSize: 16.0,
+                                              fontSize: 14.0,
                                               fontFamily: ssFont,
                                               color: Colors.grey,
                                             ),

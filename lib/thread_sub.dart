@@ -43,13 +43,26 @@ class _DFThreadPageSub extends State<DFThreadPageSub>{
                   
                   ),
 
-                  FloatingActionButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed('/new_thread', arguments: category);
-                    },
-                    child: Icon(Icons.add),
-                    backgroundColor: Colors.orange[600], 
+                  SizedBox(height: 10,),
+                  
+                  
+                  Row(
+                    children: <Widget>[
+
+                      SizedBox(width: 300),
+
+                      FloatingActionButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/new_thread', arguments: category);
+                        },
+                        child: Icon(Icons.add),
+                        backgroundColor: Colors.orange[600], 
+                      ),
+                    ],
                   ),
+
+                  SizedBox(height: 10.0,),
+
 
 
 

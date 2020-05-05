@@ -38,10 +38,12 @@ Future<ListView> getThreads(category) async{
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
 
+                                    SizedBox(width: 20.0),
+
                                     Text(
                                       threads[index].threadTitle,
                                       style: TextStyle(
-                                        fontSize: 20.0,
+                                        fontSize: 18.0,
                                         fontFamily: ssFont,
                                         color: Colors.orange[500],
                                         fontWeight: FontWeight.bold
@@ -59,25 +61,26 @@ Future<ListView> getThreads(category) async{
 
                                 SizedBox(height: 20.0),
 
-                                Expanded(
-                                child:  
-                                Wrap(
-                                direction: Axis.horizontal,
-                                children: <Widget>[
-                                SizedBox(width: 20),
-                                Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  threads[index].threadPost,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontFamily: ssFont,
-                                    color: Colors.grey,
-                                  )
-                                )
-                                ),
-                                ]
-                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: 350.0,
+                                  child: Row(
+                                    children: <Widget>[
+                                      
+                                      SizedBox(width: 10.0),
+                                      
+                                      Expanded(
+                                      child: Text(
+                                        threads[index].threadPost,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontFamily: ssFont,
+                                          color: Colors.grey,
+                                        )
+                                      ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
 
                                 SizedBox(height: 20.0),
@@ -100,6 +103,16 @@ Future<ListView> getThreads(category) async{
   
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 threadsList(category){
   return FutureBuilder<ListView> (
     future:getThreads(category),
@@ -107,7 +120,7 @@ threadsList(category){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }
