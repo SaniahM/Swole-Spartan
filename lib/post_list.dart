@@ -11,97 +11,11 @@ Future<ListView> getPosts(threadID) async{
   List<Posts> posts=List<Posts>();
   for (int x=0;x<threadData.length;x++){
     String temp=(threadData[x].data['time']).toDate.toString();
-    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp));
+    posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp,threadData[x].reference,threadRef,threadData[x].data['title']));
   }
   return new Future( ()=> ListView.builder(
-                      itemCount:posts.length+1,
+                      itemCount:posts.length,
                       itemBuilder: (context, index) {
-                      
-                      if (index == posts.length) {
-                        return Card(
-                          elevation: 3.0,
-                          margin: EdgeInsets.all(10.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(30))),
-                          child: Container(
-                            height: 200,
-                            child: Column(
-                              children: <Widget>[
-
-                                SizedBox(height: 20),
-
-                                Row(
-                                  children: <Widget>[
-                                    SizedBox( width: 20.0),
-                                    Text(
-                                      "New Post",
-                                          style: TextStyle(
-                                            fontSize: 20.0,
-                                            fontFamily: ssFont,
-                                            color: Colors.grey,
-                                            fontWeight: FontWeight.bold
-                                          )
-
-                                    ),
-                                  ],
-                                ),
-
-                                Container(
-                                  width: 330.0,
-                                  child: TextFormField(
-                                    cursorColor: Colors.amber,
-                                    cursorWidth: 2.0,
-                                    decoration: InputDecoration(
-                                      labelText: "Please enter your text here...",
-                                      labelStyle: TextStyle(
-                                        fontFamily: ssFont,
-                                        color: Colors.grey,
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(color: Colors.orange)
-                                    ),
-                                  )
-                                  )
-
-                                ),
-
-                                SizedBox(height: 35.0),
-
-                                Container(
-                                  height: 40.0,
-                                  width: 275.0,
-                                  child: Material(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    shadowColor: Colors.orangeAccent,
-                                    color: Colors.orange,
-                                    elevation: 7.0,
-                                    child: InkWell( 
-                                      hoverColor: Colors.red,
-                                      splashColor: Colors.blueAccent,
-                                      onTap: () {},
-                                          child: Center(
-                                            child: Text(
-                                              "ENTER POST",
-                                              style: TextStyle(
-                                                fontFamily: ssFont,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              )
-                                            ),
-                                          )
-                                    ),
-                                  ),
-                                )
-
-                              ],
-
-
-                            )
-
-                          )
-                        );
-                      }
-
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 7.0, horizontal: 4.0),
                         child: Card(
@@ -175,7 +89,9 @@ Future<ListView> getPosts(threadID) async{
                                     SizedBox(width: 280.0),
                                     
                                     InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Firestore.instance.collection('reports').add({'post': posts[index].content, 'post_id': posts[index].id, 'thread_id': posts[index].threadId,'thread_title': posts[index].threadTitle});
+                                      },
                                       child: Text (
                                         'Report Post',
                                         style: TextStyle(

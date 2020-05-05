@@ -1,4 +1,8 @@
+import 'package:SwoleSpartan/thread_arg.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DFNewThreadPageSub extends StatefulWidget{
   @override
@@ -7,8 +11,22 @@ class DFNewThreadPageSub extends StatefulWidget{
 
 class _DFNewThreadPageSub extends State<DFNewThreadPageSub>{
 String ssFont = 'NeusaNextStf-CompactRegular.otf';
+String threadTitle;
+String threadContent;
+  Future<String> getThreadTitle(threadRef) async{
+    var threadData = (await threadRef.get());
+    return threadData.data['thread_title'];
+  }
+  Future<String> getUserName(userRef) async{
+    var userData = (await userRef.get());
+    if (userData!=null){
+      return (userData.data['first_name']+ ' ' + userData.data['last_name']);
+    }
+    return '';
+  }
   @override
   Widget build(BuildContext context){
+    String category = ModalRoute.of(context).settings.arguments;
 
     return SingleChildScrollView(
       child: Column(
@@ -58,6 +76,9 @@ String ssFont = 'NeusaNextStf-CompactRegular.otf';
                           Container(
                                   width: 300.0,
                                   child: TextFormField(
+                                    onChanged: (val){
+                                      setState(() => threadTitle = val );
+                                    },
                                     cursorColor: Colors.amber,
                                     cursorWidth: 2.0,
                                     decoration: InputDecoration(
@@ -92,6 +113,9 @@ String ssFont = 'NeusaNextStf-CompactRegular.otf';
                           Container(
                                   width: 300.0,
                                   child: TextFormField(
+                                    onChanged: (val){
+                                      setState(() => threadContent = val );
+                                    },
                                     cursorColor: Colors.amber,
                                     cursorWidth: 2.0,
                                     autofocus: false,
@@ -130,8 +154,18 @@ String ssFont = 'NeusaNextStf-CompactRegular.otf';
                       child: InkWell( 
                         hoverColor: Colors.red,
                         splashColor: Colors.blueAccent,
-                        onTap: () {
-                          
+                        onTap: () async {
+                           final user = Provider.of<User>(context, listen: false);
+                            var userRef = Firestore.instance.collection('user_records').document(user.uid);
+                            var fullName = await getUserName(userRef);
+                            if (fullName!=''){
+                              //DatabaseService posterData= DatabaseService(uid: user.uid);
+                              //UserData userData= posterData.get
+                              Timestamp time= Timestamp.now();
+                              var threadRef= await Firestore.instance.collection('threads').add({'category':category, 'created_by': userRef, 'init_post': threadContent,'time':time,'title':threadTitle});
+                              await Firestore.instance.collection('thread_posts').add({'content':threadContent, 'poster_name': fullName, 'title': threadTitle, 'user': userRef, 'thread': threadRef, 'time': time});
+                              Navigator.of(context).pushNamed('/post', arguments: ThreadArg(threadRef.documentID,threadTitle));
+                            }
                         },
                             child: Center(
                               child: Text(

@@ -5,7 +5,7 @@ String ssFont = 'NeusaNextStf-CompactRegular.otf';
 
 Future<ListView> getSideMenuData() async{
   
-  var query = (await Firestore.instance.collection('products').limit(8).getDocuments()).documents;
+  var query = (await Firestore.instance.collection('products').getDocuments()).documents;
   List<String> uniqueCats=List<String>();
   for(int x=0;x<query.length;x++){
     if (!uniqueCats.contains(query[x].data['category']))uniqueCats.add(query[x].data['category']);

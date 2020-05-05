@@ -28,9 +28,8 @@ class _DFPostPage extends State<DFPostPage>{
               elevation: 10,
               margin: EdgeInsets.only(top:8),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
-
-            
-              child: screens()[_currentIndex]
+              child:screens()[_currentIndex]
+              
 
       ),
 

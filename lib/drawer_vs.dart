@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 String ssFont = 'NeusaNextStf-CompactRegular.otf';
 
-ListView dfCategoryList(){
+Future<ListView> vsCategoryList() async {
+  var query = (await Firestore.instance.collection('products').getDocuments()).documents;
   List<String> uniqueCats=List<String>();
-  uniqueCats.add('General Discussion');
-  uniqueCats.add('Workout Discussion');
-  uniqueCats.add('Supplements Discussion');
-  return ListView.builder(
+  for(int x=0;x<query.length;x++){
+    if (!uniqueCats.contains(query[x].data['video_category']))uniqueCats.add(query[x].data['video_category']);
+  }
+  return new Future( ()=> ListView.builder(
     itemCount: uniqueCats.length,
     itemBuilder: (BuildContext context, int index) {
       if (index==0)
@@ -20,7 +22,7 @@ ListView dfCategoryList(){
              SizedBox(width: 30),
              InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/thread', arguments: uniqueCats[index]);
+                        Navigator.of(context).pushNamed('/vscategories', arguments: uniqueCats[index]);
                       },
                       child: Text(
                         uniqueCats[index],
@@ -53,7 +55,7 @@ ListView dfCategoryList(){
              SizedBox(width: 30),
              InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/thread', arguments: uniqueCats[index]);
+                        Navigator.of(context).pushNamed('/vscategories', arguments: uniqueCats[index]);
                       },
                       child: Text(
                         uniqueCats[index],
@@ -78,8 +80,22 @@ ListView dfCategoryList(){
           ]);
           
       }             
+    )
     );
 }
+
+getVsCats(){
+   return FutureBuilder<ListView> (
+    future:vsCategoryList(),
+    builder: (context,snapshot){
+      if (snapshot.hasData){
+        return snapshot.data;
+      }
+      else return CircularProgressIndicator();
+    }
+  );
+}
+
 ClipRRect vsDrawerFunc() {
 
   return ClipRRect(
@@ -87,7 +103,7 @@ ClipRRect vsDrawerFunc() {
     child: Drawer(
     child: Container(
       color: Colors.white,
-        child: dfCategoryList()
+        child: getVsCats()
     ),
     ),
   );

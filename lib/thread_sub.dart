@@ -45,7 +45,7 @@ class _DFThreadPageSub extends State<DFThreadPageSub>{
 
                   FloatingActionButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/new_thread');
+                      Navigator.of(context).pushNamed('/new_thread', arguments: category);
                     },
                     child: Icon(Icons.add),
                     backgroundColor: Colors.orange[600], 
