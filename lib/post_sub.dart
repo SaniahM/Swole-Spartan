@@ -129,7 +129,7 @@ class _DFPostPageSub extends State<DFPostPageSub>{
                                           var threadRef = Firestore.instance.collection('threads').document(arg.docID);
                                           var threadTitle = await getThreadTitle(threadRef);
                                           Timestamp time= Timestamp.now();
-                                          Firestore.instance.collection('thread_posts').add({'content':newPostText, 'poster_name': fullName, 'title': threadTitle, 'user': userRef, 'thread': threadRef, 'time': time});
+                                          await Firestore.instance.collection('thread_posts').add({'content':newPostText, 'poster_name': fullName, 'title': threadTitle, 'user': userRef, 'thread': threadRef, 'time': time});
                                           setState(() {});
                                         }
                                       },

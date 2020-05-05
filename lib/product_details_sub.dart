@@ -10,6 +10,8 @@ import 'properties.dart';
 import 'review_list.dart';
 import 'storescreenarg.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
+import 'user.dart';
 
 class ViewProductPageSub extends StatefulWidget {
   @override
@@ -237,8 +239,15 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
                 //=====Add to Cart Button=====//
                 IconButton(
-                  onPressed: () {
-
+                  onPressed: () async {
+                    final user = Provider.of<User>(context, listen: false);
+                    var prodRef = Firestore.instance.collection('poducts').document(arg.id);
+                    var cartRef= await Firestore.instance.collection('shopping_cart').add({'product': prodRef, 'quantity':quantity,'user':user.uid});
+                    Map<String,dynamic> cartVar={'cart_id': cartRef};
+                    for (int x=0;x<attributes.length;x++){
+                      cartVar[attributes[x]]=choices[x];
+                    }
+                    Firestore.instance.collection('cart_variations').add(cartVar);
                       //  passToCart(attributes, choices, quantity, arg)
 
                   },
