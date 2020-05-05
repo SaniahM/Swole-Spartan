@@ -117,7 +117,7 @@ InkWell singleItem(context, name, images, price, categories, id, product){
                       Container(
                       width: 125,
                       child: Center(
-                        child: Text(('Rs. ' + price.toString()), style: TextStyle(fontSize: 15,color: Colors.deepOrange[getColor()[0]+400]),textAlign: TextAlign.center,),
+                        child: Text(('Rs. $price'), style: TextStyle(fontSize: 15,color: Colors.deepOrange[getColor()[0]+400]),textAlign: TextAlign.center,),
                       ),
                       ),
 
