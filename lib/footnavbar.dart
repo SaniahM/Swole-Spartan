@@ -15,19 +15,19 @@ return BottomNavigationBar(
         items: 
         [
         BottomNavigationBarItem( //Store 
-          icon: Icon(SpartanIcons.store), 
+          icon: Icon(Icons.store,size:24),
           title: Text('Store', style: TextStyle(fontWeight: FontWeight.w500),textAlign: TextAlign.center,)
           
           ),
 
         BottomNavigationBarItem( //Video Section
-          icon: Icon(SpartanIcons.vSection), 
+          icon: Icon(Icons.play_arrow, size: 24),
           title: Text('Videos', style: TextStyle(fontWeight: FontWeight.w500),textAlign: TextAlign.center,)
           
           ),
 
         BottomNavigationBarItem( //Discussion Forum 
-          icon: Icon(SpartanIcons.dForum), 
+          icon: Icon(Icons.forum, size: 24),
           title: Text('Forum', style: TextStyle(fontWeight: FontWeight.w500),textAlign: TextAlign.center,)
     
         )
