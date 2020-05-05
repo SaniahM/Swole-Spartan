@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'postsclass.dart';
-
+import 'package:intl/intl.dart';
 
 
 Future<ListView> getPosts(threadID) async{
@@ -10,7 +10,7 @@ Future<ListView> getPosts(threadID) async{
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
   List<Posts> posts=List<Posts>();
   for (int x=0;x<threadData.length;x++){
-    String temp=DateTime.parse((threadData[x].data['time']).toDate).toString();
+    String temp=(DateFormat('dd-MM-yyyy – kk:mm').format(threadData[x].data['time'].toDate()));
     posts.add(Posts(threadData[x].data['content'],threadData[x].data['poster_name'],temp,threadData[x].reference,threadRef,threadData[x].data['title']));
   }
   return new Future( ()=> ListView.builder(

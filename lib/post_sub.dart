@@ -14,7 +14,7 @@ class _DFPostPageSub extends State<DFPostPageSub>{
 
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
   String newPostText;
-
+  var _newPostController = TextEditingController();
   Future<String> getThreadTitle(threadRef) async{
     var threadData = (await threadRef.get());
     return threadData.data['title'];
@@ -87,6 +87,7 @@ class _DFPostPageSub extends State<DFPostPageSub>{
                                 Container(
                                   width: 330.0,
                                   child: TextFormField(
+                                    controller: _newPostController,
                                     onChanged: (val){
                                       setState(() => newPostText = val );
                                     },
@@ -130,6 +131,7 @@ class _DFPostPageSub extends State<DFPostPageSub>{
                                           var threadTitle = await getThreadTitle(threadRef);
                                           Timestamp time= Timestamp.now();
                                           await Firestore.instance.collection('thread_posts').add({'content':newPostText, 'poster_name': fullName, 'title': threadTitle, 'user': userRef, 'thread': threadRef, 'time': time});
+                                          _newPostController.clear();
                                           setState(() {});
                                         }
                                       },
