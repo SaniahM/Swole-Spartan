@@ -56,10 +56,15 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
   for(int x=0;x<variations.length;x++){
 
+    if(attributes.length<variations.length){
     attributes.add(variations[x]['variation_desc']);
-    choices.add('Choose an option');
+      choices.add('Choose an option');
+
+    }
+  
 
     uniqueOptions.add(List<String>());
+
     for(int y=0;y<options.length;y++){
       if (!uniqueOptions[x].contains(options[y][variations[x]['variation_desc']])){
         uniqueOptions[x].add(options[y][variations[x]['variation_desc']]);
@@ -114,7 +119,14 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                 );
                               }).toList(), 
                               onChanged: (String value) {
-                                setState(() => choices[x] = value);
+                                setState(() { 
+
+                                  choices[x] = value;
+
+                                
+                                
+                                });
+                              
                               },
                             
                             
@@ -240,15 +252,17 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                 //=====Add to Cart Button=====//
                 IconButton(
                   onPressed: () async {
+                    // print();
+                    print(choices);
+                    print(attributes);
                     final user = Provider.of<User>(context, listen: false);
-                    var prodRef = Firestore.instance.collection('poducts').document(arg.id);
+                    var prodRef = Firestore.instance.collection('products').document(arg.id);
                     var cartRef= await Firestore.instance.collection('shopping_cart').add({'product': prodRef, 'quantity':quantity,'user':user.uid});
                     Map<String,dynamic> cartVar={'cart_id': cartRef};
                     for (int x=0;x<attributes.length;x++){
                       cartVar[attributes[x]]=choices[x];
                     }
                     Firestore.instance.collection('cart_variations').add(cartVar);
-                      //  passToCart(attributes, choices, quantity, arg)
 
                   },
                   padding: EdgeInsets.only(left: 30),

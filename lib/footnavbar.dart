@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'spartan_icons_icons.dart';
+// import 'spartan_icons_icons.dart';
 import 'properties.dart';
 
 BottomNavigationBar footBar(int _currentIndex, void fn(int)){
