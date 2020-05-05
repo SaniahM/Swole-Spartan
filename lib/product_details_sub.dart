@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:SwoleSpartan/review_list.dart';
 
-import 'auth.dart';
-import 'dropdown_menu.dart';
+// import 'dropdown_menu.dart';
+// import 'product_details_main.dart';
+
 import 'post_review.dart';
 import 'properties.dart';
 import 'review_list.dart';
 import 'storescreenarg.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ViewProductPageSub extends StatefulWidget {
   @override
@@ -20,8 +22,118 @@ class _ViewProductSub extends State<ViewProductPageSub> {
   String customerName;
   String review;
 
-  final AuthService _auth = AuthService();
-  final _formKey = GlobalKey<FormState>();
+  int quantity = 0;
+
+  List<String> attributes = [];
+  List<String> choices = [];
+  
+  getVariations(id){
+  return FutureBuilder<Widget> (
+      future: getrow(id),
+      builder: (context,snapshot){
+        if (snapshot.hasData){
+          return snapshot.data;
+        }
+        else return CircularProgressIndicator();
+      }
+  );
+}
+
+  Future<Widget> getrow(id) async{
+
+  var productRef = Firestore.instance.collection('products').document(id);
+  var variations = (await Firestore.instance.collection('products_variations').where('product', isEqualTo: productRef).getDocuments()).documents;
+  
+  var options =(await Firestore.instance.collection('variation_options').where('product', isEqualTo: productRef).getDocuments()).documents;
+  
+  
+  List<List<String>> uniqueOptions=List<List<String>>();
+  List<Row> rows=List<Row>();
+  String ssFont = 'NeusaNextStf-CompactRegular.otf';
+
+
+  for(int x=0;x<variations.length;x++){
+
+    attributes.add(variations[x]['variation_desc']);
+    choices.add('Choose an option');
+
+    uniqueOptions.add(List<String>());
+    for(int y=0;y<options.length;y++){
+      if (!uniqueOptions[x].contains(options[y][variations[x]['variation_desc']])){
+        uniqueOptions[x].add(options[y][variations[x]['variation_desc']]);
+      }
+    }
+
+    rows.add(
+                  // =====FLAVOUR Selection row=====//
+            Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.fromLTRB(40, 22, 0, 0),
+                      child: Text(
+                        variations[x]['variation_desc'],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: ssFont,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+
+                    //=====Dropdown Menu for Flavour=====//
+
+                    Expanded(
+                      child: Container(
+                        height: 23,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[200],
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                        ),
+                        margin: EdgeInsets.fromLTRB(30, 32, 20, 10),
+                        child: Center(child: DropdownButton<String>(
+                              hint: Text(choices[x]),
+
+                              iconSize: 24,
+                              elevation: 16,
+                              style: TextStyle(
+                                fontFamily: ssFont,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              ),
+                              
+                              items: uniqueOptions[x].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(), 
+                              onChanged: (String value) {
+                                setState(() => choices[x] = value);
+                              },
+                            
+                            
+                            )
+                            ),
+                          ),
+                        
+                    ),
+                  ]),
+  
+    );
+  }
+
+  return new Future( ()=> Container(
+      child:Column(children: rows)
+  )
+  );
+}
+
+
+  final _reviewFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +146,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
         height: 1050,
         child: Column(
           children: <Widget>[
-            
-            //Product Name
+            //=====Product Name=====//
             Container(
               margin: EdgeInsets.fromLTRB(40, 30, 40, 0),
               child: Text(
@@ -50,7 +161,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ),
             ),
 
-            //Product Picture
+            //=====Product Picture=====//
             Container(
                 width: 200,
                 height: 170,
@@ -62,7 +173,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ),
                 )),
 
-            //Product Price
+            //=====Product Price=====//
             Text(
               'Rs. ' + arg.price.toString(),
               style: TextStyle(
@@ -73,79 +184,10 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ),
             ),
 
-            //Container(child: getVariations(arg.id)),
+            Container(child: getVariations(arg.id)),
 
-            //Flavour Selection row
-            Padding(
-              padding: const EdgeInsets.only(bottom: 5),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.fromLTRB(40, 22, 0, 0),
-                      child: Text(
-                        'FLAVOUR',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: ssFont,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
 
-                    //Dropdown Menu for Flavour
-                    Expanded(
-                      child: Container(
-                        height: 23,
-                        decoration: BoxDecoration(
-                          color: Colors.grey[200],
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        margin: EdgeInsets.fromLTRB(30, 32, 20, 10),
-                        child: Center(child: DropDown()),
-                      ),
-                    ),
-                  ]),
-            ),
-
-            //Weight Selection row
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.fromLTRB(40, 0, 0, 0),
-                    child: Text(
-                      'WEIGHT',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontFamily: ssFont,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-
-                  //Dropdown menu for Weight
-                  Expanded(
-                    child: Container(
-                      height: 23,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
-                      ),
-                      margin: EdgeInsets.fromLTRB(40, 0, 20, 0),
-                      child: Center(child: DropDown()),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            //Quantity Selection row
+            //=====QUANTITY Selection row=====//
             Row(
               children: <Widget>[
                 Container(
@@ -166,11 +208,21 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   margin: EdgeInsets.only(left: 30),
                   width: 80,
                   height: 20,
-                
+
 
                   //Quantity Counter
                   child: Container(
-                    child: TextField(
+                    child: TextFormField(
+                      validator: (val){
+                        if(int.parse(val) < 1){
+                          return "Quantity cannot be below 0";
+                        }
+                        return null;
+
+                      },
+                      onChanged: (val){
+                        quantity = int.parse(val);
+                      },
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
@@ -183,9 +235,13 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ),
                 ),
 
-                //Add to Cart Button
+                //=====Add to Cart Button=====//
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+
+                      //  passToCart(attributes, choices, quantity, arg)
+
+                  },
                   padding: EdgeInsets.only(left: 30),
                   icon: Icon(Icons.add_shopping_cart),
                   color: Colors.orange[deepOrangeShade],
@@ -193,7 +249,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ],
             ),
 
-            //Description Expansion Tile
+            //=====DESCRIPTION EXPANSION TILE=====//
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 15, 10, 0),
               child: ExpansionTile(
@@ -226,7 +282,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
               ),
             ),
 
-            //Review Expansion Tile
+            //=====REVIEW EXPANSION TILE=====//
             Padding(
               padding: const EdgeInsets.fromLTRB(25, 15, 10, 0),
               child: ExpansionTile(
@@ -242,7 +298,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   ),
                 ),
 
-                //Review List
+                //=====Review List=====//
                 children: <Widget>[
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -257,9 +313,10 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     alignment: Alignment.topRight,
                     margin: EdgeInsets.only(right: 15, bottom: 15),
                     height: 40,
-                    
+                    //color: Colors.purple,
+                    //width: 50,
 
-                    //Add Review Button
+                    //=====ADD REVIEW BUTTON=====//
                     child: FloatingActionButton(
                       tooltip: 'Write a Review',
                       backgroundColor: Colors.orange,
@@ -272,9 +329,9 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 50, vertical: 20),
 
-                                //Review Form
+                                //=====REVIEW FORM=====//
                                 child: Form(
-                                  key: _formKey,
+                                  key: _reviewFormKey,
                                   child: Column(
                                     children: <Widget>[
                                       Container(
@@ -292,7 +349,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         ),
                                       ),
 
-                                      //Name field
+                                      //=====Name field=====//
                                       Container(
                                         //padding:EdgeInsets.fromLTRB(0, 10, 0, 0),
                                         width: 325.0,
@@ -321,7 +378,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         ),
                                       ),
 
-                                      //Content field
+                                      //=====Content Box=====//
                                       Container(
                                         width: 325.0,
                                         height: 70,
@@ -353,7 +410,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         height: 30,
                                       ),
 
-                                      //Post Review Button
+                                      //=====POST REVIEW BUTTON=====//
                                       Container(
                                         //padding:EdgeInsets.fromLTRB(0, 25, 0, 0),
                                         //height: 40.0,
@@ -369,7 +426,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                             hoverColor: Colors.red,
                                             splashColor: Colors.blueAccent,
                                             onTap: () async {
-                                              if (_formKey.currentState
+                                              if (_reviewFormKey.currentState
                                                   .validate()) {
                                                 await PostReview().newReview(
                                                     arg.id,
