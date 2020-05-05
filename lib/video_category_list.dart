@@ -86,6 +86,16 @@ Future<ListView> getCategoryData(category) async{
 
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 videoCategoryList(category){
   return FutureBuilder<ListView> (
     future:getCategoryData(category),
@@ -93,7 +103,7 @@ videoCategoryList(category){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }

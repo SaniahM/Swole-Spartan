@@ -87,6 +87,16 @@ Future<ListView> getdata() async{
 
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 videolist(){
   return FutureBuilder<ListView> (
     future:getdata(),
@@ -94,7 +104,7 @@ videolist(){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }

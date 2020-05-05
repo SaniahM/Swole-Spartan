@@ -50,6 +50,16 @@ Future<ListView> getdata() async{
        
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 featuredlist(){
   return FutureBuilder<ListView> (
     future:getdata(),
@@ -57,7 +67,7 @@ featuredlist(){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }
