@@ -24,7 +24,7 @@ Future<ListView> getPosts(threadID) async{
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(30))),
                           child: Container(
-                            height: 300,
+                            height: 200,
                             child: Column(
                               children: [
 
@@ -33,24 +33,32 @@ Future<ListView> getPosts(threadID) async{
                                 Row(
                                   children: <Widget>[
                                     
-                                    SizedBox(width: 10.0),
+                                    SizedBox(width: 17.0),
 
                                     Text(
                                       posts[index].name,
                                       style: TextStyle(
-                                        fontSize: 20.0,
+                                        fontSize: 18.0,
                                         fontFamily: ssFont,
                                         color: Colors.grey,
                                         fontWeight: FontWeight.bold
                                       )
                                       ),
 
-                                    SizedBox(width: 200.0),
+                                  ],
+                                ),
+
+                                SizedBox(height: 3.0),
+
+                                Row(
+                                  children: <Widget>[
+                                    
+                                    SizedBox(width: 17.0),
                                     
                                     Text(
                                       posts[index].time,
                                       style: TextStyle(
-                                        fontSize: 20.0,
+                                        fontSize: 14.0,
                                         fontFamily: ssFont,
                                         color: Colors.grey,
                                       )
@@ -60,28 +68,29 @@ Future<ListView> getPosts(threadID) async{
 
                                 SizedBox(height: 20.0),
 
-                                Expanded(
-                                child:  
-                                Wrap(
-                                direction: Axis.horizontal,
-                                children: <Widget>[
-                                SizedBox(width: 20),
-                                Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  posts[index].content,
-                                  style: TextStyle(
-                                    fontSize: 15.0,
-                                    fontFamily: ssFont,
-                                    color: Colors.grey,
-                                  )
-                                )
-                                ),
-                                ]
-                                ),
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: 350.0,
+                                  child: Row(
+                                    children: <Widget>[
+
+                                      SizedBox(width: 10.0),
+
+                                      Expanded(
+                                      child: Text(
+                                        posts[index].content,
+                                        style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontFamily: ssFont,
+                                          color: Colors.grey,
+                                        )
+                                      ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
 
-                                SizedBox(height: 20.0),
+                                SizedBox(height: 30.0),
 
                                 Row(
                                   children: <Widget>[
@@ -104,7 +113,7 @@ Future<ListView> getPosts(threadID) async{
                                   ],
                                 ),
 
-                                SizedBox(height: 10),
+                                SizedBox(height: 5.0),
 
                               ]
                             ),
@@ -122,6 +131,16 @@ Future<ListView> getPosts(threadID) async{
   
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 postsList(threadID){
   return FutureBuilder<ListView> (
     future:getPosts(threadID),
@@ -129,7 +148,7 @@ postsList(threadID){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }

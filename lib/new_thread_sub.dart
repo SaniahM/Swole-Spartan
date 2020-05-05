@@ -47,6 +47,7 @@ String threadContent;
                     ),
                   ),
 
+                  SizedBox(height: 20),
 
                   Card(
                     elevation: 3.0,
@@ -65,7 +66,7 @@ String threadContent;
                             child: Text(
                               "THREAD TITLE",
                               style: TextStyle(
-                              fontSize: 15.0,
+                              fontSize: 14.0,
                               fontFamily: ssFont,
                               color: Colors.grey,
                               // fontWeight: FontWeight.bold
@@ -102,7 +103,7 @@ String threadContent;
                             child: Text(
                               "INITIAL POST",
                               style: TextStyle(
-                              fontSize: 15.0,
+                              fontSize: 14.0,
                               fontFamily: ssFont,
                               color: Colors.grey,
                               // fontWeight: FontWeight.bold
@@ -144,7 +145,7 @@ String threadContent;
                   SizedBox(height: 10.0),
 
                   Container(
-                    height: 40.0,
+                    height: 35.0,
                     width: 275.0,
                     child: Material(
                       borderRadius: BorderRadius.circular(20.0),

@@ -35,7 +35,7 @@ class _DFThreadPageSub extends State<DFThreadPageSub>{
                     ),
                   ),
 
-                  SizedBox(height: 30.0),
+                  SizedBox(height: 20.0),
 
 
                   Expanded(

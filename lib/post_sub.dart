@@ -74,7 +74,7 @@ class _DFPostPageSub extends State<DFPostPageSub>{
                                     Text(
                                       "New Post",
                                           style: TextStyle(
-                                            fontSize: 20.0,
+                                            fontSize: 18.0,
                                             fontFamily: ssFont,
                                             color: Colors.grey,
                                             fontWeight: FontWeight.bold
@@ -94,10 +94,12 @@ class _DFPostPageSub extends State<DFPostPageSub>{
                                     cursorColor: Colors.amber,
                                     cursorWidth: 2.0,
                                     decoration: InputDecoration(
-                                      labelText: "Please enter your text here...",
+                                      // labelText: "Please enter your text here...",
+                                      hintText: "Please enter your text here...",
                                       labelStyle: TextStyle(
                                         fontFamily: ssFont,
                                         color: Colors.grey,
+                                        fontSize: 14.0,
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(color: Colors.orange)
@@ -110,7 +112,7 @@ class _DFPostPageSub extends State<DFPostPageSub>{
                                 SizedBox(height: 35.0),
 
                                 Container(
-                                  height: 40.0,
+                                  height: 35.0,
                                   width: 275.0,
                                   child: Material(
                                     borderRadius: BorderRadius.circular(20.0),
