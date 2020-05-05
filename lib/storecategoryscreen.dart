@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'appbar.dart';
 import 'footnavbar.dart';
 import 'properties.dart';
-import 'drawer.dart';
 import 'screens.dart';
+import 'side_menus.dart';
 
 
 class StoreCatPage extends StatefulWidget{
@@ -24,7 +24,7 @@ class _StoreCategory extends State<StoreCatPage>{
 
       appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex),
       
-      drawer: drawerFunc(),
+      drawer: menus()[_sectionIndex],
 
       body: Card(
               color: Colors.white,

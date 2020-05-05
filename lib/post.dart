@@ -12,7 +12,7 @@ class DFPostPage extends StatefulWidget{
 }
 
 class _DFPostPage extends State<DFPostPage>{
-  int _currentIndex = 9;
+  int _currentIndex = 10;
   int _sectionIndex = 2;
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
   @override

@@ -12,7 +12,7 @@ class DFNewThreadPage extends StatefulWidget{
 }
 
 class _DFNewThreadPage extends State<DFNewThreadPage>{
-  int _currentIndex = 10;
+  int _currentIndex = 11;
   int _sectionIndex = 2;
   @override
   Widget build(BuildContext context){

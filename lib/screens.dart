@@ -9,6 +9,7 @@ import 'storecategoryscreen_sub.dart';
 import 'thread_sub.dart';
 import 'post_sub.dart';
 import 'new_thread_sub.dart';
+import 'video_category_sub.dart';
 
 List<Widget> screens(){
 
@@ -18,9 +19,9 @@ List<Widget> screens(){
 
     CartPageSub(), CheckoutPageSub(), ViewProductPageSub(), StoreCatPageSub(),//3-6
 
-    VSHomePage(),  //7
+    VSHomePage(),  VSCatPageSub(),//7-8
     
-    DFThreadPageSub(), DFPostPageSub(), DFNewThreadPageSub()//8-10
+    DFThreadPageSub(), DFPostPageSub(), DFNewThreadPageSub()//9-11
 
   ];
 

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 String ssFont = 'NeusaNextStf-CompactRegular.otf';
 
 Future<ListView> vsCategoryList() async {
-  var query = (await Firestore.instance.collection('products').getDocuments()).documents;
+  var query = (await Firestore.instance.collection('videos').getDocuments()).documents;
   List<String> uniqueCats=List<String>();
   for(int x=0;x<query.length;x++){
     if (!uniqueCats.contains(query[x].data['video_category']))uniqueCats.add(query[x].data['video_category']);
@@ -36,12 +36,7 @@ Future<ListView> vsCategoryList() async {
                           )
                       ),
                     ),
-            // SizedBox(width: 0), 
-            // Icon(
-            //   Icons.arrow_right,
-            //   size: 30,
-            //   color: Colors.grey,
-            // ),
+
 
             ]
             ),
@@ -66,12 +61,7 @@ Future<ListView> vsCategoryList() async {
                           fontWeight: FontWeight.bold)
                       ),
                     ),
-            // SizedBox(width: 50), 
-            // Icon(
-            //   Icons.arrow_right,
-            //   size: 30,
-            //   color: Colors.grey,
-            // ),
+
 
             ]
             ),

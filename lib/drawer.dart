@@ -84,6 +84,7 @@ Future<ListView> getSideMenuData() async{
     )
   );
 }
+
 sideMenuList(){
   return FutureBuilder<ListView> (
     future:getSideMenuData(),

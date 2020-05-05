@@ -1,40 +1,52 @@
 import 'package:flutter/material.dart';
-import 'video_category_list.dart';
+import 'appbar.dart';
+import 'footnavbar.dart';
+import 'properties.dart';
+import 'screens.dart';
+import 'side_menus.dart';
 
 class VSCatPage extends StatefulWidget{
   @override
-  _VSCatPage createState() => _VSCatPage();
+  _VSCategory createState() => _VSCategory();
 }
 
-class _VSCatPage extends State<VSCatPage>{
-
+class _VSCategory extends State<VSCatPage>{
+  int _currentIndex = 8;
+  int _sectionIndex = 1;
   @override
   Widget build(BuildContext context){
-    String ssFont = 'NeusaNextStf-CompactRegular.otf';
-    String category = ModalRoute.of(context).settings.arguments;
-    return Column(
-      
-      children:[
-      SizedBox(height: 20),
-        Container(  
-          alignment: Alignment.center,
-          width: 400.0,
-          child: Text(
-            category,
-            style: TextStyle(
-            fontSize: 20.0,
-            fontFamily: ssFont,
-            color: Colors.grey,
-            fontWeight: FontWeight.bold
-            ),
-          ),
-        ),
-        Padding(padding: EdgeInsets.only(top: 30),),
-        Expanded(child:videoCategoryList(category)),
-      ]
-          
-    );
-    
-  }
 
+    return Scaffold(
+      
+      
+      backgroundColor: Colors.grey[getColor()[0]],
+
+      appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex),
+      
+      drawer: menus()[_sectionIndex],
+
+      body: Card(
+              color: Colors.white,
+              elevation: 10,
+              margin: EdgeInsets.only(top:8),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(40))),
+
+//////////////////////////////////////////////////////////////////////////////////////////
+/////CHANGE ONLY THIS PART TO FIT ANY SCREEN INTO THE COMMON ITEMS TEMPLATE/////////////
+            
+              child: screens()[_currentIndex]
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////      
+      ),
+
+      bottomNavigationBar: footBar(_sectionIndex, (index){
+            setState(() {
+              _currentIndex = index;
+              _sectionIndex = index;
+            });
+          }), 
+
+      );
+  }
 }

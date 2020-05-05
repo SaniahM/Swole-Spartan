@@ -4,6 +4,7 @@ import 'properties.dart';
 
 BottomNavigationBar footBar(int _currentIndex, void fn(int)){
 
+final fontsize = 12.0;
 
 return BottomNavigationBar(
 
@@ -34,10 +35,15 @@ return BottomNavigationBar(
         iconSize: 20, 
         
         backgroundColor: Colors.grey[getColor()[0]],
-        selectedFontSize: 15,
-        unselectedFontSize: 0,
+        
+        /////////// HERE /////////////////////////
+        selectedFontSize: fontsize,
+        unselectedFontSize: fontsize,
+        
         selectedItemColor: Colors.deepOrange[getColor()[1]],
         selectedIconTheme:IconThemeData(color:Colors.deepOrange[getColor()[1]]),
+
+        unselectedItemColor: Colors.blue[900],
         unselectedIconTheme:IconThemeData(color:Colors.blue[900])
         
         );

@@ -7,9 +7,11 @@ Future<ListView> getQueryData(queryPhrase) async{
   
   var query = (await Firestore.instance.collection('videos').getDocuments()).documents;
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
-  
+  int itcount = 3;
   List<Map<String,dynamic>> videos = List<Map<String,dynamic>>();
   List<String> vidDocs=List<String>();
+
+
     for (int x=0;x<query.length;x++){
       if (((query[x].data['video_name'].toLowerCase().contains(queryPhrase.toLowerCase()))) && !(vidDocs.contains(query[x].documentID))){
         vidDocs.add(query[x].documentID);
@@ -26,9 +28,14 @@ Future<ListView> getQueryData(queryPhrase) async{
         }
       }
     }
+
+      if(itcount > vidDocs.length){
+        itcount = vidDocs.length;
+    }
+
       return new Future(()=> ListView.builder(
 
-                  itemCount: 3,
+                  itemCount: itcount,
 
                   itemBuilder: (BuildContext context, int index) {
                     int x=index;

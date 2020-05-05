@@ -10,7 +10,6 @@ List<Widget> menus(){
 
   		drawerFunc(), vsDrawerFunc(), dfDrawerFunc()
 
-
   ];
 
 
