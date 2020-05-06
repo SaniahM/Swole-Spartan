@@ -328,6 +328,9 @@ postsList(threadID){
                                           _newPostController.clear();
                                           // setState(() {});
                                         }
+                                        setState(() {
+                                          
+                                        });
                                       
                                       }
                                       else{
