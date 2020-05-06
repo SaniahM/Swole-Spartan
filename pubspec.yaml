@@ -28,6 +28,7 @@ dependencies:
   firebase_auth: ^0.16.0
   cloud_firestore: ^0.13.5
   provider: ^4.0.5
+  progress_indicators: ^0.1.5
 
   http: ^0.12.0+4
   youtube_player_flutter: ^6.1.0+4

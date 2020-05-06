@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'shopping_list.dart';
+import 'package:provider/provider.dart';
+import 'user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CartPageSub extends StatefulWidget {
   @override
@@ -9,9 +12,130 @@ class CartPageSub extends StatefulWidget {
 
 class _CartPageSub extends State<CartPageSub> {
 
+InkWell singleItem(context, productData, quantity, cartData){
+    int _itemCount = quantity;
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pushNamed('/viewproduct');
+      },
+      child: Container(
+        height: 80,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+          child: Row(
+            children: <Widget>[
+              //Prod Picture
+              Image.network(
+                productData['image_link'],
+                height: 75,
+              ),
+
+              //Prod details
+              Row(
+                children: <Widget>[
+                  Container(
+                    height: 80,
+                    width: 120,
+                    color: Colors.white,
+                    margin: EdgeInsets.fromLTRB(10, 3, 0, 3),
+                    padding: EdgeInsets.only(top: 3),
+                    child: Text(
+                      productData['prod_name'],
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontFamily: ssFont,
+                        color: Colors.lightBlue[900],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(width: 40.0),
+
+                  _itemCount!=0? new  IconButton(icon: new Icon(Icons.remove),onPressed:() async{
+                    var varOpt = (await Firestore.instance.collection('shopping_cart').document(cartData.documentID).get());
+                    quantity=quantity-1;
+                    if (quantity>0){
+                      varOpt.reference.updateData({'quantity':quantity});
+                    setState(() =>{
+                      });
+                    }
+                    else{
+                      var variationDoc= (await Firestore.instance.collection('cart_variations').where('cart_id', isEqualTo: cartData.reference).getDocuments()).documents;
+                      variationDoc[0].reference.delete();
+                      varOpt.reference.delete();
+                      cartData.reference.delete();
+                      setState(() =>{
+                      });
+                    }
+                  }, color: Colors.lightBlue[900], ):new Container(),
+                    new Text(_itemCount.toString()),
+                    new IconButton(icon: new Icon(Icons.add),onPressed: () async{
+                    var varOpt = (await Firestore.instance.collection('shopping_cart').document(cartData.documentID).get());
+                      quantity=quantity+1;
+                      _itemCount=quantity;
+                      
+                      varOpt.reference.updateData({'quantity':quantity});
+                      setState(() =>{
+                      });
+                    }, color: Colors.lightBlue[900],)
+                  ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+Future<DraggableScrollableSheet> getCartData(context) async{
+  final user = Provider.of<User>(context, listen: false);
+  var cart= (await Firestore.instance.collection('shopping_cart').where('user', isEqualTo: user.uid).getDocuments()).documents;
+  List<int> quantity=List<int>();
+  List<Map<String,dynamic>> products=List<Map<String,dynamic>>();
+  for (int x=0;x<cart.length;x++){
+    products.add((await cart[x].data['product'].get()).data);
+    quantity.add(cart[x].data['quantity']);
+  }
+  return DraggableScrollableSheet(
+    expand: true,
+    builder: (BuildContext context, ScrollController scrollController) {
+      return ListView.builder(
+        controller: scrollController,
+        scrollDirection: Axis.vertical,
+        itemCount: products.length,
+        padding: EdgeInsets.all(0.0),
+        itemBuilder: (BuildContext context, int index) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center, 
+            children: 
+            [ 
+              Container(
+                color: Colors.white,
+                child: singleItem(context, products[index], quantity[index], cart[index]),
+              ),
+            Divider(),
+          ]);
+        },
+      );
+    },
+  );
+}
+
+shoppingList(context){
+  return FutureBuilder<DraggableScrollableSheet> (
+    future:getCartData(context),
+    builder: (context,snapshot){
+      if (snapshot.hasData){
+        return snapshot.data;
+      }
+      else return CircularProgressIndicator();
+    }
+  );
+}
+
+
+
 @override
 Widget build(BuildContext context) {
-
 
 return SingleChildScrollView(
           child: Container(
@@ -62,7 +186,7 @@ return SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
                       Expanded(
-                        child: shoppingList(),
+                        child: shoppingList(context),
                       ),
                     ],
                   ),
@@ -95,17 +219,7 @@ return SingleChildScrollView(
                           ),
                           //Container for calculated prices
 
-                          Container(
-                            child: Text(
-                              'Rs. 46000',
-                              style: TextStyle(
-                                fontFamily: ssFont,
-                                fontSize: 12,
-                                color: Colors.orange,
-                              ),
-                            ),
-
-                          ),
+                          shoppingTotal(context)
                         ],
                       ),
 
@@ -127,7 +241,7 @@ return SingleChildScrollView(
 
                           Container(
                             child: Text(
-                              'Rs. 500',
+                              'Rs. 0',
                               style: TextStyle(
                                 fontFamily: ssFont,
                                 fontSize: 12,
@@ -154,16 +268,8 @@ return SingleChildScrollView(
                             ),
                           ),
 
-                          Container(
-                            child: Text(
-                              'Rs. 46500',
-                              style: TextStyle(
-                                fontFamily: ssFont,
-                                fontSize: 12,
-                                color: Colors.orange,
-                              ),
-                            ),
-                          ),
+                          
+                          shoppingTotal(context)
 
                         ],
                       ),
