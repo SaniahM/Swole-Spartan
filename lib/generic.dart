@@ -7,6 +7,9 @@ import 'screens.dart';
 import 'footnavbar.dart';
 import 'side_menus.dart';
 
+// import 'package:provider/provider.dart';
+// import 'user.dart';
+
 class GenericTemplate extends StatefulWidget{
   @override
   _GenericTemplate createState() => _GenericTemplate();
@@ -15,14 +18,18 @@ class GenericTemplate extends StatefulWidget{
 class _GenericTemplate extends State<GenericTemplate>{
   int _currentIndex = 0;
   int _sectionIndex = 0;
+
+  
   @override
   Widget build(BuildContext context){
 
+    // final user = Provider.of<User>(context);
+  
     return Scaffold(
       
       backgroundColor: Colors.grey[getColor()[0]],
 
-      appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex),
+      appBar: topbar(context, getColor()[0], getColor()[1],_sectionIndex,),
       
       drawer: menus()[_sectionIndex],
       

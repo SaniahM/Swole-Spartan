@@ -5,6 +5,8 @@ import 'properties.dart';
 import 'screens.dart';
 import 'side_menus.dart';
 
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 class VSCatPage extends StatefulWidget{
   @override
   _VSCategory createState() => _VSCategory();
@@ -15,7 +17,7 @@ class _VSCategory extends State<VSCatPage>{
   int _sectionIndex = 1;
   @override
   Widget build(BuildContext context){
-
+    // final user = Provider.of<User>(context);
     return Scaffold(
       
       

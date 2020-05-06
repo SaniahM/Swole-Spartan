@@ -5,6 +5,8 @@ import 'appbar.dart';
 import 'footnavbar.dart';
 import 'properties.dart';
 import 'screens.dart';
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 
 class CartPage extends StatefulWidget {
   @override
@@ -16,7 +18,7 @@ class _CartPage extends State<CartPage> {
   int _sectionIndex = 0;
   @override
   Widget build(BuildContext context) {
-
+    // final user = Provider.of<User>(context);
     return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
 

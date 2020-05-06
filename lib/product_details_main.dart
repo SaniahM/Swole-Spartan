@@ -12,7 +12,8 @@ import 'screens.dart';
 import 'appbar.dart';
 import 'footnavbar.dart';
 // import 'product_details_sub.dart';
-
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 class ViewProductPage extends StatefulWidget{
   @override
   _ViewProduct createState() => _ViewProduct();
@@ -28,7 +29,7 @@ class _ViewProduct extends State<ViewProductPage>{
   @override
   Widget build(BuildContext context){
     //Set Colors from here
-
+    // final user = Provider.of<User>(context);
     return Scaffold(
 
       resizeToAvoidBottomInset: false,

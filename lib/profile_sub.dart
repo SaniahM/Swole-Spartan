@@ -4,7 +4,7 @@ import 'shopping_list.dart';
 import 'user.dart';
 
 import 'package:provider/provider.dart';
-
+import 'auth.dart';
 
 
 class ProfilePageSub extends StatefulWidget {
@@ -19,11 +19,12 @@ class _ProfilePageStateSub extends State<ProfilePageSub> {
 
 @override
 Widget build(BuildContext context) {
-
+final AuthService _auth = AuthService();
 final user = Provider.of<User>(context);
-
+if(user != null){
 return StreamBuilder<UserData>(
-    stream: DatabaseService(uid: user.uid).userData,
+    
+      stream: DatabaseService(uid: user.uid).userData,
     
      builder:(context,snapshot){ 
        
@@ -238,7 +239,10 @@ return StreamBuilder<UserData>(
 
                 //PLACE ORDER BUTTON
                 InkWell(
-                  onTap: () {},
+                  onTap: () async {
+                     await _auth.signOut();
+                     Navigator.of(context).pushNamed('/login');
+                  },            
                   child: Container(
                     margin: EdgeInsets.fromLTRB(40, 15, 40, 0),
                     padding: EdgeInsets.fromLTRB(0, 0.0, 0.0, 2.5),
@@ -259,7 +263,7 @@ return StreamBuilder<UserData>(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Text(
-                          'Save changes and continue',
+                          'Log Out',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontFamily: ssFont,
@@ -287,6 +291,9 @@ return StreamBuilder<UserData>(
 
       
     }
-  );
+  );}
+  else{
+    return Center();
+  }
   }
 }

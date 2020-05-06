@@ -70,6 +70,7 @@ Future<ListView> getThreads(category) async{
                                       SizedBox(width: 10.0),
                                       
                                       Expanded(
+                                    
                                       child: Text(
                                         threads[index].threadPost,
                                         style: TextStyle(

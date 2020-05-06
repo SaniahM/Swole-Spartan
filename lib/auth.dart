@@ -7,7 +7,7 @@ class AuthService{
 
   //create user object
   User _user(FirebaseUser user){
-    return user != null ? User(uid:user.uid): null;
+    return user != null ? User(uid:user.uid, status: user.isAnonymous): null;
   }  
 
   // divert user stream
@@ -65,6 +65,8 @@ class AuthService{
     }
   }
 
+/////////Log out////////// 
+
   Future signOut() async{
     try{
 
@@ -78,6 +80,7 @@ class AuthService{
   }
 
 }
+
 
 bool anAlphabet(String x){
 

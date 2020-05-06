@@ -4,7 +4,8 @@ import 'footnavbar.dart';
 import 'properties.dart';
 import 'screens.dart';
 import 'side_menus.dart';
-
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 
 class StoreCatPage extends StatefulWidget{
   @override
@@ -16,7 +17,7 @@ class _StoreCategory extends State<StoreCatPage>{
   int _sectionIndex = 0;
   @override
   Widget build(BuildContext context){
-
+    // final user = Provider.of<User>(context);
     return Scaffold(
       
       

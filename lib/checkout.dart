@@ -5,7 +5,8 @@ import 'appbar.dart';
 import 'footnavbar.dart';
 import 'properties.dart';
 import 'screens.dart';
-
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 // import 'user.dart';
 // // import 'auth.dart';
 // import 'package:provider/provider.dart';
@@ -25,7 +26,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   Widget build(BuildContext context) {
     // return StreamProvider<QuerySnapshot>.value(
     //        value: DatabaseService().userInfo,
-    
+          // final user = Provider.of<User>(context);
      return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
       appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),

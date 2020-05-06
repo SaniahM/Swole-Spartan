@@ -3,10 +3,14 @@ import 'spartan_icons_icons.dart';
 import 'search_bar.dart';
 import 'search_bar_df.dart';
 import 'search_bar_vs.dart';
-// import 'auth.dart';
+import 'auth.dart';
+
+import 'package:provider/provider.dart';
+import 'user.dart';
 
 AppBar topbar(context, greyShade, deepOrangeShade, sectionIndex){
-  // final AuthService _auth = AuthService();
+final AuthService _auth = AuthService();
+final user = Provider.of<User>(context);
   return AppBar(
   
         backgroundColor: Colors.grey[greyShade],
@@ -26,10 +30,24 @@ AppBar topbar(context, greyShade, deepOrangeShade, sectionIndex){
                 child: IconButton(
                   iconSize: 19,
                   icon: Icon(SpartanIcons.profile) ,
-                  onPressed: ()  {       
+                  onPressed: ()  async{       
+                      if(user != null){
 
-                       Navigator.of(context).pushNamed('/profile');
-                    
+                        if(user.status == false){ // The user is logged in
+
+                         Navigator.of(context).pushNamed('/profile');
+                        
+                        }
+                        else{ //The user is in guest mode
+                        await _auth.signOut();
+                        Navigator.of(context).pushNamed('/login');
+                        }
+                      
+                      }
+                      else{
+
+                        Navigator.of(context).pushNamed('/login');
+                      }
 
                   },
                 )

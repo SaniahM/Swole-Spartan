@@ -4,7 +4,8 @@ import 'properties.dart';
 import 'footnavbar.dart';
 import 'side_menus.dart';
 import 'screens.dart';
-
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 
 class DFThreadPage extends StatefulWidget{
   @override
@@ -17,6 +18,7 @@ class _DFThreadPage extends State<DFThreadPage>{
   int _sectionIndex = 2;
   @override
   Widget build(BuildContext context){
+    // final user = Provider.of<User>(context);
 
     return Scaffold(
       

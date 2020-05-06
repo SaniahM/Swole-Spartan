@@ -4,7 +4,8 @@ import 'properties.dart';
 import 'footnavbar.dart';
 import 'screens.dart';
 import 'side_menus.dart';
-
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 
 class DFPostPage extends StatefulWidget{
   @override
@@ -17,6 +18,7 @@ class _DFPostPage extends State<DFPostPage>{
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
   @override
   Widget build(BuildContext context){
+        // final user = Provider.of<User>(context);
     return Scaffold(
       
       backgroundColor: Colors.grey[getColor()[0]],

@@ -165,7 +165,12 @@ class _MyHomePageState extends State<LoginPage>  {
                             
                             dynamic result = await _auth.logIn(email, password);
                             if(result == null){
+
                               setState(() =>  error = 'Kindly provide a valid email and password');
+                            
+                            }
+                            else{
+                                Navigator.of(context).pushNamed('/generic');
                             }
 
                           }

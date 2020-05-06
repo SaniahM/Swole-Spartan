@@ -9,6 +9,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'postsclass.dart';
 import 'package:intl/intl.dart';
 
+import 'auth.dart';
+
+
 class DFPostPageSub extends StatefulWidget{
   @override
   _DFPostPageSub createState() => _DFPostPageSub();
@@ -16,6 +19,7 @@ class DFPostPageSub extends StatefulWidget{
 
 class _DFPostPageSub extends State<DFPostPageSub>{
 
+  
   List<String> reportTexts = [];
 
   String ssFont = 'NeusaNextStf-CompactRegular.otf';
@@ -197,6 +201,22 @@ postsList(threadID){
   }
   @override
   Widget build(BuildContext context){
+  final AuthService _auth = AuthService();
+  final user = Provider.of<User>(context);
+  if(user != null){
+    String loginText;
+    Color floatColor;
+    
+
+    if(user.status == false){
+      loginText = "Create Post";
+      floatColor = Colors.orange[600];
+
+    }
+    else{
+      loginText = "Log in to post";
+      floatColor = Colors.grey;
+    }
     ThreadArg arg=ModalRoute.of(context).settings.arguments;
     return Column(
                 children: <Widget> [
@@ -286,12 +306,15 @@ postsList(threadID){
                                   child: Material(
                                     borderRadius: BorderRadius.circular(20.0),
                                     shadowColor: Colors.orangeAccent,
-                                    color: Colors.orange,
+                                    color: floatColor,
                                     elevation: 7.0,
                                     child: InkWell( 
                                       hoverColor: Colors.red,
                                       splashColor: Colors.blueAccent,
                                       onTap: () async {
+                                         if(user != null){
+                                         if(user.status == false){
+                                      
                                         final user = Provider.of<User>(context, listen: false);
                                         var userRef = Firestore.instance.collection('user_records').document(user.uid);
                                         var fullName = await getUserName(userRef);
@@ -303,12 +326,24 @@ postsList(threadID){
                                           Timestamp time= Timestamp.now();
                                           await Firestore.instance.collection('thread_posts').add({'content':newPostText, 'poster_name': fullName, 'title': threadTitle, 'user': userRef, 'thread': threadRef, 'time': time});
                                           _newPostController.clear();
-                                          setState(() {});
+                                          // setState(() {});
                                         }
+                                      
+                                      }
+                                      else{
+                                        await _auth.signOut();
+                                        Navigator.of(context).pushNamed('/login');
+                                        
+                                      }
+                                    
+                                    }
+                                    else{
+                                        Navigator.of(context).pushNamed('/login');
+                                    }
                                       },
                                           child: Center(
                                             child: Text(
-                                              "ENTER POST",
+                                              loginText,
                                               style: TextStyle(
                                                 fontFamily: ssFont,
                                                 color: Colors.white,
@@ -333,6 +368,9 @@ postsList(threadID){
               );
 
       
+  }  else{
+    return Scaffold();
+  }
   }
 }
 

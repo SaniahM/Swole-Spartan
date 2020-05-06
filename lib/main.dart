@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget{
           '/profile': (BuildContext context) => new ProfilePage(),
 
 
+
         },
       
         home: new Gateway(),

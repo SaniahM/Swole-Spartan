@@ -3,7 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class User{
 
   final String uid;
-  User({this.uid});
+  final bool status;
+  
+  User({this.uid, this.status});
+
+  
 
 }
 
