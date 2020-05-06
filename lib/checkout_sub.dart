@@ -583,7 +583,8 @@ StreamBuilder<UserData>(
                       Firestore.instance.collection('shopping_cart').document(cart[x].documentID).delete();
                     }
                     await Firestore.instance.collection('orders').add(newVal);
-                    Navigator.of(context).pushNamed('/storehome');
+                    Navigator.of(context).pop();
+                    Navigator.of(context).pop();
                   },
                   child: Container(
                     margin: EdgeInsets.fromLTRB(40, 15, 40, 0),
