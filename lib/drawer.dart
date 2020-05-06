@@ -85,6 +85,17 @@ Future<ListView> getSideMenuData() async{
   );
 }
 
+
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 sideMenuList(){
   return FutureBuilder<ListView> (
     future:getSideMenuData(),
@@ -92,7 +103,7 @@ sideMenuList(){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }

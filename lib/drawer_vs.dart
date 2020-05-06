@@ -74,6 +74,16 @@ Future<ListView> vsCategoryList() async {
     );
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 getVsCats(){
    return FutureBuilder<ListView> (
     future:vsCategoryList(),
@@ -81,7 +91,7 @@ getVsCats(){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }

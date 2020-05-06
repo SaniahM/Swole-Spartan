@@ -59,7 +59,7 @@ return StreamBuilder<UserData>(
                       style: TextStyle(
                         fontFamily: ssFont,
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: 18,
                         color: Colors.grey[600],
                       ),
                     ),
@@ -93,13 +93,15 @@ return StreamBuilder<UserData>(
                                 color: Colors.grey,
                               ),
                             ),
+
+                            SizedBox(width: 10,),
                              
                             Padding(padding: EdgeInsets.only(left: 20),),
 
                             //SWITCH
                            Text(userdata.firstName+ " " +userdata.lastName,
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 14,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
@@ -135,6 +137,8 @@ return StreamBuilder<UserData>(
                                 color: Colors.grey,
                               ),
                             ),
+
+                            SizedBox(width: 8,),
                              
                             Padding(padding: EdgeInsets.only(left: 20),),
 
@@ -175,6 +179,9 @@ return StreamBuilder<UserData>(
                                 color: Colors.grey,
                               ),
                             ),
+
+                            SizedBox(width: 10,),
+
                              
                             Padding(padding: EdgeInsets.only(left: 20),),
 

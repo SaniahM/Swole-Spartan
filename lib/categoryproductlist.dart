@@ -75,6 +75,16 @@ Future<ListView> getCategoryData(String category) async{
      
 }
 
+progressIndicator() {
+  return Center(
+    child: SizedBox(
+      height: 40.0,
+      width: 40.0,
+      child: CircularProgressIndicator(),
+    ),
+  );
+}
+
 categorylist(String category){
   return FutureBuilder<ListView> (
     future:getCategoryData(category),
@@ -82,7 +92,7 @@ categorylist(String category){
       if (snapshot.hasData){
         return snapshot.data;
       }
-      else return CircularProgressIndicator();
+      else return progressIndicator();
     }
   );
 }
