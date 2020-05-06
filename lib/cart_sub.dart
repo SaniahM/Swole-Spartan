@@ -35,7 +35,6 @@ class _CartPageSub extends State<CartPageSub> {
               Row(
                 children: <Widget>[
                   Container(
-                    //height: 80,
                     width: 100,
                     color: Colors.white,
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -106,7 +105,7 @@ class _CartPageSub extends State<CartPageSub> {
     );
   }
 
-  Future<DraggableScrollableSheet> getCartData(context) async {
+  Future<ListView> getCartData(context) async {
     final user = Provider.of<User>(context, listen: false);
     var cart = (await Firestore.instance
             .collection('shopping_cart')
@@ -119,11 +118,8 @@ class _CartPageSub extends State<CartPageSub> {
       products.add((await cart[x].data['product'].get()).data);
       quantity.add(cart[x].data['quantity']);
     }
-    return DraggableScrollableSheet(
-      expand: true,
-      builder: (BuildContext context, ScrollController scrollController) {
-        return ListView.builder(
-          controller: scrollController,
+    return ListView.builder(
+      //build: (BuildContext context, ScrollController scrollController)
           scrollDirection: Axis.vertical,
           itemCount: products.length,
           padding: EdgeInsets.all(0.0),
@@ -139,13 +135,11 @@ class _CartPageSub extends State<CartPageSub> {
                   Divider(),
                 ]);
           },
-        );
-      },
     );
   }
 
   shoppingList(context) {
-    return FutureBuilder<DraggableScrollableSheet>(
+    return FutureBuilder<ListView>(
         future: getCartData(context),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -196,7 +190,7 @@ class _CartPageSub extends State<CartPageSub> {
             //Scrollable Product List
             Container(
               margin: EdgeInsets.fromLTRB(40, 35, 40, 0),
-              height: 300.0,
+              height: 320.0,
               child: Column(
                 children: <Widget>[
                   Expanded(
