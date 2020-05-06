@@ -583,9 +583,21 @@ StreamBuilder<UserData>(
                       Firestore.instance.collection('shopping_cart').document(cart[x].documentID).delete();
                     }
                     await Firestore.instance.collection('orders').add(newVal);
+                    
+                  final snackBar = SnackBar(
+                      
+                      content: Text(
+                        'Product added to cart'
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(snackBar);
+
+                  
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
-                  },
+                  
+                  
+                                      },
                   child: Container(
                     margin: EdgeInsets.fromLTRB(40, 15, 40, 0),
                     padding: EdgeInsets.fromLTRB(0, 0.0, 0.0, 2.5),

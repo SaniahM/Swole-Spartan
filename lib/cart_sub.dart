@@ -49,7 +49,7 @@ InkWell singleItem(context, productData, quantity, cartData){
                     ),
                   ),
 
-                  SizedBox(width: 40.0),
+                  // SizedBox(width: 40.0),
 
                   _itemCount!=0? new  IconButton(icon: new Icon(Icons.remove),onPressed:() async{
                     var varOpt = (await Firestore.instance.collection('shopping_cart').document(cartData.documentID).get());
