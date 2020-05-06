@@ -542,6 +542,7 @@ StreamBuilder<UserData>(
                 //PLACE ORDER BUTTON
                 InkWell(
                   onTap: () async{
+
                     Map<String,dynamic> newVal={'name':name,'phone':phone,'address':address,'email':email,'uid':user.uid};
                     var cart= (await Firestore.instance.collection('shopping_cart').where('user', isEqualTo: user.uid).getDocuments()).documents;
                     int quantity;
@@ -576,6 +577,13 @@ StreamBuilder<UserData>(
                       newVal['product'+x.toString()]=products.reference;
                       newVal['quantity'+x.toString()]=quantity;
                     }
+                                        final snackBar = SnackBar(
+                      
+                      content: Text(
+                        'Order Placed'
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(snackBar);
                     for (int x=0;x<varId.length;x++){
                       Firestore.instance.collection('cart_variations').document(varId[x].documentID).delete();
                     }
@@ -584,20 +592,11 @@ StreamBuilder<UserData>(
                     }
                     await Firestore.instance.collection('orders').add(newVal);
                     
-                  final snackBar = SnackBar(
-                      
-                      content: Text(
-                        'Product added to cart'
-                      ),
-                    );
-                    Scaffold.of(context).showSnackBar(snackBar);
-
-                  
                     Navigator.of(context).pop();
                     Navigator.of(context).pop();
                   
                   
-                                      },
+                  },
                   child: Container(
                     margin: EdgeInsets.fromLTRB(40, 15, 40, 0),
                     padding: EdgeInsets.fromLTRB(0, 0.0, 0.0, 2.5),
