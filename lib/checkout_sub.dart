@@ -26,7 +26,7 @@ Future<Container> getTotal(context) async{
             'Rs. '+total.toString(),
             style: TextStyle(
               fontFamily: ssFont,
-              fontSize: 11,
+              fontSize: 14,
               color: Colors.orange,
             ),
           ),
@@ -92,7 +92,8 @@ InkWell singleItem(context, productData, quantity, cartData){
 
                   SizedBox(width: 40.0),
 
-                  _itemCount!=0? new  IconButton(icon: new Icon(Icons.remove),onPressed:() async{
+                  _itemCount!=0? new  IconButton(icon: new Icon(Icons.remove),
+                  onPressed:() async{
                     var varOpt = (await Firestore.instance.collection('shopping_cart').document(cartData.documentID).get());
                     quantity=quantity-1;
                     if (quantity>0){
@@ -108,8 +109,12 @@ InkWell singleItem(context, productData, quantity, cartData){
                       setState(() =>{
                       });
                     }
-                  }, color: Colors.lightBlue[900], ):new Container(),
+                  }, 
+                  
+                  color: Colors.lightBlue[900], ):new Container(),
+
                     new Text(_itemCount.toString()),
+                    
                     new IconButton(icon: new Icon(Icons.add),onPressed: () async{
                     var varOpt = (await Firestore.instance.collection('shopping_cart').document(cartData.documentID).get());
                       quantity=quantity+1;
@@ -118,7 +123,9 @@ InkWell singleItem(context, productData, quantity, cartData){
                       varOpt.reference.updateData({'quantity':quantity});
                       setState(() =>{
                       });
-                    }, color: Colors.lightBlue[900],)
+                    }, 
+                    color: Colors.lightBlue[900],
+                    )
                   ],
               ),
             ],
@@ -227,12 +234,15 @@ StreamBuilder<UserData>(
                       style: TextStyle(
                         fontFamily: ssFont,
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: 20,
                         color: Colors.grey[600],
                       ),
                     ),
                   ),
                 ),
+
+
+                SizedBox(height: 80),
 
                 //DELIVERY DETAILS
 
@@ -240,11 +250,14 @@ StreamBuilder<UserData>(
                 Container(
                   height: 200,
                   //color:Colors.pink,
-                  margin: EdgeInsets.fromLTRB(60, 20, 60, 0),
+                  margin: EdgeInsets.fromLTRB(40, 20, 60, 0),
                   child: Wrap(
                     children: <Widget>[
                       Row(
                         children: <Widget>[
+
+                          // SizedBox(width: 35.0),
+
                           Icon(Icons.person_outline, size: 22,color: Colors.grey,),
 
                           Container(
@@ -256,18 +269,20 @@ StreamBuilder<UserData>(
 
                               Text('Name',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
                              
-                            Padding(padding: EdgeInsets.only(left: 20),),
+                            // Padding(padding: EdgeInsets.only(left: 20),),
+
+                            SizedBox(width: 50.0),
 
                             //SWITCH
                            Text(userdata.firstName+ " " +userdata.lastName,
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
@@ -280,7 +295,7 @@ StreamBuilder<UserData>(
                       ),
 
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
 
 
@@ -298,17 +313,20 @@ StreamBuilder<UserData>(
 
                               Text('Phone',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
                              
-                            Padding(padding: EdgeInsets.only(left: 20),),
+                            // Padding(padding: EdgeInsets.only(left: 20),),
+
+                            SizedBox(width: 48.0),
+
 
                            Text(userdata.phone, //SWITCH
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
@@ -321,7 +339,7 @@ StreamBuilder<UserData>(
                       ),
 
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
 
                       //EMAIL ROW
@@ -338,17 +356,19 @@ StreamBuilder<UserData>(
 
                               Text('Email',
                               style: TextStyle(
-                                fontSize: 13,
+                                 fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
                              
-                            Padding(padding: EdgeInsets.only(left: 20),),
+                            // Padding(padding: EdgeInsets.only(left: 20),),
+                            SizedBox(width: 55.0),
+
 
                            Text(userdata.email, //SWITCH
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
@@ -361,7 +381,7 @@ StreamBuilder<UserData>(
                       ),
 
                       SizedBox(
-                        height: 30,
+                        height: 40,
                       ),
 
 
@@ -379,17 +399,19 @@ StreamBuilder<UserData>(
 
                               Text('Address',
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
                              
-                            Padding(padding: EdgeInsets.only(left: 20),),
+                            // Padding(padding: EdgeInsets.only(left: 20),),
+                            SizedBox(width: 35.0),
+
 
                            Text(userdata.address, //SWITCH
                               style: TextStyle(
-                                fontSize: 13,
+                                fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
@@ -404,6 +426,7 @@ StreamBuilder<UserData>(
                   ),
                 ),
                 
+
              
 
                 //YOUR ORDER TITLE
@@ -422,7 +445,7 @@ StreamBuilder<UserData>(
                       style: TextStyle(
                         fontFamily: ssFont,
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                        fontSize: 16,
                         color: Colors.grey[600],
                       ),
                     ),
@@ -431,7 +454,7 @@ StreamBuilder<UserData>(
 
 //                 //ORDER DETAILS
                 Container(
-                  //height: 90,
+                  // height: 200,
                   margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
                   padding: EdgeInsets.fromLTRB(12, 5, 12, 5),
                   decoration: BoxDecoration(
@@ -450,7 +473,7 @@ StreamBuilder<UserData>(
                             'Subtotal: ',
                             style: TextStyle(
                               fontFamily: ssFont,
-                              fontSize: 11,
+                              fontSize: 14,
                               color: Colors.grey[800],
                             ),
                           ),
@@ -473,7 +496,7 @@ StreamBuilder<UserData>(
                             'Shipping: ',
                             style: TextStyle(
                               fontFamily: ssFont,
-                              fontSize: 11,
+                              fontSize: 14,
                               color: Colors.grey[800],
                             ),
                           ),
@@ -483,7 +506,7 @@ StreamBuilder<UserData>(
                               'Rs. 0',
                               style: TextStyle(
                                 fontFamily: ssFont,
-                                fontSize: 11,
+                                fontSize: 14,
                                 color: Colors.orange,
                               ),
                             ),
@@ -503,7 +526,7 @@ StreamBuilder<UserData>(
                             'Total: ',
                             style: TextStyle(
                               fontFamily: ssFont,
-                              fontSize: 11,
+                              fontSize: 14,
                               color: Colors.grey[800],
                             ),
                           ),
@@ -565,7 +588,7 @@ StreamBuilder<UserData>(
                   child: Container(
                     margin: EdgeInsets.fromLTRB(40, 15, 40, 0),
                     padding: EdgeInsets.fromLTRB(0, 0.0, 0.0, 2.5),
-                    height: 28,
+                    height: 35,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
                       color: Colors.orange,
@@ -587,7 +610,7 @@ StreamBuilder<UserData>(
                           style: TextStyle(
                             fontFamily: ssFont,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
+                            fontSize: 14,
                             color: Colors.white,
                           ),
                         ),

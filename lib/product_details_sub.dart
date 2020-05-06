@@ -135,7 +135,9 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                           ),
                         
                     ),
-                  ]),
+                  ]
+                  
+            ),
   
     );
   }
