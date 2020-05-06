@@ -525,12 +525,12 @@ StreamBuilder<UserData>(
                     List<DocumentReference> varId=List<DocumentReference>();
                     for (int x=0;x<cart.length;x++){
                       DocumentSnapshot products=(await cart[x].data['product'].get());
-                      var variations=(await Firestore.instance.collection('product_variations').where('product',isEqualTo: cart[x].data['product']).getDocuments()).documents;
+                      var variations=(await Firestore.instance.collection('products_variations').where('product',isEqualTo: cart[x].data['product']).getDocuments()).documents;
                       var options=(await Firestore.instance.collection('cart_variations').where('cart_id',isEqualTo: cart[x].reference).getDocuments()).documents;
                       quantity=cart[x].data['quantity'];
                       var varOp=(await Firestore.instance.collection('variation_options').where('product',isEqualTo: cart[x].data['product']).getDocuments()).documents;
+                      varId.add(options[0].reference);
                       for (int y=0;y<variations.length;y++){
-                        varId.add(options[0].reference);
                         newVal[variations[y].data['variation_desc']+x.toString()]=options[0].data[variations[y].data['variation_desc']];
                       }
                       for (int y=0;y<varOp.length;y++){
@@ -546,19 +546,21 @@ StreamBuilder<UserData>(
                             //RAISE ERROR HERE
                             return;
                           }
+                          break;
                         }
                       }
                       newVal['productName'+x.toString()]=products.data['prod_name'];
                       newVal['product'+x.toString()]=products.reference;
                       newVal['quantity'+x.toString()]=quantity;
                     }
-                    for (int x=0;x<cart.length;x++){
-                      Firestore.instance.collection('shopping_cart').document(cart[x].documentID).delete();
-                    }
                     for (int x=0;x<varId.length;x++){
                       Firestore.instance.collection('cart_variations').document(varId[x].documentID).delete();
                     }
+                    for (int x=0;x<cart.length;x++){
+                      Firestore.instance.collection('shopping_cart').document(cart[x].documentID).delete();
+                    }
                     await Firestore.instance.collection('orders').add(newVal);
+                    Navigator.of(context).pushNamed('/storehome');
                   },
                   child: Container(
                     margin: EdgeInsets.fromLTRB(40, 15, 40, 0),

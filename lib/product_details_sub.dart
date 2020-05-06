@@ -149,6 +149,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
   final _reviewFormKey = GlobalKey<FormState>();
 
+  var _quantityFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     int deepOrangeShade = getColor()[1];
@@ -236,6 +237,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                         return null;
 
                       },
+                      controller: _quantityFieldController,
                       onChanged: (val){
                         quantity = int.parse(val);
                       },
@@ -265,7 +267,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                       cartVar[attributes[x]]=choices[x];
                     }
                     Firestore.instance.collection('cart_variations').add(cartVar);
-
+                    _quantityFieldController.clear();
                   },
                   padding: EdgeInsets.only(left: 30),
                   icon: Icon(Icons.add_shopping_cart),
