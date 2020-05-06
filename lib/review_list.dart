@@ -19,8 +19,8 @@ Future<ListView> getReviews(id) async{
             return ListTile(
               title: Text('There are no reviews for this product yet',
                 style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.grey,
+                  fontSize: 16,
+                  color: Colors.grey[500],
                   fontFamily: ssFont,
                 ),
               ),
@@ -40,10 +40,21 @@ Future<ListView> getReviews(id) async{
                   Icons.person_outline,
                   color: Colors.orange,
                 ),
-                backgroundColor: Colors.grey[300],
+                backgroundColor: Colors.grey[200],
               ),
-              title: Text(reviewList[index].name),
-              subtitle: Text(reviewList[index].reviewText),
+              title: Text(reviewList[index].name, style:
+              TextStyle(
+                fontFamily: ssFont,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[500],
+              ),),
+              subtitle: Text(reviewList[index].reviewText, style:
+              TextStyle(
+                fontFamily: ssFont,
+                fontSize: 14,
+                color: Colors.grey[500],
+              ),),
               enabled: false,
             );
           },
