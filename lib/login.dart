@@ -88,6 +88,7 @@ class _MyHomePageState extends State<LoginPage>  {
                       children: <Widget>[
                         SizedBox(height: 10),
                         Container(
+                          padding: EdgeInsets.only(top: 0),
                           width: 325.0,
                           child: TextFormField(
                             validator: (val) => val.isEmpty ? 'You need to provide an email to log in': null,
@@ -103,7 +104,6 @@ class _MyHomePageState extends State<LoginPage>  {
                               labelStyle: TextStyle(
                                 fontFamily: ssFont,
                                 color: Colors.grey,
-                                height: 2.0
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.orange)

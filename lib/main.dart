@@ -1,5 +1,5 @@
 import 'package:SwoleSpartan/checkout.dart';
-import 'package:SwoleSpartan/storehome.dart';
+
 import 'package:flutter/material.dart';
 
 import 'login.dart';
@@ -49,9 +49,6 @@ class MyApp extends StatelessWidget{
           '/new_thread': (BuildContext context) => new DFNewThreadPage(),
           '/vscategories': (BuildContext context) => new VSCatPage(),
           '/profile': (BuildContext context) => new ProfilePage(),
-          '/storehome': (BuildContext context) => new StoreHomePage(),
-
-
 
         },
       

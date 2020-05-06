@@ -135,9 +135,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                           ),
                         
                     ),
-                  ]
-                  
-            ),
+                  ]),
   
     );
   }
@@ -150,6 +148,8 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
 
   final _reviewFormKey = GlobalKey<FormState>();
+  Icon cartIcon = Icon(Icons.add_shopping_cart);
+  
 
   var _quantityFieldController = TextEditingController();
   @override
@@ -258,9 +258,10 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                 //=====Add to Cart Button=====//
                 IconButton(
                   onPressed: () async {
-                    // print();
-                    print(choices);
-                    print(attributes);
+                    
+                    setState(() {
+                     cartIcon = Icon(Icons.done); 
+                    });
                     final user = Provider.of<User>(context, listen: false);
                     var prodRef = Firestore.instance.collection('products').document(arg.id);
                     var cartRef= await Firestore.instance.collection('shopping_cart').add({'product': prodRef, 'quantity':quantity,'user':user.uid});
@@ -270,9 +271,10 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                     }
                     Firestore.instance.collection('cart_variations').add(cartVar);
                     _quantityFieldController.clear();
+                    
                   },
                   padding: EdgeInsets.only(left: 30),
-                  icon: Icon(Icons.add_shopping_cart),
+                  icon: cartIcon,
                   color: Colors.orange[deepOrangeShade],
                 ),
               ],

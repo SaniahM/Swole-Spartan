@@ -105,7 +105,6 @@ class _SignupPageState extends State<SignupPage>  {
                               labelStyle: TextStyle(
                                 fontFamily: ssFont,
                                 color: Colors.grey,
-                                height: 2.0
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.orange)
@@ -128,7 +127,7 @@ class _SignupPageState extends State<SignupPage>  {
                               labelStyle: TextStyle(
                                 fontFamily: ssFont,
                                 color: Colors.grey,
-                                height: 2.0
+                                
                               ),
                               focusedBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.orange)
@@ -365,7 +364,7 @@ class _SignupPageState extends State<SignupPage>  {
                 ),
                 InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed('/signup');
+                    // Navigator.of(context).pushNamed('/signup');
                   },
                   child: Text ('Terms of Service and Privacy Policy',
                   style: TextStyle(
