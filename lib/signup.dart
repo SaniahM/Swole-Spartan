@@ -314,7 +314,7 @@ class _SignupPageState extends State<SignupPage>  {
                               setState(() =>  error = 'The provided email address is already in use');
                             }
                             else{
-                                Navigator.of(context).pop();
+                                Navigator.of(context).pushNamed('/generic');
                             }
                             
                           }

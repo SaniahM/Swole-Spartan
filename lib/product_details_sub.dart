@@ -251,12 +251,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                       keyboardType: TextInputType.number,
                             cursorColor: Colors.amber,
                             cursorWidth: 2.0,
-                      validator: (val) {
-                        if (int.parse(val) < 1) {
-                          return "Quantity cannot be below 0";
-                        }
-                        return null;
-                      },
+                      
                       controller: _quantityFieldController,
                       onChanged: (val) {
                         quantity = int.parse(val);
@@ -278,9 +273,31 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                 //Add to Cart Button.
                 IconButton(
                   onPressed: () async {
-                     setState(() {
-                     cartIcon = Icon(Icons.done); 
-                    });
+                    bool add = true;
+                    if(quantity < 1){
+                      add = false;
+                      final nackBar = SnackBar(
+                      
+                      content: Text(
+                        'Quantity must be greater than zero'
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(nackBar);
+                    }
+                    for(int i = 0; i<attributes.length;i++){
+                      if(choices[i] == "Choose an option"){
+                        add = false;
+                        final ackBar = SnackBar(
+                      
+                      content: Text(
+                        'Must choose all attributes'
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(ackBar);
+                      }
+                    }
+
+                    if(add == true){
 
                     final user = Provider.of<User>(context, listen: false);
                     var prodRef = Firestore.instance
@@ -292,6 +309,9 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                       'product': prodRef,
                       'quantity': quantity,
                       'user': user.uid
+                    });
+                     setState(() {
+                     cartIcon = Icon(Icons.done); 
                     });
 
                     final snackBar = SnackBar(
@@ -309,6 +329,10 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                         .collection('cart_variations')
                         .add(cartVar);
                     _quantityFieldController.clear();
+                    }
+                    else{
+                      
+                    }
                   },
                   padding: EdgeInsets.only(left: 30),
                   icon: cartIcon,
