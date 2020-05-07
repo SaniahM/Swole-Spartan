@@ -213,10 +213,13 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   margin: EdgeInsets.only(left: 30),
                   width: 80,
                   height: 20,
-
                   //Quantity field.
                   child: Container(
+                    width: 50.0,
                     child: TextFormField(
+                      cursorColor: Colors.amber,
+                      cursorWidth: 2.0,
+                      keyboardType: TextInputType.number,
                       validator: (val) {
                         if (int.parse(val) < 1) {
                           return "Quantity cannot be below 0";
@@ -232,6 +235,8 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                         fontSize: 16,
                       ),
                       decoration: InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.orange)),
                         labelStyle:
                             TextStyle(fontFamily: ssFont, color: Colors.grey),
                       ),
