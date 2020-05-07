@@ -25,7 +25,7 @@ Future<Container> getTotal(context) async{
             'Rs. '+ total.toString(),
             style: TextStyle(
               fontFamily: ssFont,
-              fontSize: 14,
+              fontSize: 12,
               color: Colors.orange,
             ),
           ),

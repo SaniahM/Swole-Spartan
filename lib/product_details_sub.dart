@@ -10,7 +10,9 @@ import 'properties.dart';
 import 'review_list.dart';
 import 'storescreenarg.dart';
 import 'user.dart';
-
+import 'auth.dart';
+// import 'package:provider/provider.dart';
+// import 'user.dart';
 class ViewProductPageSub extends StatefulWidget {
   @override
   _ViewProductSub createState() => _ViewProductSub();
@@ -138,13 +140,42 @@ class _ViewProductSub extends State<ViewProductPageSub> {
   var _quantityFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+  final AuthService _auth = AuthService();
+    final user = Provider.of<User>(context);
+    if(user != null){
+        String loginText;
+        Color floatColor;
+        
+
+        if(user.status == false){
+          loginText = " ";
+          floatColor = Colors.orange[600];
+
+        }
+        else{
+          loginText = "Kindly log-in to review the product";
+          floatColor = Colors.grey;
+        }
+
     int deepOrangeShade = getColor()[1];
     ScreenArg arg = ModalRoute.of(context).settings.arguments;
     String ssFont = 'NeusaNextStf-CompactRegular.otf';
     dynamic pastReviews = reviewList(arg.id);
 
-    return SingleChildScrollView(
-      child: Container(
+    return StreamBuilder<UserData>(
+    
+      stream: DatabaseService(uid: user.uid).userData,
+    
+     builder:(context,snapshot){ 
+       
+       UserData userdata = snapshot.data;
+       if( user.status == false ){
+        
+        customerName = userdata.firstName + ' ' + userdata.lastName;
+       
+       }
+        return SingleChildScrollView(
+        child: Container(
         height: 1050,
         child: Column(
           children: <Widget>[
@@ -213,13 +244,10 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   margin: EdgeInsets.only(left: 30),
                   width: 80,
                   height: 20,
+
                   //Quantity field.
                   child: Container(
-                    width: 50.0,
                     child: TextFormField(
-                      cursorColor: Colors.amber,
-                      cursorWidth: 2.0,
-                      keyboardType: TextInputType.number,
                       validator: (val) {
                         if (int.parse(val) < 1) {
                           return "Quantity cannot be below 0";
@@ -235,8 +263,6 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                         fontSize: 16,
                       ),
                       decoration: InputDecoration(
-                        focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.orange)),
                         labelStyle:
                             TextStyle(fontFamily: ssFont, color: Colors.grey),
                       ),
@@ -346,19 +372,25 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                       ),
                     ],
                   ),
-                  Container(
-                    alignment: Alignment.topRight,
-                    margin: EdgeInsets.only(right: 15, bottom: 15),
-                    height: 50,
+                  
                     //color: Colors.purple,
                     //width: 50,
 
                     //Add review button.
-                    child: FloatingActionButton(
+
+                  Row(children:[
+                    SizedBox(width: 20,),
+                    SizedBox(child: Text(loginText),width: 250,),
+                    FloatingActionButton(
                       tooltip: 'Write a Review',
-                      backgroundColor: Colors.orange,
+                      backgroundColor: floatColor,
                       child: Icon(Icons.add, size: 24),
-                      onPressed: () {
+                      onPressed: () async {
+                          if(user != null){
+                          if(user.status == false){
+                                                   
+                        
+
                         showModalBottomSheet(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(
@@ -393,33 +425,33 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         ),
 
                                         //Name text field.
-                                        Container(
-                                          //padding:EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                          width: 325.0,
-                                          height: 70,
-                                          child: TextFormField(
-                                            validator: (val) => val.isEmpty
-                                                ? 'Name cannot be empty'
-                                                : null,
-                                            onChanged: (val) {
-                                              setState(() => customerName = val);
-                                            },
-                                            cursorColor: Colors.amber,
-                                            cursorWidth: 2.0,
-                                            decoration: InputDecoration(
-                                                labelText: "Name",
-                                                labelStyle: TextStyle(
-                                                    fontSize: 16,
-                                                    fontFamily: ssFont,
-                                                    color: Colors.grey,
-                                                    height: 1.0),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color:
-                                                                Colors.orange))),
-                                          ),
-                                        ),
+                                        // Container(
+                                        //   //padding:EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                        //   width: 325.0,
+                                        //   height: 70,
+                                        //   child: TextFormField(
+                                        //     validator: (val) => val.isEmpty
+                                        //         ? 'Name cannot be empty'
+                                        //         : null,
+                                        //     onChanged: (val) {
+                                        //       setState(() => customerName = val);
+                                        //     },
+                                        //     cursorColor: Colors.amber,
+                                        //     cursorWidth: 2.0,
+                                        //     decoration: InputDecoration(
+                                        //         labelText: "Name",
+                                        //         labelStyle: TextStyle(
+                                        //             fontSize: 16,
+                                        //             fontFamily: ssFont,
+                                        //             color: Colors.grey,
+                                        //             height: 1.0),
+                                        //         focusedBorder:
+                                        //             UnderlineInputBorder(
+                                        //                 borderSide: BorderSide(
+                                        //                     color:
+                                        //                         Colors.orange))),
+                                        //   ),
+                                        // ),
 
                                         //Review text field.
                                         Container(
@@ -450,7 +482,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                         ),
 
                                         SizedBox(
-                                          height: 30,
+                                          height: 10,
                                         ),
 
                                         //Post review button.
@@ -509,15 +541,32 @@ class _ViewProductSub extends State<ViewProductPageSub> {
 
                               );
                             });
+
+                            }
+                          else{
+                            await _auth.signOut();
+                            Navigator.of(context).pushNamed('/login');
+                            
+                          }
+                        
+                        }
+                        else{
+                            Navigator.of(context).pushNamed('/login');
+                        }
                       },
-                    ),
-                  ),
+                    ),]
+              ),
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
+    );}  );
+  }
+  
+  else{
+    return Scaffold();
+  }
   }
 }

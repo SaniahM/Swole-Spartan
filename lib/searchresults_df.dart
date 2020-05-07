@@ -69,27 +69,25 @@ Future<ListView> getThreadResults(queryPhrase) async{
 
                                 SizedBox(height: 20.0),
 
-                                Container(
-                                  alignment: Alignment.center,
-                                  width: 350.0,
-                                  child: Row(
-                                    children: <Widget>[
-
-                                      SizedBox(width: 10.0),
-
-                                      Expanded(
-                                      child: Text(
-                                        threads[index].postContent,
-                                        style: TextStyle(
-                                          fontSize: 14.0,
-                                          fontFamily: ssFont,
-                                          color: Colors.grey,
-                                        ),
-
-                                      ),
-                                      ),
-                                    ],
-                                  ),
+                                Expanded(
+                                child:  
+                                Wrap(
+                                direction: Axis.horizontal,
+                                children: <Widget>[
+                                SizedBox(width: 20),
+                                Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  threads[index].postContent,
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontFamily: ssFont,
+                                    color: Colors.grey,
+                                  )
+                                )
+                                ),
+                                ]
+                                ),
                                 ),
 
                                 SizedBox(height: 20.0),

@@ -184,6 +184,7 @@ shoppingList(context){
 @override
 Widget build(BuildContext context) {
 
+
 final user = Provider.of<User>(context);
 return 
 
@@ -193,10 +194,17 @@ StreamBuilder<UserData>(
      builder:(context,snapshot){ 
        
        UserData userdata = snapshot.data;
-        String address=userdata.address;
-        String name=userdata.firstName+' '+userdata.lastName;
-        String phone=userdata.phone;
-        String email=userdata.email;
+        String address= ' ';
+        String name= ' ';
+        String phone=' ';
+        String email=' ';
+
+        if(user.status == false){        
+          address=userdata.address;
+          name=userdata.firstName+' '+userdata.lastName;
+          phone=userdata.phone;
+          email=userdata.email;
+        }
 
         return Container(
         child:
@@ -245,19 +253,14 @@ StreamBuilder<UserData>(
                 SizedBox(height: 80),
 
                 //DELIVERY DETAILS
-
-                
                 Container(
-                  height: 200,
-                  //color:Colors.pink,
-                  margin: EdgeInsets.fromLTRB(40, 20, 60, 0),
+                  height: 250,
+                  // color:Colors.pink,
+                  margin: EdgeInsets.fromLTRB(40, 0, 60, 0),
                   child: Wrap(
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-
-                          // SizedBox(width: 35.0),
-
                           Icon(Icons.person_outline, size: 22,color: Colors.grey,),
 
                           Container(
@@ -267,26 +270,53 @@ StreamBuilder<UserData>(
                             child: Row( 
                               children:[
 
-                              Text('Name',
+                            Text('Name',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
                             ),
+
+                            SizedBox(width: 50.0,),
                              
                             // Padding(padding: EdgeInsets.only(left: 20),),
 
-                            SizedBox(width: 50.0),
-
                             //SWITCH
-                           Text(userdata.firstName+ " " +userdata.lastName,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: ssFont,
-                                color: Colors.grey,
-                              ),
-                            )
+                          //  if (_isEditingText)
+
+                           Container(
+                             width: 100,
+                             child: TextFormField(
+                               cursorColor: Colors.amber,
+                                    cursorWidth: 2.0,
+                                    decoration: InputDecoration(
+                                      hintText: name,
+                                      labelStyle: TextStyle(
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                        fontSize: 14.0,
+                                      ),
+                                      // focusedBorder: UnderlineInputBorder(
+                                      // borderSide: BorderSide(color: Colors.orange)
+                                    // ),
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none,
+                                    ),
+                             ),
+                             ), 
+                             
+                            //  Text(userdata.firstName+ " " +userdata.lastName,
+                            //     style: TextStyle(
+                            //       fontSize: 16,
+                            //       fontFamily: ssFont,
+                            //       color: Colors.grey,
+                            //     ),
+                            //   ),
+                          //  )
 
                             ],
                           ),
@@ -295,7 +325,7 @@ StreamBuilder<UserData>(
                       ),
 
                       SizedBox(
-                        height: 40,
+                        height: 30,
                       ),
 
 
@@ -318,19 +348,43 @@ StreamBuilder<UserData>(
                                 color: Colors.grey,
                               ),
                             ),
+
+                            SizedBox(width: 48.0),
+                            
                              
                             // Padding(padding: EdgeInsets.only(left: 20),),
 
-                            SizedBox(width: 48.0),
-
-
-                           Text(userdata.phone, //SWITCH
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: ssFont,
-                                color: Colors.grey,
-                              ),
-                            )
+                            Container(
+                             width: 100,
+                             child: TextFormField(
+                               cursorColor: Colors.amber,
+                                    cursorWidth: 2.0,
+                                    decoration: InputDecoration(
+                                      hintText: phone,
+                                      labelStyle: TextStyle(
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                        fontSize: 14.0,
+                                      ),
+                                      // focusedBorder: UnderlineInputBorder(
+                                      // borderSide: BorderSide(color: Colors.orange)
+                                    // ),
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none,
+                                    ),
+                             ),
+                             ),
+                           
+                          //  Text(userdata.phone, //SWITCH
+                          //     style: TextStyle(
+                          //       fontSize: 16,
+                          //       fontFamily: ssFont,
+                          //       color: Colors.grey,
+                          //     ),
+                          //   )
 
                             ],
                           ),
@@ -339,7 +393,7 @@ StreamBuilder<UserData>(
                       ),
 
                       SizedBox(
-                        height: 40,
+                        height: 30,
                       ),
 
                       //EMAIL ROW
@@ -356,23 +410,48 @@ StreamBuilder<UserData>(
 
                               Text('Email',
                               style: TextStyle(
-                                 fontSize: 16,
-                                fontFamily: ssFont,
-                                color: Colors.grey,
-                              ),
-                            ),
-                             
-                            // Padding(padding: EdgeInsets.only(left: 20),),
-                            SizedBox(width: 55.0),
-
-
-                           Text(userdata.email, //SWITCH
-                              style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: ssFont,
                                 color: Colors.grey,
                               ),
-                            )
+                            ),
+
+                            SizedBox(width: 55.0),
+
+                             
+                            // Padding(padding: EdgeInsets.only(left: 20),),
+
+                           Container(
+                             width: 100,
+                             child: TextFormField(
+                               cursorColor: Colors.amber,
+                                    cursorWidth: 2.0,
+                                    decoration: InputDecoration(
+                                      hintText: email,
+                                      labelStyle: TextStyle(
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                        fontSize: 14.0,
+                                      ),
+                                      // focusedBorder: UnderlineInputBorder(
+                                      // borderSide: BorderSide(color: Colors.orange)
+                                    // ),
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none,
+                                    ),
+                             ),
+                             ),
+
+                          //  Text(userdata.email, //SWITCH
+                          //     style: TextStyle(
+                          //       fontSize: 16,
+                          //       fontFamily: ssFont,
+                          //       color: Colors.grey,
+                          //     ),
+                          //   )
 
                             ],
                           ),
@@ -381,7 +460,7 @@ StreamBuilder<UserData>(
                       ),
 
                       SizedBox(
-                        height: 40,
+                        height: 30.0,
                       ),
 
 
@@ -405,17 +484,41 @@ StreamBuilder<UserData>(
                               ),
                             ),
                              
-                            // Padding(padding: EdgeInsets.only(left: 20),),
                             SizedBox(width: 35.0),
 
+                            // Padding(padding: EdgeInsets.only(left: 20),),
 
-                           Text(userdata.address, //SWITCH
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: ssFont,
-                                color: Colors.grey,
-                              ),
-                            )
+                           Container(
+                             width: 100,
+                             child: TextFormField(
+                               cursorColor: Colors.amber,
+                                    cursorWidth: 2.0,
+                                    decoration: InputDecoration(
+                                      hintText: address,
+                                      labelStyle: TextStyle(
+                                        fontFamily: ssFont,
+                                        color: Colors.grey,
+                                        fontSize: 14.0,
+                                      ),
+                                      // focusedBorder: UnderlineInputBorder(
+                                      // borderSide: BorderSide(color: Colors.orange)
+                                    // ),
+                                      border: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      enabledBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      disabledBorder: InputBorder.none,
+                                    ),
+                             ),
+                             ),
+
+                          //  Text(userdata.address, //SWITCH
+                          //     style: TextStyle(
+                          //       fontSize: 16,
+                          //       fontFamily: ssFont,
+                          //       color: Colors.grey,
+                          //     ),
+                          //   )
 
                             ],
                           ),                          ),
@@ -426,7 +529,7 @@ StreamBuilder<UserData>(
                   ),
                 ),
                 
-
+             
              
 
                 //YOUR ORDER TITLE
@@ -568,6 +671,14 @@ StreamBuilder<UserData>(
                         if (found==true){
                           if (varOp[y].data['quantity']<quantity){
                             //RAISE ERROR HERE
+                      final snack = SnackBar(
+                      
+                      content: Text(
+                        'Requested Quantity exceeds availability in store'
+                      ),
+                    );
+                    Scaffold.of(context).showSnackBar(snack);
+                            
                             return;
                           }
                           break;
@@ -577,7 +688,7 @@ StreamBuilder<UserData>(
                       newVal['product'+x.toString()]=products.reference;
                       newVal['quantity'+x.toString()]=quantity;
                     }
-                                        final snackBar = SnackBar(
+                      final snackBar = SnackBar(
                       
                       content: Text(
                         'Order Placed'

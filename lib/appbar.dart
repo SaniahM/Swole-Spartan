@@ -57,8 +57,24 @@ final user = Provider.of<User>(context);
                 child: IconButton(
                   iconSize: 19,
                   icon: Icon(SpartanIcons.sCart),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/cart');
+                  onPressed: () async{
+                    if(user != null){
+
+                        if(false == false){ // The user is logged in
+
+                         Navigator.of(context).pushNamed('/cart');
+                        
+                        }
+                        else{ //The user is in guest mode
+                        await _auth.signOut();
+                        Navigator.of(context).pushNamed('/login');
+                        }
+                      
+                      }
+                      else{
+
+                        Navigator.of(context).pushNamed('/login');
+                      }
                   },
                 )
               ),
