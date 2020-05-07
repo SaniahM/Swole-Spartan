@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'properties.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 Future<ListView> getdata() async{

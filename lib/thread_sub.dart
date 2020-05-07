@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'thread_list.dart';
-
 import 'package:provider/provider.dart';
+
 import 'user.dart';
 import 'auth.dart';
+import 'thread_list.dart';
 
 class DFThreadPageSub extends StatefulWidget {
   @override

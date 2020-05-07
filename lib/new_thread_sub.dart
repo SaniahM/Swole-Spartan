@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:SwoleSpartan/thread_arg.dart';
 
+import 'thread_arg.dart';
 import 'user.dart';
 
 class DFNewThreadPageSub extends StatefulWidget {

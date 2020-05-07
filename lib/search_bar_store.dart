@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:SwoleSpartan/search_results_df.dart';
 
+import 'search_results_store.dart';
 
-
-class SearchBarPageDf extends SearchDelegate<String> {
+class SearchBarPage extends SearchDelegate<String> {
 
   final cities = [
     "Hello",
@@ -42,7 +41,7 @@ class SearchBarPageDf extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     //Results
-    return querylistdf(query);
+    return querylist(query);
   }
 
   @override

@@ -6,6 +6,7 @@ import 'footnavbar.dart';
 import 'properties.dart';
 import 'screens.dart';
 
+//Shopping cart page.
 class CartPage extends StatefulWidget {
   @override
   _CartPage createState() => _CartPage();
@@ -19,7 +20,7 @@ class _CartPage extends State<CartPage> {
     // final user = Provider.of<User>(context);
     return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
-      appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),
+      appBar: topBar(context, getColor()[0], getColor()[1], _sectionIndex),
       body: Card(
         color: Colors.white,
         elevation: 10,

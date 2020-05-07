@@ -8,7 +8,7 @@ import 'package:SwoleSpartan/review_list.dart';
 import 'post_review.dart';
 import 'properties.dart';
 import 'review_list.dart';
-import 'storescreenarg.dart';
+import 'store_screen_arg.dart';
 import 'user.dart';
 import 'auth.dart';
 // import 'package:provider/provider.dart';

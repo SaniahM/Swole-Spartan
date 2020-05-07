@@ -20,7 +20,7 @@ class _DFThreadPage extends State<DFThreadPage> {
 
     return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
-      appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),
+      appBar: topBar(context, getColor()[0], getColor()[1], _sectionIndex),
       drawer: menus()[_sectionIndex],
       body: Card(
         color: Colors.white,

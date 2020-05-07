@@ -6,6 +6,7 @@ import 'properties.dart';
 import 'screens.dart';
 import 'side_menus.dart';
 
+//New post in thread.
 class DFPostPage extends StatefulWidget {
   @override
   _DFPostPage createState() => _DFPostPage();
@@ -20,7 +21,7 @@ class _DFPostPage extends State<DFPostPage> {
     // final user = Provider.of<User>(context);
     return Scaffold(
       backgroundColor: Colors.grey[getColor()[0]],
-      appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),
+      appBar: topBar(context, getColor()[0], getColor()[1], _sectionIndex),
       drawer: menus()[_sectionIndex],
       body: Card(
           color: Colors.white,

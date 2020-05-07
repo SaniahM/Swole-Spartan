@@ -1,16 +1,19 @@
-
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'storescreenarg.dart';
-import 'properties.dart';
+import 'package:flutter/material.dart';
 
-Future<ListView> getdata() async{
+import 'properties.dart';
+import 'store_screen_arg.dart';
+
+//Getting data for featured product list in home.
+Future<ListView> getData() async{
   
   var query = (await Firestore.instance.collection('products').limit(8).getDocuments()).documents;
   List<Map<String,dynamic>> products=List<Map<String,dynamic>>();
   for(int x=0;x<query.length;x++){
     products.add(query[x].data);
   }
+
+  //Building the list of products.
   return new Future( ()=> ListView.builder(
 
                   itemCount: 4,
@@ -60,9 +63,9 @@ progressIndicator() {
   );
 }
 
-featuredlist(){
+featuredList(){
   return FutureBuilder<ListView> (
-    future:getdata(),
+    future:getData(),
     builder: (context,snapshot){
       if (snapshot.hasData){
         return snapshot.data;

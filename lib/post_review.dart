@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+
+//Reviews in product details.
 class PostReview{
 
   final CollectionReference reviews = Firestore.instance.collection('reviews');

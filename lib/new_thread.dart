@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'appbar.dart';
-import 'properties.dart';
 
+import 'appbar.dart';
 import 'footnavbar.dart';
+import 'properties.dart';
 import 'screens.dart';
 import 'side_menus.dart';
-// import 'package:provider/provider.dart';
-// import 'user.dart';
+
+//New thread.
 class DFNewThreadPage extends StatefulWidget{
   @override
   _DFNewThreadPage createState() => _DFNewThreadPage();
@@ -22,7 +22,7 @@ class _DFNewThreadPage extends State<DFNewThreadPage>{
       
       backgroundColor: Colors.grey[getColor()[0]],
 
-      appBar: topbar(context, getColor()[0], getColor()[1], _sectionIndex),
+      appBar: topBar(context, getColor()[0], getColor()[1], _sectionIndex),
       drawer: menus()[_sectionIndex],
       body: Card(
               color: Colors.white,

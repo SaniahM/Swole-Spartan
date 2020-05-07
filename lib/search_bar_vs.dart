@@ -1,5 +1,6 @@
-import 'package:SwoleSpartan/search_results_vs.dart';
 import 'package:flutter/material.dart';
+
+import 'search_results_vs.dart';
 
 
 class SearchBarPageVs extends SearchDelegate<String> {

@@ -6,12 +6,14 @@ import 'package:provider/provider.dart';
 import 'shopping_list.dart';
 import 'user.dart';
 
+//Shopping cart page elements.
 class CartPageSub extends StatefulWidget {
   @override
   _CartPageSub createState() => _CartPageSub();
 }
 
 class _CartPageSub extends State<CartPageSub> {
+  //Each product in the list of cart content.
   InkWell singleItem(context, productData, quantity, cartData) {
     int _itemCount = quantity;
     return InkWell(
@@ -24,14 +26,14 @@ class _CartPageSub extends State<CartPageSub> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            //Prod Picture
+            //Product Picture.
             Image.network(
               productData['image_link'],
               height: 75,
               width: 75,
             ),
 
-            //Prod details
+            //Product details.
             Row(
               children: <Widget>[
                 Container(
@@ -48,6 +50,8 @@ class _CartPageSub extends State<CartPageSub> {
                   ),
                 ),
                 //SizedBox(width: 40.0),
+
+                //Remove icon to decrease the quantity of a product in cart.
                 _itemCount != 0
                     ? new IconButton(
                         icon: new Icon(Icons.remove,
@@ -77,6 +81,8 @@ class _CartPageSub extends State<CartPageSub> {
                         color: Colors.grey[700],
                       )
                     : new Container(),
+
+                //Quantity of product.
                 new Text(
                   _itemCount.toString(),
                   style: TextStyle(
@@ -84,6 +90,8 @@ class _CartPageSub extends State<CartPageSub> {
                     fontSize: 14,
                   ),
                 ),
+
+                //Add icon to increase the quantity of a product in cart.
                 new IconButton(
                   icon: new Icon(
                     Icons.add,
@@ -111,6 +119,7 @@ class _CartPageSub extends State<CartPageSub> {
     );
   }
 
+  //List of cart content.
   Future<ListView> getCartData(context) async {
     final user = Provider.of<User>(context, listen: false);
     var cart = (await Firestore.instance
@@ -154,6 +163,7 @@ class _CartPageSub extends State<CartPageSub> {
 
   @override
   Widget build(BuildContext context) {
+    //Cart screen components.
     return SingleChildScrollView(
       child: Container(
         height: MediaQuery.of(context).size.height,
@@ -190,7 +200,7 @@ class _CartPageSub extends State<CartPageSub> {
               ),
             ),
 
-            //SCROLLABLE PRODUCT LIST
+            //Scrollable Product list.
             Container(
               margin: EdgeInsets.fromLTRB(40, 35, 40, 0),
               height: 320.0,
@@ -203,7 +213,7 @@ class _CartPageSub extends State<CartPageSub> {
               ),
             ),
 
-            //Total Bill Window
+            //Total Bill Window.
             Container(
               //height: 90,
               margin: EdgeInsets.fromLTRB(40, 20, 40, 0),
@@ -237,7 +247,7 @@ class _CartPageSub extends State<CartPageSub> {
                   //Divider
                   Divider(),
 
-                  //Shipping row
+                  //Shipping row.
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -264,8 +274,7 @@ class _CartPageSub extends State<CartPageSub> {
 
                   Divider(),
 
-                  //Total row
-
+                  //Total row.
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -284,7 +293,7 @@ class _CartPageSub extends State<CartPageSub> {
               ),
             ),
 
-            //CHECKOUT BUTTON
+            //Checkout button.
             InkWell(
               onTap: () {
                 Navigator.of(context).pushNamed('/checkout');
@@ -325,7 +334,7 @@ class _CartPageSub extends State<CartPageSub> {
               ),
             ),
 
-            //Continue Shopping Button
+            //Continue Shopping Button.
             InkWell(
               onTap: () {
                 Navigator.pop(context);

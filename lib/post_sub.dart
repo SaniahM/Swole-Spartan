@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'auth.dart';
-import 'postsclass.dart';
+import 'posts_class.dart';
 import 'thread_arg.dart';
 import 'user.dart';
 

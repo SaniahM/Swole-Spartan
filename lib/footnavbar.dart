@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'spartan_icons_icons.dart';
+
 import 'properties.dart';
 
 BottomNavigationBar footBar(int _currentIndex, void fn(int)){
 
-final fontsize = 12.0;
+final fontSize = 12.0;
 
+//Bottom navigation bar with its icons.
 return BottomNavigationBar(
 
         currentIndex: _currentIndex,
@@ -37,8 +38,8 @@ return BottomNavigationBar(
         backgroundColor: Colors.grey[getColor()[0]],
         
         /////////// HERE /////////////////////////
-        selectedFontSize: fontsize,
-        unselectedFontSize: fontsize,
+        selectedFontSize: fontSize,
+        unselectedFontSize: fontSize,
         
         selectedItemColor: Colors.deepOrange[getColor()[1]],
         selectedIconTheme:IconThemeData(color:Colors.deepOrange[getColor()[1]]),

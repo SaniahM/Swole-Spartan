@@ -5,17 +5,17 @@ import 'footnavbar.dart';
 import 'properties.dart';
 import 'screens.dart';
 import 'side_menus.dart';
-
 // import 'package:provider/provider.dart';
 // import 'user.dart';
-class VSCatPage extends StatefulWidget{
+
+class StoreCatPage extends StatefulWidget{
   @override
-  _VSCategory createState() => _VSCategory();
+  _StoreCategory createState() => _StoreCategory();
 }
 
-class _VSCategory extends State<VSCatPage>{
-  int _currentIndex = 8;
-  int _sectionIndex = 1;
+class _StoreCategory extends State<StoreCatPage>{
+  int _currentIndex = 6;
+  int _sectionIndex = 0;
   @override
   Widget build(BuildContext context){
     // final user = Provider.of<User>(context);
