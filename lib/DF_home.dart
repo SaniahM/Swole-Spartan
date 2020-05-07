@@ -32,7 +32,7 @@ class _DFHomePage extends State<DFHomePage>{
                     ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 32.0),
                   Expanded(
                     child: forumList()
                   ),

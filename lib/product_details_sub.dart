@@ -189,7 +189,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                   fontFamily: ssFont,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[700],
+                  color: Colors.grey,
                 ),
               ),
             ),

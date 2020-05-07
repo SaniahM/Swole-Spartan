@@ -1,6 +1,6 @@
-class ThreadArg{
+class ThreadArg {
   String docID;
   String threadTitle;
 
-  ThreadArg(this.docID,this.threadTitle);
+  ThreadArg(this.docID, this.threadTitle);
 }

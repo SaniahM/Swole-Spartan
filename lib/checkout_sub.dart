@@ -237,13 +237,13 @@ StreamBuilder<UserData>(
                       color: Colors.white,
                     ),
                     child: Text(
-                      'Personal Details',
+                      'ORDER DETAILS',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: ssFont,
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.grey[600],
+                        color: Colors.grey[500],
                       ),
                     ),
                   ),
@@ -270,7 +270,7 @@ StreamBuilder<UserData>(
                             child: Row( 
                               children:[
 
-                            Text('Name',
+                            /*Text('Name',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: ssFont,
@@ -278,7 +278,7 @@ StreamBuilder<UserData>(
                               ),
                             ),
 
-                            SizedBox(width: 50.0,),
+                            SizedBox(width: 50.0,),*/
                              
                             // Padding(padding: EdgeInsets.only(left: 20),),
 
@@ -341,7 +341,7 @@ StreamBuilder<UserData>(
                             child: Row( 
                               children:[
 
-                              Text('Phone',
+                              /*Text('Phone',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: ssFont,
@@ -349,7 +349,7 @@ StreamBuilder<UserData>(
                               ),
                             ),
 
-                            SizedBox(width: 48.0),
+                            SizedBox(width: 48.0),*/
                             
                              
                             // Padding(padding: EdgeInsets.only(left: 20),),
@@ -408,7 +408,7 @@ StreamBuilder<UserData>(
                             child: Row( 
                               children:[
 
-                              Text('Email',
+                              /*Text('Email',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: ssFont,
@@ -416,7 +416,7 @@ StreamBuilder<UserData>(
                               ),
                             ),
 
-                            SizedBox(width: 55.0),
+                            SizedBox(width: 55.0),*/
 
                              
                             // Padding(padding: EdgeInsets.only(left: 20),),
@@ -476,7 +476,7 @@ StreamBuilder<UserData>(
                             child: Row( 
                               children:[
 
-                              Text('Address',
+                              /*Text('Address',
                               style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: ssFont,
@@ -484,7 +484,7 @@ StreamBuilder<UserData>(
                               ),
                             ),
                              
-                            SizedBox(width: 35.0),
+                            SizedBox(width: 35.0),*/
 
                             // Padding(padding: EdgeInsets.only(left: 20),),
 
@@ -549,7 +549,7 @@ StreamBuilder<UserData>(
                         fontFamily: ssFont,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
-                        color: Colors.grey[600],
+                        color: Colors.grey[500],
                       ),
                     ),
                   ),
