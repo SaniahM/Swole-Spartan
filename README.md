@@ -19,7 +19,7 @@ The application allows its users to:
 - Create new threads in the Discussion Forum.
 - Add new posts in existing forum threads.
 
-# Installation
+## Installation
 To run the application on the computer, first you need to download android studio from:
 - https://developer.android.com/studio for Windows.
 - https://android-studio.en.uptodown.com/mac for Mac.
