@@ -33,7 +33,9 @@ Click Restart when prompted.
 After installation, run Android Studio and create a new project by clicking File > New > New Flutter Project. Then, provide the path where you want to keep your project.
 
 Clone the Swole Spartan repository in your desired directory through the following command and import it into Android Studio
+'''bash
 git clone https://github.com/SaniahM/Swole-Spartan.git
+'''
 
 To run the whole folder, downloaded from our GitHub link, you can either open it by dragging it straight to the android studio or by opening it from android studio file>open.
 
