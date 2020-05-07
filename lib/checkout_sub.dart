@@ -691,7 +691,7 @@ StreamBuilder<UserData>(
                       final snackBar = SnackBar(
                       
                       content: Text(
-                        'Order Placed'
+                        'Order Placed!'
                       ),
                     );
                     Scaffold.of(context).showSnackBar(snackBar);
