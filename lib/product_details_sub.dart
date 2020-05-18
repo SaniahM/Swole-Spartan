@@ -13,6 +13,12 @@ import 'user.dart';
 import 'auth.dart';
 // import 'package:provider/provider.dart';
 // import 'user.dart';
+
+class ReviewFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty? 'This field cannot be empty': null;
+  }
+}
 class ViewProductPageSub extends StatefulWidget {
   @override
   _ViewProductSub createState() => _ViewProductSub();
@@ -487,9 +493,7 @@ class _ViewProductSub extends State<ViewProductPageSub> {
                                           width: 325.0,
                                           height: 70,
                                           child: TextFormField(
-                                            validator: (val) => val.isEmpty
-                                                ? 'This field cannot be empty'
-                                                : null,
+                                            validator: ReviewFieldValidator.validate,
                                             onChanged: (val) {
                                               setState(() => review = val);
                                             },
