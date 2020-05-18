@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'auth.dart';
 
+class EmailFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'You need to provide an email to log in' : null;
+  }
+}
+
+class PasswordFieldValidator {
+  static String validate(String value) {
+    return value.isEmpty ? 'You need to provide a password to log in' : null;
+  }
+}
+
 class LoginPage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -78,9 +90,7 @@ class _MyHomePageState extends State<LoginPage> {
                                 padding: EdgeInsets.only(top: 0),
                                 width: 325.0,
                                 child: TextFormField(
-                                  validator: (val) => val.isEmpty
-                                      ? 'You need to provide an email to log in'
-                                      : null,
+                                  validator: EmailFieldValidator.validate,
                                   onChanged: (val) {
                                     setState(() => error = ' ');
                                     setState(() => email = val);
@@ -101,9 +111,7 @@ class _MyHomePageState extends State<LoginPage> {
                               Container(
                                 width: 325.0,
                                 child: TextFormField(
-                                  validator: (val) => val.isEmpty
-                                      ? 'You need to provide a password to log in'
-                                      : null,
+                                  validator: PasswordFieldValidator.validate,
                                   onChanged: (val) {
                                     setState(() => password = val);
                                   },
