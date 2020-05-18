@@ -1,9 +1,8 @@
-import 'package:SwoleSpartan/login.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-void main() {
-  test('title', () {});
+import 'package:SwoleSpartan/login.dart';
 
+void main() {
   test('empty mail returns error string', () {
     var result = EmailFieldValidator.validate('');
     expect(result, 'You need to provide an email to log in');

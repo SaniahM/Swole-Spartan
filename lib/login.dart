@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'auth.dart';
 
+// Testing.
+
 class EmailFieldValidator {
   static String validate(String value) {
     return value.isEmpty ? 'You need to provide an email to log in' : null;
@@ -13,6 +15,8 @@ class PasswordFieldValidator {
     return value.isEmpty ? 'You need to provide a password to log in' : null;
   }
 }
+
+// Main Body of the code.
 
 class LoginPage extends StatefulWidget {
   @override
